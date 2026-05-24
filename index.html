@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Jetts RRA — PT Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',sans-serif;font-size:12px;color:#222;
+  min-height:100vh;
+  /* พื้นหลัง: ดำ + เส้น Red & Gold */
+  background-color:#0d0d0d;
+  background-image:
+    repeating-linear-gradient(45deg,  transparent, transparent 60px, rgba(192,0,42,.12) 60px,  rgba(192,0,42,.12) 61px),
+    repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(200,149,42,.08) 80px, rgba(200,149,42,.08) 81px),
+    linear-gradient(160deg, rgba(192,0,42,.06) 0%, transparent 40%, rgba(200,149,42,.06) 100%);
+}
+
+/* ─── Navbar ─── */
+.topbar{background:#c0002a;padding:7px 14px;display:flex;justify-content:space-between;align-items:center;}
+.topbar .brand{font-size:14px;font-weight:700;color:white;}
+.topbar .upd{font-size:10px;color:rgba(255,255,255,.7);}
+.print-btn{background:white;color:#c0002a;border:none;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;}
+.print-btn:hover{background:#ffe;}
+
+/* ─── Wrapper ─── */
+.a4{max-width:980px;margin:0 auto;padding:12px 14px;}
+
+/* ─── Header ─── */
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;background:white;border-radius:10px;padding:10px 14px;border-left:4px solid #c0002a;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.3);}
+.doc-title{font-size:15px;font-weight:800;color:#c0002a;}
+.doc-sub{font-size:10px;color:#888;margin-top:2px;}
+.doc-meta{text-align:right;font-size:10px;color:#aaa;}
+
+/* ─── Summary strip ─── */
+.sum-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;}
+.sum-box{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);border-top:3px solid #c0002a;}
+.sum-box .lbl{font-size:9px;color:#999;}
+.sum-box .val{font-size:15px;font-weight:800;color:#c0002a;line-height:1.3;}
+.sum-box .unit{font-size:9px;color:#bbb;}
+
+/* ─── Goal cards ─── */
+.goal-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.goal-box{background:white;border-radius:10px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.goal-box .gtitle{font-size:10px;font-weight:700;color:#555;margin-bottom:5px;}
+.goal-nums{display:flex;align-items:baseline;gap:8px;}
+.goal-pct{font-size:24px;font-weight:900;line-height:1;}
+.goal-actual{font-size:10px;color:#999;}
+.pbar{height:6px;background:#eee;border-radius:3px;margin:6px 0 4px;}
+.pbar-fill{height:6px;border-radius:3px;}
+.goal-note{font-size:9px;color:#aaa;}
+
+/* ─── Section title ─── */
+.st{font-size:11px;font-weight:700;color:#c0002a;border-left:3px solid #c0002a;padding-left:6px;margin-bottom:6px;}
+
+/* ─── Cards ─── */
+.card-wrap{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.tbox{margin-bottom:10px;}
+
+/* ─── Tables ─── */
+table{width:100%;border-collapse:collapse;}
+thead th{background:#c0002a;color:white;font-size:10px;font-weight:600;padding:4px 6px;white-space:nowrap;}
+tbody td{font-size:11px;padding:4px 6px;border-bottom:1px solid #f0f0f0;vertical-align:middle;}
+tbody tr:last-child td{border-bottom:none;}
+tbody tr:nth-child(even){background:#fafafa;}
+tbody tr:hover td{background:#fff5f7;}
+.tc{text-align:center;width:22px;}
+.tr{text-align:right;}
+.fw{font-weight:700;}
+.green{color:#2e7d32;font-weight:600;}
+.bp{display:inline-block;padding:1px 4px;border-radius:5px;font-size:9px;font-weight:700;margin-right:2px;}
+.etred{background:#ffe0e0;color:#c0002a;}
+.stred{background:#fff0e0;color:#c06000;}
+.ptred{background:#e0eeff;color:#1565c0;}
+
+/* ─── Charts ─── */
+.chart-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
+.chart-box{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);}
+.chart-inner{position:relative;}
+
+/* ─── Table layout ─── */
+.table-row-3{display:grid;grid-template-columns:3fr 2fr;gap:8px;margin-bottom:10px;}
+
+/* ════════════ PRINT ════════════ */
+@media print{
+  @page{size:A4 portrait;margin:8mm;}
+  body{background:#fff!important;background-image:none!important;font-size:10px;}
+  .topbar{display:none!important;}
+  .a4{max-width:100%;padding:0;}
+  .sum-box,.goal-box,.card-wrap,.chart-box,.doc-header{
+    box-shadow:none!important;border:1px solid #ddd!important;}
+  .chart-inner{height:160px!important;}
+  tbody td{font-size:9.5px!important;padding:2px 5px!important;}
+  thead th{font-size:9px!important;padding:3px 5px!important;}
+}
+
+/* ─── Mobile ─── */
+@media(max-width:600px){
+  .sum-strip{grid-template-columns:repeat(2,1fr);gap:6px;}
+  .goal-row,.chart-row,.table-row-3{grid-template-columns:1fr;}
+  .a4{padding:8px;}
+}
+@media(min-width:601px) and (max-width:860px){
+  .chart-row{grid-template-columns:1fr 1fr;}
+  .table-row-3{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar no-print">
+  <span class="brand">Jetts RRA — PT Dashboard</span>
+  <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+</div>
+
+<div class="a4">
+
+  <!-- Doc Header -->
+  <div class="doc-header">
+    <div>
+      <div class="doc-title">Report — Jetts Robinson Ratchaphruek</div>
+      <div class="doc-sub">ช่วงเวลา: 01/05/2026 — 24/05/2026 &nbsp;|&nbsp; อัพเดต: 24/05/2026 14:33</div>
+    </div>
+    <div style="text-align:right;font-size:10px;color:#aaa;">
+      Conduct: 23 Trainers<br>
+      Sold: 21 Trainers
+    </div>
+  </div>
+
+  <!-- Summary Strip (4 การ์ด) -->
+  <div class="sum-strip">
+    <div class="sum-box">
+      <div class="lbl">Total Session</div>
+      <div class="val">2,010</div>
+      <div class="unit">ครั้ง</div>
+    </div>
+    <div class="sum-box">
+      <div class="lbl">PT Sold</div>
+      <div class="val">2,201,570</div>
+      <div class="unit">฿</div>
+    </div>
+    <div class="sum-box">
+      <div class="lbl">Comm Sold</div>
+      <div class="val">101,205</div>
+      <div class="unit">฿</div>
+    </div>
+    <div class="sum-box">
+      <div class="lbl">สมาชิกใหม่</div>
+      <div class="val">120</div>
+      <div class="unit">คน</div>
+    </div>
+  </div>
+
+  <!-- Goal Cards -->
+  <div class="goal-row">
+    <div class="goal-box">
+      <div class="gtitle">เป้าหมาย PT Sold (2,000,000 + VAT 7%)</div>
+      <div class="goal-nums">
+        <div class="goal-pct" style="color:#2e7d32;">102.9%</div>
+        <div class="goal-actual">2,201,570 / 2,140,000 ฿</div>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:100.0%;background:#2e7d32;"></div></div>
+      <div class="goal-note">เป้า: 2,140,000 ฿ &nbsp;|&nbsp; ✅ บรรลุเป้าแล้ว</div>
+    </div>
+    <div class="goal-box">
+      <div class="gtitle">เป้าหมายสมาชิก (เป้ารายคน 6 คน)</div>
+      <div class="goal-nums">
+        <div class="goal-pct" style="color:#2e7d32;">120.0%</div>
+        <div class="goal-actual">120 / 100 คน</div>
+      </div>
+      <div class="pbar"><div class="pbar-fill" style="width:100.0%;background:#2e7d32;"></div></div>
+      <div class="goal-note">เป้ารวม: 100 คน &nbsp;|&nbsp; ✅ บรรลุเป้าแล้ว</div>
+    </div>
+  </div>
+
+  <!-- Charts: ★ height บน .chart-inner div → Chart.js ใช้ fillParent ★ -->
+  <div class="chart-row">
+    <div class="chart-box">
+      <div class="st">PT Conduct — Sessions รายคน</div>
+      <div class="chart-inner" style="height:308px;">
+        <canvas id="cChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="st">PT Sold — ยอดขายรายคน</div>
+      <div class="chart-inner" style="height:308px;">
+        <canvas id="sChart"></canvas>
+      </div>
+    </div>
+    <div class="chart-box">
+      <div class="st">Membership รายคน (เป้า 6)</div>
+      <div class="chart-inner" style="height:230px;">
+        <canvas id="mChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conduct + Membership -->
+  <div class="table-row-3">
+    <div class="tbox card-wrap">
+      <div class="st">PT Conduct — Sessions รายบุคคล</div>
+      <table>
+        <thead><tr>
+          <th>#</th><th>Trainer</th>
+          <th class="tr">Fitstart</th><th class="tr">Trial</th>
+          <th class="tr">Total Session</th>
+        </tr></thead>
+        <tbody><tr>
+          <td class="tc">🥇</td>
+          <td><span class="bp etred">ET-RED</span> Golf_01913</td>
+          <td class="tr">1</td>
+          <td class="tr">0</td>
+          <td class="tr fw">140</td>
+        </tr><tr>
+          <td class="tc">🥈</td>
+          <td><span class="bp etred">ET-RED</span> Mew_01974</td>
+          <td class="tr">7</td>
+          <td class="tr">1</td>
+          <td class="tr fw">140</td>
+        </tr><tr>
+          <td class="tc">🥉</td>
+          <td><span class="bp etred">ET-RED</span> Ae_02227</td>
+          <td class="tr">5</td>
+          <td class="tr">0</td>
+          <td class="tr fw">104</td>
+        </tr><tr>
+          <td class="tc">4</td>
+          <td><span class="bp etred">ET-RED</span> Bos_01915</td>
+          <td class="tr">2</td>
+          <td class="tr">0</td>
+          <td class="tr fw">112</td>
+        </tr><tr>
+          <td class="tc">5</td>
+          <td><span class="bp etred">ET-RED</span> Lion_02391</td>
+          <td class="tr">12</td>
+          <td class="tr">1</td>
+          <td class="tr fw">111</td>
+        </tr><tr>
+          <td class="tc">6</td>
+          <td><span class="bp stred">ST-RED</span> Paul_02228</td>
+          <td class="tr">9</td>
+          <td class="tr">1</td>
+          <td class="tr fw">114</td>
+        </tr><tr>
+          <td class="tc">7</td>
+          <td><span class="bp ptred">PT-RED</span> Yean_03170</td>
+          <td class="tr">11</td>
+          <td class="tr">0</td>
+          <td class="tr fw">107</td>
+        </tr><tr>
+          <td class="tc">8</td>
+          <td><span class="bp ptred">PT-RED</span> Put_02910</td>
+          <td class="tr">7</td>
+          <td class="tr">0</td>
+          <td class="tr fw">98</td>
+        </tr><tr>
+          <td class="tc">9</td>
+          <td><span class="bp etred">ET-RED</span> Peet_02169</td>
+          <td class="tr">12</td>
+          <td class="tr">1</td>
+          <td class="tr fw">111</td>
+        </tr><tr>
+          <td class="tc">10</td>
+          <td><span class="bp ptred">PT-RED</span> Man_01911</td>
+          <td class="tr">2</td>
+          <td class="tr">1</td>
+          <td class="tr fw">96</td>
+        </tr><tr>
+          <td class="tc">11</td>
+          <td><span class="bp ptred">PT-RED</span> Tiger_01923</td>
+          <td class="tr">6</td>
+          <td class="tr">0</td>
+          <td class="tr fw">96</td>
+        </tr><tr>
+          <td class="tc">12</td>
+          <td><span class="bp stred">ST-RED</span> IBA_Deaw_02058</td>
+          <td class="tr">3</td>
+          <td class="tr">0</td>
+          <td class="tr fw">72</td>
+        </tr><tr>
+          <td class="tc">13</td>
+          <td><span class="bp ptred">PT-RED</span> Nine_02024</td>
+          <td class="tr">4</td>
+          <td class="tr">1</td>
+          <td class="tr fw">78</td>
+        </tr><tr>
+          <td class="tc">14</td>
+          <td><span class="bp ptred">PT-RED</span> Poom_03173</td>
+          <td class="tr">8</td>
+          <td class="tr">0</td>
+          <td class="tr fw">84</td>
+        </tr><tr>
+          <td class="tc">15</td>
+          <td><span class="bp stred">ST-RED</span> Ice_01548</td>
+          <td class="tr">3</td>
+          <td class="tr">1</td>
+          <td class="tr fw">86</td>
+        </tr><tr>
+          <td class="tc">16</td>
+          <td><span class="bp ptred">PT-RED</span> Baifern_01910</td>
+          <td class="tr">6</td>
+          <td class="tr">0</td>
+          <td class="tr fw">82</td>
+        </tr><tr>
+          <td class="tc">17</td>
+          <td><span class="bp stred">ST-RED</span> Lekza_01909</td>
+          <td class="tr">3</td>
+          <td class="tr">0</td>
+          <td class="tr fw">59</td>
+        </tr><tr>
+          <td class="tc">18</td>
+          <td><span class="bp ptred">PT-RED</span> Zico_01805</td>
+          <td class="tr">7</td>
+          <td class="tr">0</td>
+          <td class="tr fw">76</td>
+        </tr><tr>
+          <td class="tc">19</td>
+          <td><span class="bp ptred">PT-RED</span> Nill_03116</td>
+          <td class="tr">9</td>
+          <td class="tr">0</td>
+          <td class="tr fw">65</td>
+        </tr><tr>
+          <td class="tc">20</td>
+          <td><span class="bp cm">CM</span> Tonmai_01312</td>
+          <td class="tr">0</td>
+          <td class="tr">0</td>
+          <td class="tr fw">50</td>
+        </tr><tr>
+          <td class="tc">21</td>
+          <td><span class="bp ptred">PT-RED</span> Ford_02742</td>
+          <td class="tr">8</td>
+          <td class="tr">0</td>
+          <td class="tr fw">68</td>
+        </tr><tr>
+          <td class="tc">22</td>
+          <td><span class="bp ptred">PT-RED</span> Benz_03155</td>
+          <td class="tr">8</td>
+          <td class="tr">2</td>
+          <td class="tr fw">40</td>
+        </tr><tr>
+          <td class="tc">23</td>
+          <td><span class="bp ptred">PT-RED</span> Sataem_03348</td>
+          <td class="tr">5</td>
+          <td class="tr">1</td>
+          <td class="tr fw">21</td>
+        </tr></tbody>
+      </table>
+    </div>
+    <div class="tbox card-wrap">
+      <div class="st">Membership รายบุคคล (เป้า 6)</div>
+      <table>
+        <thead><tr><th>#</th><th>Sold by</th><th>จำนวน / เป้า</th></tr></thead>
+        <tbody><tr>
+          <td class="tc">🥇</td>
+          <td>Golf_01913</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">9</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">🥈</td>
+          <td>Peet_02169</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">8</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">🥉</td>
+          <td>Sataem_03348</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">8</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">4</td>
+          <td>Yean_03170</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">7</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">5</td>
+          <td>Bos_01915</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">6</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">6</td>
+          <td>Lion_02391</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">6</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">7</td>
+          <td>Benz_03155</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">6</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">8</td>
+          <td>IBA_Deaw_02058</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">6</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">9</td>
+          <td>Poom_03173</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">6</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">10</td>
+          <td>Ae_02227</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#2e7d32;min-width:18px;">6</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:100%;height:5px;background:#2e7d32;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">11</td>
+          <td>Put_02910</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">5</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:83%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">12</td>
+          <td>Nill_03116</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">5</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:83%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">13</td>
+          <td>Tiger_01923</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">5</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:83%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">14</td>
+          <td>Ford_02742</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">5</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:83%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">15</td>
+          <td>Zico_01805</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">5</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:83%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">16</td>
+          <td>Lekza_01909</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">5</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:83%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">17</td>
+          <td>Ice_01548</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">4</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:67%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">18</td>
+          <td>Mew_01974</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">4</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:67%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">19</td>
+          <td>Man_01911</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">4</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:67%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">20</td>
+          <td>Paul_02228</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#f57c00;min-width:18px;">4</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:67%;height:5px;background:#f57c00;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">21</td>
+          <td>Baifern_01910</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#c0002a;min-width:18px;">3</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:50%;height:5px;background:#c0002a;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr><tr>
+          <td class="tc">22</td>
+          <td>Nine_02024</td>
+          <td><div style="display:flex;align-items:center;gap:4px;">
+      <span style="font-weight:700;color:#c0002a;min-width:18px;">3</span>
+      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
+        <div style="width:50%;height:5px;background:#c0002a;border-radius:3px;"></div>
+      </div>
+      <span style="font-size:9px;color:#aaa;">/6</span>
+    </div></td>
+        </tr></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PT Sold -->
+  <div class="tbox card-wrap">
+    <div class="st">PT Sold — รายบุคคล</div>
+    <table>
+      <thead><tr>
+        <th>#</th><th>Trainer</th>
+        <th class="tr">Total Amount ฿</th>
+        <th class="tr">Before VAT ฿</th>
+      </tr></thead>
+      <tbody><tr>
+          <td class="tc">🥇</td>
+          <td><span class="bp stred">ST-RED</span> Lekza_01909</td>
+          <td class="tr fw">177,980</td>
+          <td class="tr">166,336</td>
+        </tr><tr>
+          <td class="tc">🥈</td>
+          <td><span class="bp etred">ET-RED</span> Golf_01913</td>
+          <td class="tr fw">175,300</td>
+          <td class="tr">163,832</td>
+        </tr><tr>
+          <td class="tc">🥉</td>
+          <td><span class="bp ptred">PT-RED</span> Poom_03173</td>
+          <td class="tr fw">144,100</td>
+          <td class="tr">134,673</td>
+        </tr><tr>
+          <td class="tc">4</td>
+          <td><span class="bp etred">ET-RED</span> Lion_02391</td>
+          <td class="tr fw">143,870</td>
+          <td class="tr">134,458</td>
+        </tr><tr>
+          <td class="tc">5</td>
+          <td><span class="bp ptred">PT-RED</span> Yean_03170</td>
+          <td class="tr fw">130,805</td>
+          <td class="tr">122,248</td>
+        </tr><tr>
+          <td class="tc">6</td>
+          <td><span class="bp etred">ET-RED</span> Ae_02227</td>
+          <td class="tr fw">128,420</td>
+          <td class="tr">120,019</td>
+        </tr><tr>
+          <td class="tc">7</td>
+          <td><span class="bp ptred">PT-RED</span> Put_02910</td>
+          <td class="tr fw">120,840</td>
+          <td class="tr">112,935</td>
+        </tr><tr>
+          <td class="tc">8</td>
+          <td><span class="bp etred">ET-RED</span> Bos_01915</td>
+          <td class="tr fw">115,000</td>
+          <td class="tr">107,477</td>
+        </tr><tr>
+          <td class="tc">9</td>
+          <td><span class="bp ptred">PT-RED</span> Tiger_01923</td>
+          <td class="tr fw">113,940</td>
+          <td class="tr">106,486</td>
+        </tr><tr>
+          <td class="tc">10</td>
+          <td><span class="bp etred">ET-RED</span> Peet_02169</td>
+          <td class="tr fw">113,420</td>
+          <td class="tr">106,000</td>
+        </tr><tr>
+          <td class="tc">11</td>
+          <td><span class="bp stred">ST-RED</span> Paul_02228</td>
+          <td class="tr fw">106,765</td>
+          <td class="tr">99,780</td>
+        </tr><tr>
+          <td class="tc">12</td>
+          <td><span class="bp ptred">PT-RED</span> Nill_03116</td>
+          <td class="tr fw">103,440</td>
+          <td class="tr">96,673</td>
+        </tr><tr>
+          <td class="tc">13</td>
+          <td><span class="bp ptred">PT-RED</span> Baifern_01910</td>
+          <td class="tr fw">100,870</td>
+          <td class="tr">94,271</td>
+        </tr><tr>
+          <td class="tc">14</td>
+          <td><span class="bp stred">ST-RED</span> IBA_Deaw_02058</td>
+          <td class="tr fw">100,000</td>
+          <td class="tr">93,458</td>
+        </tr><tr>
+          <td class="tc">15</td>
+          <td><span class="bp etred">ET-RED</span> Mew_01974</td>
+          <td class="tr fw">92,510</td>
+          <td class="tr">86,458</td>
+        </tr><tr>
+          <td class="tc">16</td>
+          <td><span class="bp ptred">PT-RED</span> Man_01911</td>
+          <td class="tr fw">89,170</td>
+          <td class="tr">83,336</td>
+        </tr><tr>
+          <td class="tc">17</td>
+          <td><span class="bp ptred">PT-RED</span> Nine_02024</td>
+          <td class="tr fw">87,640</td>
+          <td class="tr">81,907</td>
+        </tr><tr>
+          <td class="tc">18</td>
+          <td><span class="bp ptred">PT-RED</span> Ford_02742</td>
+          <td class="tr fw">81,860</td>
+          <td class="tr">76,505</td>
+        </tr><tr>
+          <td class="tc">19</td>
+          <td><span class="bp ptred">PT-RED</span> Zico_01805</td>
+          <td class="tr fw">72,280</td>
+          <td class="tr">67,551</td>
+        </tr><tr>
+          <td class="tc">20</td>
+          <td><span class="bp ptred">PT-RED</span> Sataem_03348</td>
+          <td class="tr fw">1,680</td>
+          <td class="tr">1,570</td>
+        </tr><tr>
+          <td class="tc">21</td>
+          <td><span class="bp stred">ST-RED</span> Ice_01548</td>
+          <td class="tr fw">1,680</td>
+          <td class="tr">1,570</td>
+        </tr></tbody>
+    </table>
+  </div>
+
+</div><!-- /a4 -->
+
+<script>
+const red  = ['#c0002a','#d42040','#e84060','#f06080','#f585a0','#f8a0b5','#fabdcc','#fcd5e0','#fee8ef','#fff0f5','#fff5f8','#fff8fa'];
+const blue = ['#1565c0','#1976d2','#1e88e5','#2196f3','#42a5f5','#64b5f6','#90caf9','#bbdefb','#e3f2fd','#eef5ff','#f5f9ff','#fafcff'];
+const goalLine = 6;
+
+const opts = () => ({
+  indexAxis: 'y',
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins:{ legend:{display:false}, tooltip:{
+    backgroundColor:'rgba(0,0,0,.85)',
+    titleColor:'#ffd',
+    bodyColor:'#fff',
+    callbacks:{ label: ctx => '  ' + ctx.raw.toLocaleString() }
+  } },
+  scales:{
+    x:{
+      ticks:{ color:'#666', font:{size:9}, callback: v => v>=1000?Math.round(v/1000)+'k':v },
+      grid:{ color:'#f0f0f0' }
+    },
+    y:{
+      ticks:{ color:'#333', font:{size:10}, padding:4 },
+      grid:{ display:false }
+    }
+  }
+});
+
+new Chart('cChart', { type:'bar', data:{
+  labels:["Golf_01913", "Mew_01974", "Ae_02227", "Bos_01915", "Lion_02391", "Paul_02228", "Yean_03170", "Put_02910", "Peet_02169", "Man_01911", "Tiger_01923", "IBA_Deaw_02058"],
+  datasets:[{ data:[140.0, 140.0, 104.0, 112.0, 111.0, 114.0, 107.0, 98.0, 111.0, 96.0, 96.0, 72.0], backgroundColor:red, borderRadius:3 }]
+}, options:opts() });
+
+new Chart('sChart', { type:'bar', data:{
+  labels:["Lekza_01909", "Golf_01913", "Poom_03173", "Lion_02391", "Yean_03170", "Ae_02227", "Put_02910", "Bos_01915", "Tiger_01923", "Peet_02169", "Paul_02228", "Nill_03116"],
+  datasets:[{ data:[177980.0, 175300.0, 144100.0, 143870.0, 130805.0, 128420.0, 120840.0, 115000.0, 113940.0, 113420.0, 106765.0, 103440.0], backgroundColor:red, borderRadius:3 }]
+}, options:opts() });
+
+new Chart('mChart', { type:'bar', data:{
+  labels:["Golf_01913", "Peet_02169, Sataem_03348", "Yean_03170", "Bos_01915, Lion_02391, Benz_03155, IBA_Deaw_02058, Poom_03173, Ae_02227", "Put_02910, Nill_03116, Tiger_01923, Ford_02742, Zico_01805, Lekza_01909", "Ice_01548, Mew_01974, Man_01911, Paul_02228", "Baifern_01910, Nine_02024"],
+  datasets:[{
+    data:[9, 8, 7, 6, 5, 4, 3],
+    backgroundColor: [9, 8, 7, 6, 5, 4, 3].map(v => v >= goalLine ? '#2e7d32' : v >= goalLine-2 ? '#f57c00' : '#c0002a'),
+    borderRadius:3
+  }]
+}, options:opts() });
+</script>
+</body>
+</html>
