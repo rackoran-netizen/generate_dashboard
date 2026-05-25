@@ -1,8 +1,8 @@
 {
-  "updated_at": "24/05/2026 14:33",
+  "updated_at": "25/05/2026 08:00",
   "period": {
     "start": "01/05/2026",
-    "end": "24/05/2026"
+    "end": "25/05/2026"
   },
   "conduct": {
     "headers": [
@@ -373,19 +373,19 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "2,201,570",
-        "Amount Before VAT": "2,057,542.06",
+        "Total Amount": "2,251,810",
+        "Amount Before VAT": "2,104,495.33",
         "Comm Sold": "",
-        "Commission Price": "101,204.94"
+        "Commission Price": "106,014.85"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Lekza_01909",
         "Position Rate": "ST-RED",
-        "Total Amount": "177,980",
-        "Amount Before VAT": "166,336.45",
+        "Total Amount": "179,660",
+        "Amount Before VAT": "167,906.54",
         "Comm Sold": "7%",
-        "Commission Price": "11,643.55"
+        "Commission Price": "11,753.46"
       },
       {
         "Ext": "",
@@ -398,21 +398,21 @@
       },
       {
         "Ext": "",
+        "Trainer": "RRA_Lion_02391",
+        "Position Rate": "ET-RED",
+        "Total Amount": "166,470",
+        "Amount Before VAT": "155,579.44",
+        "Comm Sold": "7%",
+        "Commission Price": "10,890.56"
+      },
+      {
+        "Ext": "",
         "Trainer": "RRA_Poom_03173",
         "Position Rate": "PT-RED",
         "Total Amount": "144,100",
         "Amount Before VAT": "134,672.90",
         "Comm Sold": "7%",
         "Commission Price": "9,427.10"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Lion_02391",
-        "Position Rate": "ET-RED",
-        "Total Amount": "143,870",
-        "Amount Before VAT": "134,457.94",
-        "Comm Sold": "5%",
-        "Commission Price": "6,722.90"
       },
       {
         "Ext": "",
@@ -440,6 +440,15 @@
         "Amount Before VAT": "112,934.58",
         "Comm Sold": "5%",
         "Commission Price": "5,646.73"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Mew_01974",
+        "Position Rate": "ET-RED",
+        "Total Amount": "115,110",
+        "Amount Before VAT": "107,579.44",
+        "Comm Sold": "2%",
+        "Commission Price": "2,151.59"
       },
       {
         "Ext": "",
@@ -481,10 +490,10 @@
         "Ext": "",
         "Trainer": "RRA_Nill_03116",
         "Position Rate": "PT-RED",
-        "Total Amount": "103,440",
-        "Amount Before VAT": "96,672.90",
+        "Total Amount": "105,120",
+        "Amount Before VAT": "98,242.99",
         "Comm Sold": "5%",
-        "Commission Price": "4,833.64"
+        "Commission Price": "4,912.15"
       },
       {
         "Ext": "",
@@ -503,15 +512,6 @@
         "Amount Before VAT": "93,457.94",
         "Comm Sold": "5%",
         "Commission Price": "4,672.90"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Mew_01974",
-        "Position Rate": "ET-RED",
-        "Total Amount": "92,510",
-        "Amount Before VAT": "86,457.94",
-        "Comm Sold": "2%",
-        "Commission Price": "1,729.16"
       },
       {
         "Ext": "",
@@ -553,10 +553,10 @@
         "Ext": "",
         "Trainer": "RRA_Sataem_03348",
         "Position Rate": "PT-RED",
-        "Total Amount": "1,680",
-        "Amount Before VAT": "1,570.09",
+        "Total Amount": "3,360",
+        "Amount Before VAT": "3,140.19",
         "Comm Sold": "2%",
-        "Commission Price": "31.40"
+        "Commission Price": "62.80"
       },
       {
         "Ext": "",
@@ -1662,12 +1662,30 @@
         "membership": "Corporate Promotion 12 Months PIA Membership",
         "client": "Noppadol Malungpaishrope",
         "sold_by": "RRA_Zico_01805"
+      },
+      {
+        "sold_date": "24 May 2026",
+        "app_id": "046202600806",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Onouma Lati",
+        "sold_by": "RRA_Nill_03116"
+      },
+      {
+        "sold_date": "24 May 2026",
+        "app_id": "046202600807",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Anggoon Sareedee",
+        "sold_by": "RRA_Sataem_03348"
       }
     ],
     "summary": [
       {
         "sold_by": "BGPL_Ou_00936",
         "count": 36
+      },
+      {
+        "sold_by": "RRA_Sataem_03348",
+        "count": 9
       },
       {
         "sold_by": "RRA_Golf_01913",
@@ -1678,12 +1696,12 @@
         "count": 8
       },
       {
-        "sold_by": "RRA_Sataem_03348",
-        "count": 8
-      },
-      {
         "sold_by": "RRA_Yean_03170",
         "count": 7
+      },
+      {
+        "sold_by": "RRA_Nill_03116",
+        "count": 6
       },
       {
         "sold_by": "RRA_Bos_01915",
@@ -1711,10 +1729,6 @@
       },
       {
         "sold_by": "RRA_Put_02910",
-        "count": 5
-      },
-      {
-        "sold_by": "RRA_Nill_03116",
         "count": 5
       },
       {
