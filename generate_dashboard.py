@@ -62,10 +62,16 @@ def mem_bar(count):
       <span style="font-size:9px;color:#aaa;">/{GOAL_MEM_EACH}</span>
     </div>'''
 
+def clean_name(raw):
+    for pre in ("RRA_","IBA_","BGPL_"):
+        if raw.startswith(pre):
+            return raw[len(pre):]
+    return raw
+
 def conduct_rows_html():
     rows = ""
     for i, r in enumerate(conduct_sorted):
-        name = r.get("Trainer","").replace("RRA_","")
+        name = clean_name(r.get("Trainer",""))
         rows += f"""<tr>
           <td class="tc">{medal(i)}</td>
           <td>{badge(r.get("Position Rate",""))} {name}</td>
@@ -78,7 +84,7 @@ def conduct_rows_html():
 def sold_rows_html():
     rows = ""
     for i, r in enumerate(sold_sorted):
-        name = r.get("Trainer","").replace("RRA_","")
+        name = clean_name(r.get("Trainer",""))
         rows += f"""<tr>
           <td class="tc">{medal(i)}</td>
           <td>{badge(r.get("Position Rate",""))} {name}</td>
@@ -90,7 +96,7 @@ def sold_rows_html():
 def mem_rows_html():
     rows = ""
     for i, r in enumerate(mem_summary):
-        name = r["sold_by"].replace("RRA_","")
+        name = clean_name(r["sold_by"])
         rows += f"""<tr>
           <td class="tc">{medal(i)}</td>
           <td>{name}</td>
@@ -100,7 +106,11 @@ def mem_rows_html():
 
 # Chart data — conduct ใช้ Total Session แทน Commission
 def _cname(r, key="Trainer"):
-    n = r.get(key,"").replace("RRA_","").replace("BGPL_","")
+    n = r.get(key,"")
+    for pre in ("RRA_","IBA_","BGPL_"):
+        if n.startswith(pre):
+            n = n[len(pre):]
+            break
     return n.split("_")[0] if "_" in n else n
 c_names = [_cname(r) for r in conduct_sorted[:12]]
 c_vals  = [num(r.get("Total Session","0")) for r in conduct_sorted[:12]]
@@ -113,7 +123,11 @@ for _r in mem_summary:
     _count_groups[_r["count"]].append(_r["sold_by"].replace("RRA_",""))
 _grouped = sorted(_count_groups.items(), key=lambda x: x[0], reverse=True)
 def _short(name):
-    # "Golf_01913" → "Golf"
+    # ลบ prefix RRA_ / IBA_ / BGPL_ แล้วเอาชื่อส่วนแรก
+    for pre in ("RRA_","IBA_","BGPL_"):
+        if name.startswith(pre):
+            name = name[len(pre):]
+            break
     return name.split("_")[0] if "_" in name else name
 m_names = [", ".join(_short(n) for n in names) for count, names in _grouped]
 m_vals  = [count for count, names in _grouped]
