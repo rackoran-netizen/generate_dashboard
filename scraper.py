@@ -15,13 +15,13 @@ def get_date_range():
     return start, end
 
 def login(page):
-    page.goto("https://jettsapp.jetts.co.th", timeout=30000)
-    page.wait_for_load_state("networkidle")
+    page.goto("https://jettsapp.jetts.co.th", timeout=60000)
+    page.wait_for_selector("#txtUsername", timeout=60000)
     page.fill("#txtUsername", USERNAME)
     page.fill("#txtPassword", PASSWORD)
     page.click("#BtnSubmit")
-    page.wait_for_load_state("networkidle")
-    time.sleep(2)
+    page.wait_for_load_state("load")
+    time.sleep(3)
 
 def scrape_table(page, url, start_date, end_date):
     page.goto(url, timeout=30000)
@@ -143,7 +143,9 @@ def main():
 
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+        page = browser.new_page(
+            user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
+        )
 
         print("กำลัง login...")
         login(page)
