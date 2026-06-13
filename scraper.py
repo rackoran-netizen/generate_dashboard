@@ -25,7 +25,7 @@ def login(page):
 
 def scrape_table(page, url, start_date, end_date):
     page.goto(url, timeout=30000)
-    page.wait_for_load_state("networkidle")
+    page.wait_for_load_state("load")
     time.sleep(2)
 
     # ตั้งวันที่ผ่าน JS (field เป็น readonly datepicker)
@@ -35,14 +35,27 @@ def scrape_table(page, url, start_date, end_date):
     """)
 
     page.click("input[value='Search']")
-    page.wait_for_load_state("networkidle")
+    page.wait_for_load_state("load")
     time.sleep(3)
 
-    # กด + เพื่อ expand รายบุคคล
-    plus_btn = page.query_selector("table tbody tr td:first-child i.fa-plus-circle")
-    if plus_btn:
-        plus_btn.click()
-        time.sleep(2)
+    # กด + เพื่อ expand รายบุคคล (ลอง selector หลายแบบ)
+    for sel in [
+        "i.fa-plus-circle",
+        "i.fa-plus",
+        "span.expand",
+        "td:first-child i",
+        "a[onclick*='expand']",
+    ]:
+        plus_btn = page.query_selector(sel)
+        if plus_btn:
+            try:
+                plus_btn.click()
+                time.sleep(3)
+            except Exception:
+                pass
+            break
+    # รอให้ expand เสร็จแล้วดึงข้อมูลอีกครั้ง
+    time.sleep(1)
 
     # ดึงตารางหลัก (ตารางแรกที่ไม่ใช่ calendar)
     tables = page.query_selector_all("table")
@@ -66,7 +79,7 @@ def scrape_table(page, url, start_date, end_date):
 
 def scrape_membership(page, start_date, end_date):
     page.goto("https://jettsapp.jetts.co.th/MemberRegisterReport", timeout=30000)
-    page.wait_for_load_state("networkidle")
+    page.wait_for_load_state("load")
     time.sleep(2)
 
     # เลือก Club (Jetts Robinson Ratchaphruek = value 46)
@@ -85,7 +98,7 @@ def scrape_membership(page, start_date, end_date):
     """)
 
     page.click("input[value='Search']")
-    page.wait_for_load_state("networkidle")
+    page.wait_for_load_state("load")
     time.sleep(3)
 
     all_rows = []
@@ -125,7 +138,7 @@ def scrape_membership(page, start_date, end_date):
             break
 
         next_span.click()
-        page.wait_for_load_state("networkidle")
+        page.wait_for_load_state("load")
         time.sleep(2)
         page_num += 1
 

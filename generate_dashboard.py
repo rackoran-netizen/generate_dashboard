@@ -99,9 +99,12 @@ def mem_rows_html():
     return rows
 
 # Chart data — conduct ใช้ Total Session แทน Commission
-c_names = [r.get("Trainer","").replace("RRA_","") for r in conduct_sorted[:12]]
+def _cname(r, key="Trainer"):
+    n = r.get(key,"").replace("RRA_","").replace("BGPL_","")
+    return n.split("_")[0] if "_" in n else n
+c_names = [_cname(r) for r in conduct_sorted[:12]]
 c_vals  = [num(r.get("Total Session","0")) for r in conduct_sorted[:12]]
-s_names = [r.get("Trainer","").replace("RRA_","") for r in sold_sorted[:12]]
+s_names = [_cname(r) for r in sold_sorted[:12]]
 s_vals  = [num(r.get("Total Amount","0")) for r in sold_sorted[:12]]
 # จัดกลุ่ม membership: คนที่ยอดเท่ากันอยู่กลุ่มเดียวกัน
 from collections import defaultdict as _dd
@@ -109,7 +112,10 @@ _count_groups = _dd(list)
 for _r in mem_summary:
     _count_groups[_r["count"]].append(_r["sold_by"].replace("RRA_",""))
 _grouped = sorted(_count_groups.items(), key=lambda x: x[0], reverse=True)
-m_names = [", ".join(names) for count, names in _grouped]
+def _short(name):
+    # "Golf_01913" → "Golf"
+    return name.split("_")[0] if "_" in name else name
+m_names = [", ".join(_short(n) for n in names) for count, names in _grouped]
 m_vals  = [count for count, names in _grouped]
 
 sc = pcolor(sold_pct)
@@ -122,7 +128,6 @@ html = f"""<!DOCTYPE html>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Jetts RRA — PT Dashboard</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
 *{{box-sizing:border-box;margin:0;padding:0;}}
 body{{
@@ -153,7 +158,7 @@ body{{
 .doc-meta{{text-align:right;font-size:10px;color:#aaa;}}
 
 /* ─── Summary strip ─── */
-.sum-strip{{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px;}}
+.sum-strip{{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}}
 .sum-box{{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);border-top:3px solid #c0002a;}}
 .sum-box .lbl{{font-size:9px;color:#999;}}
 .sum-box .val{{font-size:15px;font-weight:800;color:#c0002a;line-height:1.3;}}
@@ -247,7 +252,7 @@ tbody tr:hover td{{background:#fff5f7;}}
     </div>
   </div>
 
-  <!-- Summary Strip (4 การ์ด) -->
+  <!-- Summary Strip (3 การ์ด) -->
   <div class="sum-strip">
     <div class="sum-box">
       <div class="lbl">Total Session</div>
@@ -257,11 +262,6 @@ tbody tr:hover td{{background:#fff5f7;}}
     <div class="sum-box">
       <div class="lbl">PT Sold</div>
       <div class="val">{fmt(sold_actual)}</div>
-      <div class="unit">฿</div>
-    </div>
-    <div class="sum-box">
-      <div class="lbl">Comm Sold</div>
-      <div class="val">{fmt(sold_summary.get('Commission Price','0'))}</div>
       <div class="unit">฿</div>
     </div>
     <div class="sum-box">
@@ -352,21 +352,35 @@ tbody tr:hover td{{background:#fff5f7;}}
 
 </div><!-- /a4 -->
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script>
+Chart.register(ChartDataLabels);
 const red  = ['#c0002a','#d42040','#e84060','#f06080','#f585a0','#f8a0b5','#fabdcc','#fcd5e0','#fee8ef','#fff0f5','#fff5f8','#fff8fa'];
-const blue = ['#1565c0','#1976d2','#1e88e5','#2196f3','#42a5f5','#64b5f6','#90caf9','#bbdefb','#e3f2fd','#eef5ff','#f5f9ff','#fafcff'];
 const goalLine = {GOAL_MEM_EACH};
 
-const opts = () => ({{
+const labelFmt = (val) => val >= 1000 ? (val/1000).toFixed(0)+'k' : val;
+
+const opts = (fmtFn) => ({{
   indexAxis: 'y',
   responsive: true,
   maintainAspectRatio: false,
-  plugins:{{ legend:{{display:false}}, tooltip:{{
-    backgroundColor:'rgba(0,0,0,.85)',
-    titleColor:'#ffd',
-    bodyColor:'#fff',
-    callbacks:{{ label: ctx => '  ' + ctx.raw.toLocaleString() }}
-  }} }},
+  plugins:{{
+    legend:{{display:false}},
+    tooltip:{{
+      backgroundColor:'rgba(0,0,0,.85)',
+      titleColor:'#ffd',
+      bodyColor:'#fff',
+      callbacks:{{ label: ctx => '  ' + ctx.raw.toLocaleString() }}
+    }},
+    datalabels:{{
+      anchor:'end', align:'start',
+      color:'#fff',
+      font:{{size:9, weight:'bold'}},
+      formatter: fmtFn || labelFmt,
+      clamp:true
+    }}
+  }},
   scales:{{
     x:{{
       ticks:{{ color:'#666', font:{{size:9}}, callback: v => v>=1000?Math.round(v/1000)+'k':v }},
@@ -382,12 +396,12 @@ const opts = () => ({{
 new Chart('cChart', {{ type:'bar', data:{{
   labels:{json.dumps(c_names, ensure_ascii=False)},
   datasets:[{{ data:{json.dumps(c_vals)}, backgroundColor:red, borderRadius:3 }}]
-}}, options:opts() }});
+}}, options:opts(v => v) }});
 
 new Chart('sChart', {{ type:'bar', data:{{
   labels:{json.dumps(s_names, ensure_ascii=False)},
   datasets:[{{ data:{json.dumps(s_vals)}, backgroundColor:red, borderRadius:3 }}]
-}}, options:opts() }});
+}}, options:opts(v => v>=1000?(v/1000).toFixed(0)+'k':v) }});
 
 new Chart('mChart', {{ type:'bar', data:{{
   labels:{json.dumps(m_names, ensure_ascii=False)},
@@ -396,7 +410,7 @@ new Chart('mChart', {{ type:'bar', data:{{
     backgroundColor: {json.dumps(m_vals)}.map(v => v >= goalLine ? '#2e7d32' : v >= goalLine-2 ? '#f57c00' : '#c0002a'),
     borderRadius:3
   }}]
-}}, options:opts() }});
+}}, options:opts(v => v) }});
 </script>
 </body>
 </html>"""
