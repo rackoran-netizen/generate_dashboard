@@ -370,8 +370,18 @@ tbody tr:hover td{{background:#fff5f7;}}
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script>
 Chart.register(ChartDataLabels);
-const red  = ['#c0002a','#d42040','#e84060','#f06080','#f585a0','#f8a0b5','#fabdcc','#fcd5e0','#fee8ef','#fff0f5','#fff5f8','#fff8fa'];
 const goalLine = {GOAL_MEM_EACH};
+
+// สร้างสี gradient จากเข้ม→อ่อน ตามจำนวน n
+function redGrad(n) {{
+  return Array.from({{length:n}}, (_,i) => {{
+    const t = n===1 ? 0 : i/(n-1);
+    const r = Math.round(192 + (254-192)*t);
+    const g = Math.round(0   + (213-0)*t);
+    const b = Math.round(42  + (224-42)*t);
+    return `rgb(${{r}},${{g}},${{b}})`;
+  }});
+}}
 
 const labelFmt = (val) => val >= 1000 ? (val/1000).toFixed(0)+'k' : val;
 
@@ -409,12 +419,12 @@ const opts = (fmtFn) => ({{
 
 new Chart('cChart', {{ type:'bar', data:{{
   labels:{json.dumps(c_names, ensure_ascii=False)},
-  datasets:[{{ data:{json.dumps(c_vals)}, backgroundColor:red, borderRadius:3 }}]
+  datasets:[{{ data:{json.dumps(c_vals)}, backgroundColor:redGrad({len(c_vals)}), borderRadius:3 }}]
 }}, options:opts(v => v) }});
 
 new Chart('sChart', {{ type:'bar', data:{{
   labels:{json.dumps(s_names, ensure_ascii=False)},
-  datasets:[{{ data:{json.dumps(s_vals)}, backgroundColor:red, borderRadius:3 }}]
+  datasets:[{{ data:{json.dumps(s_vals)}, backgroundColor:redGrad({len(s_vals)}), borderRadius:3 }}]
 }}, options:opts(v => v>=1000?(v/1000).toFixed(0)+'k':v) }});
 
 new Chart('mChart', {{ type:'bar', data:{{

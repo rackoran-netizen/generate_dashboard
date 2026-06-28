@@ -711,8 +711,18 @@ tbody tr:hover td{background:#fff5f7;}
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script>
 Chart.register(ChartDataLabels);
-const red  = ['#c0002a','#d42040','#e84060','#f06080','#f585a0','#f8a0b5','#fabdcc','#fcd5e0','#fee8ef','#fff0f5','#fff5f8','#fff8fa'];
 const goalLine = 6;
+
+// สร้างสี gradient จากเข้ม→อ่อน ตามจำนวน n
+function redGrad(n) {
+  return Array.from({length:n}, (_,i) => {
+    const t = n===1 ? 0 : i/(n-1);
+    const r = Math.round(192 + (254-192)*t);
+    const g = Math.round(0   + (213-0)*t);
+    const b = Math.round(42  + (224-42)*t);
+    return `rgb(${r},${g},${b})`;
+  });
+}
 
 const labelFmt = (val) => val >= 1000 ? (val/1000).toFixed(0)+'k' : val;
 
@@ -750,12 +760,12 @@ const opts = (fmtFn) => ({
 
 new Chart('cChart', { type:'bar', data:{
   labels:["Golf", "Ae", "Mew", "Bos", "Lion", "Paul", "Yean", "Ford", "Peet", "Deaw", "Tiger", "Zico", "Man", "Poom", "Lekza", "Nine", "Baifern", "Put", "Nill", "Ice", "Benz", "Tonmai", "Sataem"],
-  datasets:[{ data:[184.0, 169.0, 173.0, 130.0, 147.0, 142.0, 141.0, 134.0, 118.0, 110.0, 124.0, 116.0, 118.0, 123.0, 100.0, 100.0, 80.0, 78.0, 90.0, 65.0, 67.0, 44.0, 52.0], backgroundColor:red, borderRadius:3 }]
+  datasets:[{ data:[184.0, 169.0, 173.0, 130.0, 147.0, 142.0, 141.0, 134.0, 118.0, 110.0, 124.0, 116.0, 118.0, 123.0, 100.0, 100.0, 80.0, 78.0, 90.0, 65.0, 67.0, 44.0, 52.0], backgroundColor:redGrad(23), borderRadius:3 }]
 }, options:opts(v => v) });
 
 new Chart('sChart', { type:'bar', data:{
   labels:["Bos", "Mew", "Ae", "Lion", "Golf", "Nine", "Peet", "Benz", "Zico", "Tiger", "Lekza", "Poom", "Yean", "Baifern", "Paul", "Deaw", "Man", "Ice", "Ford", "Put", "Nill", "Sataem"],
-  datasets:[{ data:[174600.0, 168150.0, 159460.0, 156925.0, 155025.0, 152990.0, 152860.0, 147470.0, 143700.0, 143230.0, 142385.0, 141100.0, 138880.0, 138715.0, 137130.0, 135150.0, 130580.0, 113200.0, 97900.0, 91280.0, 83020.0, 73260.0], backgroundColor:red, borderRadius:3 }]
+  datasets:[{ data:[174600.0, 168150.0, 159460.0, 156925.0, 155025.0, 152990.0, 152860.0, 147470.0, 143700.0, 143230.0, 142385.0, 141100.0, 138880.0, 138715.0, 137130.0, 135150.0, 130580.0, 113200.0, 97900.0, 91280.0, 83020.0, 73260.0], backgroundColor:redGrad(22), borderRadius:3 }]
 }, options:opts(v => v>=1000?(v/1000).toFixed(0)+'k':v) });
 
 new Chart('mChart', { type:'bar', data:{
