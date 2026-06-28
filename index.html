@@ -174,13 +174,13 @@ tbody tr:hover td{background:#fff5f7;}
   <div class="chart-row">
     <div class="chart-box">
       <div class="st">PT Conduct — Sessions รายคน</div>
-      <div class="chart-inner" style="height:308px;">
+      <div class="chart-inner" style="height:572px;">
         <canvas id="cChart"></canvas>
       </div>
     </div>
     <div class="chart-box">
       <div class="st">PT Sold — ยอดขายรายคน</div>
-      <div class="chart-inner" style="height:308px;">
+      <div class="chart-inner" style="height:548px;">
         <canvas id="sChart"></canvas>
       </div>
     </div>
@@ -749,13 +749,13 @@ const opts = (fmtFn) => ({
 });
 
 new Chart('cChart', { type:'bar', data:{
-  labels:["Golf", "Ae", "Mew", "Bos", "Lion", "Paul", "Yean", "Ford", "Peet", "Deaw", "Tiger", "Zico"],
-  datasets:[{ data:[184.0, 169.0, 173.0, 130.0, 147.0, 142.0, 141.0, 134.0, 118.0, 110.0, 124.0, 116.0], backgroundColor:red, borderRadius:3 }]
+  labels:["Golf", "Ae", "Mew", "Bos", "Lion", "Paul", "Yean", "Ford", "Peet", "Deaw", "Tiger", "Zico", "Man", "Poom", "Lekza", "Nine", "Baifern", "Put", "Nill", "Ice", "Benz", "Tonmai", "Sataem"],
+  datasets:[{ data:[184.0, 169.0, 173.0, 130.0, 147.0, 142.0, 141.0, 134.0, 118.0, 110.0, 124.0, 116.0, 118.0, 123.0, 100.0, 100.0, 80.0, 78.0, 90.0, 65.0, 67.0, 44.0, 52.0], backgroundColor:red, borderRadius:3 }]
 }, options:opts(v => v) });
 
 new Chart('sChart', { type:'bar', data:{
-  labels:["Bos", "Mew", "Ae", "Lion", "Golf", "Nine", "Peet", "Benz", "Zico", "Tiger", "Lekza", "Poom"],
-  datasets:[{ data:[174600.0, 168150.0, 159460.0, 156925.0, 155025.0, 152990.0, 152860.0, 147470.0, 143700.0, 143230.0, 142385.0, 141100.0], backgroundColor:red, borderRadius:3 }]
+  labels:["Bos", "Mew", "Ae", "Lion", "Golf", "Nine", "Peet", "Benz", "Zico", "Tiger", "Lekza", "Poom", "Yean", "Baifern", "Paul", "Deaw", "Man", "Ice", "Ford", "Put", "Nill", "Sataem"],
+  datasets:[{ data:[174600.0, 168150.0, 159460.0, 156925.0, 155025.0, 152990.0, 152860.0, 147470.0, 143700.0, 143230.0, 142385.0, 141100.0, 138880.0, 138715.0, 137130.0, 135150.0, 130580.0, 113200.0, 97900.0, 91280.0, 83020.0, 73260.0], backgroundColor:red, borderRadius:3 }]
 }, options:opts(v => v>=1000?(v/1000).toFixed(0)+'k':v) });
 
 new Chart('mChart', { type:'bar', data:{

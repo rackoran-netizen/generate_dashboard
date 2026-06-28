@@ -112,10 +112,10 @@ def _cname(r, key="Trainer"):
             n = n[len(pre):]
             break
     return n.split("_")[0] if "_" in n else n
-c_names = [_cname(r) for r in conduct_sorted[:12]]
-c_vals  = [num(r.get("Total Session","0")) for r in conduct_sorted[:12]]
-s_names = [_cname(r) for r in sold_sorted[:12]]
-s_vals  = [num(r.get("Total Amount","0")) for r in sold_sorted[:12]]
+c_names = [_cname(r) for r in conduct_sorted]
+c_vals  = [num(r.get("Total Session","0")) for r in conduct_sorted]
+s_names = [_cname(r) for r in sold_sorted]
+s_vals  = [num(r.get("Total Amount","0")) for r in sold_sorted]
 # จัดกลุ่ม membership: คนที่ยอดเท่ากันอยู่กลุ่มเดียวกัน
 from collections import defaultdict as _dd
 _count_groups = _dd(list)
