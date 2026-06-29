@@ -1,8 +1,8 @@
 {
-  "updated_at": "28/06/2026 20:54",
+  "updated_at": "29/06/2026 08:00",
   "period": {
     "start": "01/06/2026",
-    "end": "28/06/2026"
+    "end": "29/06/2026"
   },
   "conduct": {
     "headers": [
@@ -373,10 +373,10 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "2,977,010",
-        "Amount Before VAT": "2,782,252.34",
+        "Total Amount": "3,033,700",
+        "Amount Before VAT": "2,835,233.64",
         "Comm Sold": "",
-        "Commission Price": "176,713.56"
+        "Commission Price": "184,668.41"
       },
       {
         "Ext": "",
@@ -422,6 +422,15 @@
         "Amount Before VAT": "144,883.18",
         "Comm Sold": "7%",
         "Commission Price": "10,141.82"
+      },
+      {
+        "Ext": "",
+        "Trainer": "IBA_Deaw_02058",
+        "Position Rate": "ST-RED",
+        "Total Amount": "154,150",
+        "Amount Before VAT": "144,065.42",
+        "Comm Sold": "7%",
+        "Commission Price": "10,084.58"
       },
       {
         "Ext": "",
@@ -515,39 +524,30 @@
       },
       {
         "Ext": "",
-        "Trainer": "IBA_Deaw_02058",
-        "Position Rate": "ST-RED",
-        "Total Amount": "135,150",
-        "Amount Before VAT": "126,308.41",
-        "Comm Sold": "5%",
-        "Commission Price": "6,315.42"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Man_01911",
         "Position Rate": "PT-RED",
-        "Total Amount": "130,580",
-        "Amount Before VAT": "122,037.38",
+        "Total Amount": "133,940",
+        "Amount Before VAT": "125,177.57",
         "Comm Sold": "7%",
-        "Commission Price": "8,542.62"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Ice_01548",
-        "Position Rate": "ST-RED",
-        "Total Amount": "113,200",
-        "Amount Before VAT": "105,794.39",
-        "Comm Sold": "5%",
-        "Commission Price": "5,289.72"
+        "Commission Price": "8,762.43"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Ford_02742",
         "Position Rate": "PT-RED",
-        "Total Amount": "97,900",
-        "Amount Before VAT": "91,495.33",
+        "Total Amount": "128,870",
+        "Amount Before VAT": "120,439.25",
+        "Comm Sold": "7%",
+        "Commission Price": "8,430.75"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ice_01548",
+        "Position Rate": "ST-RED",
+        "Total Amount": "114,880",
+        "Amount Before VAT": "107,364.49",
         "Comm Sold": "5%",
-        "Commission Price": "4,574.77"
+        "Commission Price": "5,368.22"
       },
       {
         "Ext": "",
@@ -562,10 +562,10 @@
         "Ext": "",
         "Trainer": "RRA_Nill_03116",
         "Position Rate": "PT-RED",
-        "Total Amount": "83,020",
-        "Amount Before VAT": "77,588.79",
+        "Total Amount": "84,700",
+        "Amount Before VAT": "79,158.88",
         "Comm Sold": "2%",
-        "Commission Price": "1,551.78"
+        "Commission Price": "1,583.18"
       },
       {
         "Ext": "",
