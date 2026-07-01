@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-cd /Users/oran_raurhotmail.com/team-request-hub
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "=== $(date) ==="
 echo "1. ดึงข้อมูลจาก Jetts..."
