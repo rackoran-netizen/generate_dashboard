@@ -13,8 +13,8 @@ mem_summary  = [r for r in data["membership"]["summary"] if r["sold_by"] not in 
 mem_total    = sum(r["count"] for r in mem_summary)
 
 # Goals
-GOAL_PT_SOLD  = 2_000_000 * 1.07   # 2,140,000 (รวม VAT 7%)
-GOAL_MEMBER   = 100                  # เป้ารวมคลับ
+GOAL_PT_SOLD  = 2_400_000 * 1.07   # 2,568,000 (รวม VAT 7%)
+GOAL_MEMBER   = 124                  # เป้ารวมคลับ
 GOAL_MEM_EACH = 6                    # เป้ารายบุคคล
 
 conduct_summary = next((r for r in conduct_rows if "Ratchaphruek" in r.get("Trainer","")), {})
