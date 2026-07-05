@@ -13,8 +13,8 @@ mem_summary  = [r for r in data["membership"]["summary"] if r["sold_by"] not in 
 mem_total    = sum(r["count"] for r in mem_summary)
 
 # Goals
-GOAL_PT_SOLD  = 2_000_000 * 1.07   # 2,140,000 (รวม VAT 7%)
-GOAL_MEMBER   = 100                  # เป้ารวมคลับ
+GOAL_PT_SOLD  = 2_400_000 * 1.07   # 2,568,000 (รวม VAT 7%)
+GOAL_MEMBER   = 125                  # เป้ารวมคลับ
 GOAL_MEM_EACH = 6                    # เป้ารายบุคคล
 
 conduct_summary = next((r for r in conduct_rows if "Ratchaphruek" in r.get("Trainer","")), {})
@@ -288,7 +288,7 @@ tbody tr:hover td{{background:#fff5f7;}}
   <!-- Goal Cards -->
   <div class="goal-row">
     <div class="goal-box">
-      <div class="gtitle">เป้าหมาย PT Sold (2,000,000 + VAT 7%)</div>
+      <div class="gtitle">เป้าหมาย PT Sold (2,400,000 + VAT 7%)</div>
       <div class="goal-nums">
         <div class="goal-pct" style="color:{sc};">{sold_pct:.1f}%</div>
         <div class="goal-actual">{fmt(sold_actual)} / {fmt(GOAL_PT_SOLD)} ฿</div>

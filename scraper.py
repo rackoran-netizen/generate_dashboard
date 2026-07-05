@@ -1,5 +1,6 @@
-import sys
-sys.path.insert(0, '/Users/oran_raurhotmail.com/Library/Python/3.9/lib/python/site-packages')
+import sys, os
+if os.path.exists('/Users/oran_raurhotmail.com/Library/Python/3.9/lib/python/site-packages'):
+    sys.path.insert(0, '/Users/oran_raurhotmail.com/Library/Python/3.9/lib/python/site-packages')
 
 import os, json, time
 from datetime import datetime
