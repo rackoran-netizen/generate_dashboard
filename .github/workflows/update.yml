@@ -5,6 +5,9 @@ on:
     - cron: '0 1 * * *'   # 08:00 Bangkok (UTC+7)
   workflow_dispatch:        # กดปุ่มรันเองได้จาก GitHub
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: ubuntu-latest
