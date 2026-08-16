@@ -63,18 +63,23 @@ for r in conduct_ind:
         "id": tid,
         "name": display_name(tid),
         "pos": pos_tag(r.get("Position Rate", "")),
-        "sessions": num(r.get("Total Session", "0")),
+        # PT Conducted = เซสชันที่เทรนจริง ไม่รวม Fitstart/Trial (แยกออกมาเป็นตัวชี้วัดของตัวเอง)
+        "sessions": num(r.get("Total Session (Expept Fitstart and Trial)", "0")),
+        # ชั่วโมงเทรน = บริการลูกค้าตอนต้นของการขาย (Fitstart + Trial Session)
+        "trial": num(r.get("Fitstart", "0")) + num(r.get("Trial Session", "0")),
         "sold": sold_by_id.get(tid, 0.0),
         "members": mem_by_id.get(tid, 0),
     })
 
 sold_max     = max((t["sold"] for t in trainers), default=0) or 1
 sessions_max = max((t["sessions"] for t in trainers), default=0) or 1
+trial_max    = max((t["trial"] for t in trainers), default=0) or 1
 members_max  = max((t["members"] for t in trainers), default=0) or 1
 
 # ลำดับแถว: composite score (ใช้จัดอันดับเท่านั้น ไม่ใช้วาดกราฟ — หลีกเลี่ยงการรวมหน่วยที่ต่างกัน)
 for t in trainers:
-    t["score"] = (t["sold"] / sold_max) + (t["sessions"] / sessions_max) + (t["members"] / members_max)
+    t["score"] = (t["sold"] / sold_max) + (t["sessions"] / sessions_max) \
+               + (t["trial"] / trial_max) + (t["members"] / members_max)
 trainers.sort(key=lambda t: t["score"], reverse=True)
 
 sold_actual = num(sold_summary.get("Total Amount", "0"))
@@ -94,23 +99,29 @@ def grid_rows_html():
     for i, t in enumerate(trainers):
         sold_pct_w   = min(t["sold"] / sold_max * 100, 100)
         sess_pct_w   = min(t["sessions"] / sessions_max * 100, 100)
+        trial_pct_w  = min(t["trial"] / trial_max * 100, 100)
         mem_pct_w    = min(t["members"] / GOAL_MEM_EACH * 100, 100)
         pos_html     = f'<span class="postag">{t["pos"]}</span>' if t["pos"] else ""
-        sold_fill = f'<div class="bar-fill sold" style="width:{sold_pct_w:.1f}%"></div>' if sold_pct_w > 0 else ""
-        sess_fill = f'<div class="bar-fill conduct" style="width:{sess_pct_w:.1f}%"></div>' if sess_pct_w > 0 else ""
-        mem_fill  = f'<div class="bar-fill mem" style="width:{mem_pct_w:.1f}%"></div>' if mem_pct_w > 0 else ""
+        sold_fill  = f'<div class="bar-fill sold" style="width:{sold_pct_w:.1f}%"></div>' if sold_pct_w > 0 else ""
+        sess_fill  = f'<div class="bar-fill conduct" style="width:{sess_pct_w:.1f}%"></div>' if sess_pct_w > 0 else ""
+        trial_fill = f'<div class="bar-fill trial" style="width:{trial_pct_w:.1f}%"></div>' if trial_pct_w > 0 else ""
+        mem_fill   = f'<div class="bar-fill mem" style="width:{mem_pct_w:.1f}%"></div>' if mem_pct_w > 0 else ""
         rows.append(f"""<div class="grid-row">
           <div class="gr-rank">{i+1}</div>
           <div class="gr-name">{pos_html}{t['name']}</div>
-          <div class="gr-metric">
+          <div class="gr-metric m1">
             <div class="bar-track">{sold_fill}</div>
             <span class="bar-val">{fmt(t['sold'])}</span>
           </div>
-          <div class="gr-metric">
+          <div class="gr-metric m2">
             <div class="bar-track">{sess_fill}</div>
             <span class="bar-val">{fmt(t['sessions'])}</span>
           </div>
-          <div class="gr-metric">
+          <div class="gr-metric m3">
+            <div class="bar-track">{trial_fill}</div>
+            <span class="bar-val">{fmt(t['trial'])}</span>
+          </div>
+          <div class="gr-metric m4">
             <div class="bar-track">{mem_fill}</div>
             <span class="bar-val">{t['members']}/{GOAL_MEM_EACH}</span>
           </div>
@@ -166,6 +177,7 @@ html = f"""<!DOCTYPE html>
   --gold:#c8952a;
   --sold:#d6342f;
   --conduct:#2a78d6;
+  --trial:#8fcfc6;
   --member:#f2b705;
 }}
 
@@ -220,14 +232,15 @@ body{{
 .sw{{width:9px;height:9px;border-radius:2px;display:inline-block;}}
 .sw.sold{{background:var(--sold);}}
 .sw.conduct{{background:var(--conduct);}}
+.sw.trial{{background:var(--trial);}}
 .sw.mem{{background:var(--member);}}
 
 /* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) ─── */
 .grid-card{{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px 6px;}}
 .grid-head,.grid-row{{
   display:grid;
-  grid-template-columns:20px 74px 1fr 1fr 1fr;
-  column-gap:12px;
+  grid-template-columns:20px 76px 1fr 1fr 1fr 1fr;
+  column-gap:9px;
   align-items:center;
 }}
 .grid-head{{padding:4px 2px 7px;border-bottom:1.5px solid var(--ink-1);}}
@@ -242,8 +255,9 @@ body{{
 .bar-fill{{border-radius:3px;min-width:3px;}}
 .bar-fill.sold{{background:var(--sold);}}
 .bar-fill.conduct{{background:var(--conduct);}}
+.bar-fill.trial{{background:var(--trial);}}
 .bar-fill.mem{{background:var(--member);}}
-.bar-val{{flex:0 0 auto;width:58px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}}
+.bar-val{{flex:0 0 auto;width:48px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}}
 
 /* ─── ขนาดแถวไดนามิก: คำนวณจากจำนวนเทรนเนอร์ (n_trainers={n_trainers}) ให้พอดี A4 เสมอ ─── */
 .grid-row{{padding:{row_pad}px 2px;border-bottom:1px solid var(--line);}}
@@ -271,7 +285,7 @@ body{{
   .tile-row{{grid-template-columns:1fr 1fr;}}
   .goal-row{{grid-template-columns:1fr;}}
   .grid-head,.grid-row{{grid-template-columns:14px 50px 1fr;row-gap:2px;}}
-  .grid-head .gh-c,.grid-head .gh-m2,.gr-metric.m2{{display:none;}}
+  .grid-head .gh-m2,.gr-metric.m2,.grid-head .gh-m3,.gr-metric.m3{{display:none;}}
 }}
 </style>
 </head>
@@ -339,10 +353,11 @@ body{{
 
   <!-- Trainer grid: PT Sold + PT Conducted + New Member รวมรายคน -->
   <div class="st-row">
-    <div class="st">ผลงานรายบุคคล — เรียงตามคะแนนรวม 3 ตัวชี้วัด</div>
+    <div class="st">ผลงานรายบุคคล — เรียงตามคะแนนรวม 4 ตัวชี้วัด</div>
     <div class="legend">
       <span><span class="sw sold"></span>PT Sold</span>
       <span><span class="sw conduct"></span>PT Conducted</span>
+      <span><span class="sw trial"></span>Fs+Ra</span>
       <span><span class="sw mem"></span>New Member</span>
     </div>
   </div>
@@ -352,12 +367,13 @@ body{{
       <div class="gh-n">เทรนเนอร์</div>
       <div class="gh-m gh-m1">PT Sold (฿)</div>
       <div class="gh-m gh-m2">PT Conducted (ครั้ง)</div>
-      <div class="gh-m gh-m3">สมาชิกใหม่ (เป้า {GOAL_MEM_EACH})</div>
+      <div class="gh-m gh-m3">Fs+Ra (ครั้ง)</div>
+      <div class="gh-m gh-m4">สมาชิกใหม่ (เป้า {GOAL_MEM_EACH})</div>
     </div>
     <div class="grid-body">{grid_rows_html()}</div>
   </div>
 
-  <div class="footnote">ความยาวแท่งของ PT Sold และ PT Conducted เทียบกับค่าสูงสุดของแต่ละตัวชี้วัดในทีม &nbsp;·&nbsp; แท่งสมาชิกใหม่เทียบกับเป้าหมายรายบุคคล {GOAL_MEM_EACH} คน</div>
+  <div class="footnote">ความยาวแท่งของ PT Sold, PT Conducted และ Fs+Ra เทียบกับค่าสูงสุดของแต่ละตัวชี้วัดในทีม &nbsp;·&nbsp; แท่งสมาชิกใหม่เทียบกับเป้าหมายรายบุคคล {GOAL_MEM_EACH} คน &nbsp;·&nbsp; PT Conducted ไม่รวม Fitstart/Trial (แยกเป็น Fs+Ra)</div>
 
 </div><!-- /a4 -->
 
