@@ -1,0 +1,7 @@
+name = "jetts-rra-refresh"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# GH_TOKEN ไม่ได้อยู่ในไฟล์นี้ — ตั้งด้วยคำสั่ง:
+#   wrangler secret put GH_TOKEN
+# (token ไม่ถูก commit และไม่โผล่ในโค้ดที่ public เห็น)

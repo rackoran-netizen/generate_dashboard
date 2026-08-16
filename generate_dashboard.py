@@ -194,8 +194,10 @@ body{{
 .topbar .brand small{{display:block;font-weight:500;font-size:9.5px;color:rgba(255,255,255,.75);margin-top:1px;}}
 .topbar-right{{display:flex;align-items:center;gap:10px;}}
 .print-hint{{font-size:9.5px;color:rgba(255,255,255,.8);max-width:260px;line-height:1.35;text-align:right;}}
-.print-btn{{background:#fff;color:var(--brand);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;}}
+.print-btn{{background:#fff;color:var(--brand);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:inherit;}}
 .print-btn:hover{{background:#ffe9ee;}}
+.print-btn:disabled{{opacity:.6;cursor:default;}}
+.refresh-status{{font-size:10px;color:rgba(255,255,255,.8);white-space:nowrap;}}
 
 /* ─── Wrapper (หน้า A4) ─── */
 .a4{{max-width:800px;margin:16px auto;padding:20px 24px;background:var(--surface);border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,.12);}}
@@ -294,10 +296,34 @@ body{{
 <div class="topbar no-print">
   <div class="brand">Jetts RRA — PT Performance Dashboard<small>Robinson Ratchaphruek</small></div>
   <div class="topbar-right">
+    <span id="refreshStatus" class="refresh-status"></span>
+    <button class="print-btn" id="refreshBtn" onclick="triggerRefresh()" title="สั่งดึงข้อมูลใหม่ 1 คลิก">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+      Refresh ข้อมูล
+    </button>
     <div class="print-hint">เคล็ดลับ: ก่อนกดพิมพ์ ให้ปิดตัวเลือก "Headers and footers" ในหน้าต่างพิมพ์ของเบราว์เซอร์ เพื่อไม่ให้แสดง URL/วันที่บนกระดาษ</div>
     <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
   </div>
 </div>
+<script>
+async function triggerRefresh() {{
+  const btn = document.getElementById('refreshBtn');
+  const status = document.getElementById('refreshStatus');
+  btn.disabled = true;
+  status.textContent = 'กำลังสั่งดึงข้อมูล...';
+  try {{
+    const res = await fetch('https://jetts-rra-refresh.rackoran.workers.dev/', {{ method: 'POST' }});
+    if (res.ok) {{
+      status.textContent = 'สั่งแล้ว รอ ~1-2 นาทีแล้วรีเฟรชหน้านี้';
+    }} else {{
+      status.textContent = 'สั่งไม่สำเร็จ (' + res.status + ')';
+    }}
+  }} catch (e) {{
+    status.textContent = 'เชื่อมต่อไม่ได้ ลองใหม่อีกครั้ง';
+  }}
+  btn.disabled = false;
+}}
+</script>
 
 <div class="a4">
 
