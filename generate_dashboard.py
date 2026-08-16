@@ -7,7 +7,7 @@ updated_at   = data["updated_at"]
 period       = data["period"]
 conduct_rows = data["conduct"]["rows"]
 sold_rows    = data["sold"]["rows"]
-# ตัด BGPL_Ou_00936 ออกจาก membership
+# ตัด BGPL_Ou_00936 ออกจาก membership (บัญชีกลาง ไม่ใช่เทรนเนอร์จริง)
 EXCLUDE_MEM = {"BGPL_Ou_00936"}
 mem_summary  = [r for r in data["membership"]["summary"] if r["sold_by"] not in EXCLUDE_MEM]
 mem_total    = sum(r["count"] for r in mem_summary)
@@ -30,110 +30,116 @@ def fmt(v):
     try: return f"{num(v):,.0f}"
     except: return str(v)
 
-conduct_sorted = sorted(conduct_ind, key=lambda r: num(r.get("Total Commission","0")), reverse=True)
-sold_sorted    = sorted(sold_ind,    key=lambda r: num(r.get("Total Amount","0")), reverse=True)
-
-sold_actual = num(sold_summary.get("Total Amount","0"))
-sold_pct    = sold_actual / GOAL_PT_SOLD * 100
-mem_pct     = mem_total / GOAL_MEMBER * 100
-
 def pcolor(pct):
-    if pct >= 100: return "#2e7d32"
-    if pct >= 80:  return "#f57c00"
-    return "#c0002a"
+    if pct >= 100: return "#0ca30c"
+    if pct >= 80:  return "#eb6834"
+    return "#d03b3b"
 
-def badge(pos):
-    cls = pos.lower().replace("-","")
-    return f'<span class="bp {cls}">{pos}</span>'
-
-def medal(i):
-    return ["🥇","🥈","🥉"][i] if i < 3 else str(i+1)
-
-def mem_bar(count):
-    pct = min(count / GOAL_MEM_EACH * 100, 100)
-    if count >= GOAL_MEM_EACH: c = "#2e7d32"
-    elif count >= GOAL_MEM_EACH - 2: c = "#f57c00"
-    else: c = "#c0002a"
-    return f'''<div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:{c};min-width:18px;">{count}</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:{pct:.0f}%;height:5px;background:{c};border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/{GOAL_MEM_EACH}</span>
-    </div>'''
-
-def clean_name(raw):
-    for pre in ("RRA_","IBA_","BGPL_"):
-        if raw.startswith(pre):
-            return raw[len(pre):]
-    return raw
-
-def conduct_rows_html():
-    rows = ""
-    for i, r in enumerate(conduct_sorted):
-        name = clean_name(r.get("Trainer",""))
-        rows += f"""<tr>
-          <td class="tc">{medal(i)}</td>
-          <td>{badge(r.get("Position Rate",""))} {name}</td>
-          <td class="tr">{r.get("Fitstart","")}</td>
-          <td class="tr">{r.get("Trial Session","")}</td>
-          <td class="tr fw">{r.get("Total Session","")}</td>
-        </tr>"""
-    return rows
-
-def sold_rows_html():
-    rows = ""
-    for i, r in enumerate(sold_sorted):
-        name = clean_name(r.get("Trainer",""))
-        rows += f"""<tr>
-          <td class="tc">{medal(i)}</td>
-          <td>{badge(r.get("Position Rate",""))} {name}</td>
-          <td class="tr fw">{fmt(r.get("Total Amount","0"))}</td>
-          <td class="tr">{fmt(r.get("Amount Before VAT","0"))}</td>
-        </tr>"""
-    return rows
-
-def mem_rows_html():
-    rows = ""
-    for i, r in enumerate(mem_summary):
-        name = clean_name(r["sold_by"])
-        rows += f"""<tr>
-          <td class="tc">{medal(i)}</td>
-          <td>{name}</td>
-          <td>{mem_bar(r["count"])}</td>
-        </tr>"""
-    return rows
-
-# Chart data — conduct ใช้ Total Session แทน Commission
-def _cname(r, key="Trainer"):
-    n = r.get(key,"")
-    for pre in ("RRA_","IBA_","BGPL_"):
+def display_name(raw):
+    """RRA_Ae_02227 -> Ae   (ตัด prefix สาขา + ตัด ID ต่อท้าย)"""
+    n = raw
+    for pre in ("RRA_", "IBA_", "BGPL_"):
         if n.startswith(pre):
             n = n[len(pre):]
             break
     return n.split("_")[0] if "_" in n else n
-c_names = [_cname(r) for r in conduct_sorted]
-c_vals  = [num(r.get("Total Session","0")) for r in conduct_sorted]
-s_names = [_cname(r) for r in sold_sorted]
-s_vals  = [num(r.get("Total Amount","0")) for r in sold_sorted]
-# จัดกลุ่ม membership: คนที่ยอดเท่ากันอยู่กลุ่มเดียวกัน
-from collections import defaultdict as _dd
-_count_groups = _dd(list)
-for _r in mem_summary:
-    _count_groups[_r["count"]].append(_r["sold_by"].replace("RRA_",""))
-_grouped = sorted(_count_groups.items(), key=lambda x: x[0], reverse=True)
-def _short(name):
-    # ลบ prefix RRA_ / IBA_ / BGPL_ แล้วเอาชื่อส่วนแรก
-    for pre in ("RRA_","IBA_","BGPL_"):
-        if name.startswith(pre):
-            name = name[len(pre):]
-            break
-    return name.split("_")[0] if "_" in name else name
-m_names = [", ".join(_short(n) for n in names) for count, names in _grouped]
-m_vals  = [count for count, names in _grouped]
 
+def pos_tag(pos_rate):
+    if not pos_rate:
+        return ""
+    return pos_rate.split("-")[0].strip().upper()
+
+# ─────────────────────────────────────────────────────────────
+# รวมข้อมูล 3 แหล่ง (conduct / sold / membership) เข้าเป็น 1 แถวต่อเทรนเนอร์
+# conduct_rows คือ "รายชื่อหลัก" (มีเทรนเนอร์ครบ 23 คนเสมอ)
+# ─────────────────────────────────────────────────────────────
+sold_by_id = {r["Trainer"]: num(r.get("Total Amount", "0")) for r in sold_ind}
+mem_by_id  = {r["sold_by"]: r["count"] for r in mem_summary}
+
+trainers = []
+for r in conduct_ind:
+    tid = r.get("Trainer", "")
+    trainers.append({
+        "id": tid,
+        "name": display_name(tid),
+        "pos": pos_tag(r.get("Position Rate", "")),
+        "sessions": num(r.get("Total Session", "0")),
+        "sold": sold_by_id.get(tid, 0.0),
+        "members": mem_by_id.get(tid, 0),
+    })
+
+sold_max     = max((t["sold"] for t in trainers), default=0) or 1
+sessions_max = max((t["sessions"] for t in trainers), default=0) or 1
+members_max  = max((t["members"] for t in trainers), default=0) or 1
+
+# ลำดับแถว: composite score (ใช้จัดอันดับเท่านั้น ไม่ใช้วาดกราฟ — หลีกเลี่ยงการรวมหน่วยที่ต่างกัน)
+for t in trainers:
+    t["score"] = (t["sold"] / sold_max) + (t["sessions"] / sessions_max) + (t["members"] / members_max)
+trainers.sort(key=lambda t: t["score"], reverse=True)
+
+sold_actual = num(sold_summary.get("Total Amount", "0"))
+sold_pct    = sold_actual / GOAL_PT_SOLD * 100
+mem_pct     = mem_total / GOAL_MEMBER * 100
 sc = pcolor(sold_pct)
 mc = pcolor(mem_pct)
+
+def compact(v):
+    v = num(v)
+    if v >= 1000:
+        return f"{v/1000:.1f}k".replace(".0k", "k")
+    return f"{v:,.0f}"
+
+def grid_rows_html():
+    rows = []
+    for i, t in enumerate(trainers):
+        sold_pct_w   = min(t["sold"] / sold_max * 100, 100)
+        sess_pct_w   = min(t["sessions"] / sessions_max * 100, 100)
+        mem_pct_w    = min(t["members"] / GOAL_MEM_EACH * 100, 100)
+        pos_html     = f'<span class="postag">{t["pos"]}</span>' if t["pos"] else ""
+        sold_fill = f'<div class="bar-fill sold" style="width:{sold_pct_w:.1f}%"></div>' if sold_pct_w > 0 else ""
+        sess_fill = f'<div class="bar-fill conduct" style="width:{sess_pct_w:.1f}%"></div>' if sess_pct_w > 0 else ""
+        mem_fill  = f'<div class="bar-fill mem" style="width:{mem_pct_w:.1f}%"></div>' if mem_pct_w > 0 else ""
+        rows.append(f"""<div class="grid-row">
+          <div class="gr-rank">{i+1}</div>
+          <div class="gr-name">{pos_html}{t['name']}</div>
+          <div class="gr-metric">
+            <div class="bar-track">{sold_fill}</div>
+            <span class="bar-val">{fmt(t['sold'])}</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track">{sess_fill}</div>
+            <span class="bar-val">{fmt(t['sessions'])}</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track">{mem_fill}</div>
+            <span class="bar-val">{t['members']}/{GOAL_MEM_EACH}</span>
+          </div>
+        </div>""")
+    return "".join(rows)
+
+# ─────────────────────────────────────────────────────────────
+# ปรับขนาดแถวในตารางอัตโนมัติตามจำนวนเทรนเนอร์ เพื่อให้พอดี A4 หน้าเดียวเสมอ
+# (แถวยิ่งเยอะ ยิ่งย่อ แต่ไม่เล็กกว่า ROW_MIN เพื่อให้ยังอ่านออกเมื่อพิมพ์)
+# งบประมาณอิงจากพื้นที่พิมพ์จริง A4 - margin 8mm ~ 1062px สูง วัดจริงแล้วส่วนอื่น
+# (header/สรุป/เป้าหมาย/หัวตาราง/footnote) กินพื้นที่คงที่ ~352px โดยประมาณ
+# วัดด้วย Chrome automation จริงก่อนปรับค่าคงที่เหล่านี้ (ดูรายงานท้ายไฟล์)
+n_trainers   = len(trainers)
+ROW_MIN      = 20.0   # px, แถวเล็กสุดที่ยังอ่านตัวเลขออกเมื่อพิมพ์
+ROW_MAX      = 27.0   # px, แถวใหญ่สุด (ขนาดปัจจุบันที่ 23 คน)
+PAGE_BUDGET  = 1000.0 # px, เผื่อ margin ปลอดภัยจากงบจริง ~1040px
+FIXED_OVERHEAD = 352.0  # px, ส่วนที่ไม่ขึ้นกับจำนวนแถว (วัดจริงด้วย Chrome)
+
+avail_for_rows = max(PAGE_BUDGET - FIXED_OVERHEAD, ROW_MIN)
+row_h = (avail_for_rows / n_trainers) if n_trainers else ROW_MAX
+row_h = max(ROW_MIN, min(ROW_MAX, row_h))
+_t = (row_h - ROW_MIN) / (ROW_MAX - ROW_MIN)  # 0 (แน่นสุด) .. 1 (โปร่งสุด)
+
+name_fs  = round(9.5 + _t * (12.0 - 9.5), 2)
+rank_fs  = round(8.5 + _t * (9.5 - 8.5), 2)
+val_fs   = round(9.0 + _t * (10.5 - 9.0), 2)
+bar_h    = round(8.0 + _t * (11.0 - 8.0), 2)
+row_pad  = round(max((row_h - name_fs * 1.3) / 2.0, 1.0), 2)  # เนื้อหาในแถวสูงตามบรรทัดชื่อ (line-height ~1.3x)
+postag_fs = round(max(7.0, val_fs * 0.76), 2)
 
 html = f"""<!DOCTYPE html>
 <html lang="th">
@@ -141,115 +147,142 @@ html = f"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Jetts RRA — PT Dashboard</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{{box-sizing:border-box;margin:0;padding:0;}}
-body{{
-  font-family:'Segoe UI',sans-serif;font-size:12px;color:#222;
-  min-height:100vh;
-  /* พื้นหลัง: ดำ + เส้น Red & Gold */
-  background-color:#0d0d0d;
-  background-image:
-    repeating-linear-gradient(45deg,  transparent, transparent 60px, rgba(192,0,42,.12) 60px,  rgba(192,0,42,.12) 61px),
-    repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(200,149,42,.08) 80px, rgba(200,149,42,.08) 81px),
-    linear-gradient(160deg, rgba(192,0,42,.06) 0%, transparent 40%, rgba(200,149,42,.06) 100%);
+
+:root{{
+  --ink-1:#0b0b0b;
+  --ink-2:#52514e;
+  --ink-muted:#898781;
+  --surface:#fcfcfb;
+  --page:#f2f1ec;
+  --line:#e1e0d9;
+  --border:rgba(11,11,11,.10);
+  --brand:#c0002a;
+  --brand-dark:#8f0020;
+  --gold:#c8952a;
+  --sold:#d6342f;
+  --conduct:#2a78d6;
+  --member:#f2b705;
 }}
 
-/* ─── Navbar ─── */
-.topbar{{background:#c0002a;padding:7px 14px;display:flex;justify-content:space-between;align-items:center;}}
-.topbar .brand{{font-size:14px;font-weight:700;color:white;}}
-.topbar .upd{{font-size:10px;color:rgba(255,255,255,.7);}}
-.print-btn{{background:white;color:#c0002a;border:none;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;}}
-.print-btn:hover{{background:#ffe;}}
+body{{
+  font-family:'Inter','Noto Sans Thai',system-ui,-apple-system,sans-serif;
+  font-size:12px;color:var(--ink-1);
+  background:var(--page);
+  min-height:100vh;
+}}
 
-/* ─── Wrapper ─── */
-.a4{{max-width:980px;margin:0 auto;padding:12px 14px;}}
+/* ─── Topbar (ไม่พิมพ์) ─── */
+.topbar{{background:linear-gradient(100deg,var(--brand),var(--brand-dark));padding:9px 16px;display:flex;justify-content:space-between;align-items:center;}}
+.topbar .brand{{font-size:14px;font-weight:800;color:#fff;letter-spacing:.2px;}}
+.topbar .brand small{{display:block;font-weight:500;font-size:9.5px;color:rgba(255,255,255,.75);margin-top:1px;}}
+.topbar-right{{display:flex;align-items:center;gap:10px;}}
+.print-hint{{font-size:9.5px;color:rgba(255,255,255,.8);max-width:260px;line-height:1.35;text-align:right;}}
+.print-btn{{background:#fff;color:var(--brand);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;}}
+.print-btn:hover{{background:#ffe9ee;}}
+
+/* ─── Wrapper (หน้า A4) ─── */
+.a4{{max-width:800px;margin:16px auto;padding:20px 24px;background:var(--surface);border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,.12);}}
 
 /* ─── Header ─── */
-.doc-header{{display:flex;justify-content:space-between;align-items:flex-start;background:white;border-radius:10px;padding:10px 14px;border-left:4px solid #c0002a;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.3);}}
-.doc-title{{font-size:15px;font-weight:800;color:#c0002a;}}
-.doc-sub{{font-size:10px;color:#888;margin-top:2px;}}
-.doc-meta{{text-align:right;font-size:10px;color:#aaa;}}
+.doc-header{{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--brand);padding-bottom:11px;margin-bottom:14px;}}
+.doc-title{{font-size:19px;font-weight:800;color:var(--brand);letter-spacing:.1px;}}
+.doc-sub{{font-size:11px;color:var(--ink-muted);margin-top:3px;}}
+.doc-meta{{text-align:right;font-size:11px;color:var(--ink-muted);line-height:1.55;}}
+.doc-meta b{{color:var(--ink-2);font-weight:700;}}
 
-/* ─── Summary strip ─── */
-.sum-strip{{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}}
-.sum-box{{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);border-top:3px solid #c0002a;}}
-.sum-box .lbl{{font-size:9px;color:#999;}}
-.sum-box .val{{font-size:15px;font-weight:800;color:#c0002a;line-height:1.3;}}
-.sum-box .unit{{font-size:9px;color:#bbb;}}
+/* ─── Stat / Goal tiles ─── */
+.tile-row{{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;}}
+.tile{{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}}
+.tile .lbl{{font-size:9.5px;color:var(--ink-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}}
+.tile .val{{font-size:20px;font-weight:800;color:var(--ink-1);line-height:1.4;font-variant-numeric:tabular-nums;}}
+.tile .val .unit{{font-size:11px;color:var(--ink-muted);font-weight:600;margin-left:3px;}}
 
-/* ─── Goal cards ─── */
-.goal-row{{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}}
-.goal-box{{background:white;border-radius:10px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25);}}
-.goal-box .gtitle{{font-size:10px;font-weight:700;color:#555;margin-bottom:5px;}}
+.goal-row{{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}}
+.goal-tile{{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}}
+.goal-tile .gtitle{{font-size:10.5px;font-weight:700;color:var(--ink-2);margin-bottom:5px;}}
 .goal-nums{{display:flex;align-items:baseline;gap:8px;}}
-.goal-pct{{font-size:24px;font-weight:900;line-height:1;}}
-.goal-actual{{font-size:10px;color:#999;}}
-.pbar{{height:6px;background:#eee;border-radius:3px;margin:6px 0 4px;}}
+.goal-pct{{font-size:24px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;}}
+.goal-actual{{font-size:10.5px;color:var(--ink-muted);font-variant-numeric:tabular-nums;}}
+.pbar{{height:6px;background:var(--line);border-radius:3px;margin:7px 0 4px;overflow:hidden;}}
 .pbar-fill{{height:6px;border-radius:3px;}}
-.goal-note{{font-size:9px;color:#aaa;}}
+.goal-note{{font-size:10px;color:var(--ink-muted);}}
 
-/* ─── Section title ─── */
-.st{{font-size:11px;font-weight:700;color:#c0002a;border-left:3px solid #c0002a;padding-left:6px;margin-bottom:6px;}}
+/* ─── Section title + legend ─── */
+.st-row{{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;}}
+.st{{font-size:13px;font-weight:700;color:var(--ink-1);}}
+.legend{{display:flex;gap:12px;font-size:10px;color:var(--ink-2);}}
+.legend span{{display:inline-flex;align-items:center;gap:4px;}}
+.sw{{width:9px;height:9px;border-radius:2px;display:inline-block;}}
+.sw.sold{{background:var(--sold);}}
+.sw.conduct{{background:var(--conduct);}}
+.sw.mem{{background:var(--member);}}
 
-/* ─── Cards ─── */
-.card-wrap{{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);}}
-.tbox{{margin-bottom:10px;}}
+/* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) ─── */
+.grid-card{{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px 6px;}}
+.grid-head,.grid-row{{
+  display:grid;
+  grid-template-columns:20px 74px 1fr 1fr 1fr;
+  column-gap:12px;
+  align-items:center;
+}}
+.grid-head{{padding:4px 2px 7px;border-bottom:1.5px solid var(--ink-1);}}
+.grid-head > div{{font-size:9.5px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.2px;}}
+.grid-head .gh-m{{display:flex;align-items:center;gap:4px;}}
+.grid-body{{display:flex;flex-direction:column;}}
+.grid-row:last-child{{border-bottom:none;}}
+.grid-row:nth-child(even){{background:#faf9f6;}}
+.postag{{display:inline-block;font-weight:700;color:var(--ink-muted);border:1px solid var(--line);border-radius:3px;padding:0 3px;margin-right:4px;vertical-align:middle;}}
+.gr-metric{{display:flex;align-items:center;gap:7px;}}
+.bar-track{{flex:1;min-width:0;background:var(--line);border-radius:3px;overflow:hidden;}}
+.bar-fill{{border-radius:3px;min-width:3px;}}
+.bar-fill.sold{{background:var(--sold);}}
+.bar-fill.conduct{{background:var(--conduct);}}
+.bar-fill.mem{{background:var(--member);}}
+.bar-val{{flex:0 0 auto;width:58px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}}
 
-/* ─── Tables ─── */
-table{{width:100%;border-collapse:collapse;}}
-thead th{{background:#c0002a;color:white;font-size:10px;font-weight:600;padding:4px 6px;white-space:nowrap;}}
-tbody td{{font-size:11px;padding:4px 6px;border-bottom:1px solid #f0f0f0;vertical-align:middle;}}
-tbody tr:last-child td{{border-bottom:none;}}
-tbody tr:nth-child(even){{background:#fafafa;}}
-tbody tr:hover td{{background:#fff5f7;}}
-.tc{{text-align:center;width:22px;}}
-.tr{{text-align:right;}}
-.fw{{font-weight:700;}}
-.green{{color:#2e7d32;font-weight:600;}}
-.bp{{display:inline-block;padding:1px 4px;border-radius:5px;font-size:9px;font-weight:700;margin-right:2px;}}
-.etred{{background:#ffe0e0;color:#c0002a;}}
-.stred{{background:#fff0e0;color:#c06000;}}
-.ptred{{background:#e0eeff;color:#1565c0;}}
+/* ─── ขนาดแถวไดนามิก: คำนวณจากจำนวนเทรนเนอร์ (n_trainers={n_trainers}) ให้พอดี A4 เสมอ ─── */
+.grid-row{{padding:{row_pad}px 2px;border-bottom:1px solid var(--line);}}
+.gr-rank{{font-size:{rank_fs}px;color:var(--ink-muted);text-align:center;font-variant-numeric:tabular-nums;}}
+.gr-name{{font-size:{name_fs}px;font-weight:700;color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
+.postag{{font-size:{postag_fs}px;}}
+.bar-track,.bar-fill{{height:{bar_h}px;}}
+.bar-val{{font-size:{val_fs}px;}}
 
-/* ─── Charts ─── */
-.chart-row{{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}}
-.chart-box{{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);}}
-.chart-inner{{position:relative;}}
-
-/* ─── Table layout ─── */
-.table-row-3{{display:grid;grid-template-columns:3fr 2fr;gap:8px;margin-bottom:10px;}}
+.footnote{{margin-top:10px;font-size:9.5px;color:var(--ink-muted);text-align:center;line-height:1.5;}}
 
 /* ════════════ PRINT ════════════ */
 @media print{{
   @page{{size:A4 portrait;margin:8mm;}}
-  body{{background:#fff!important;background-image:none!important;font-size:10px;}}
+  html,body{{background:#fff!important;}}
   .topbar{{display:none!important;}}
-  .a4{{max-width:100%;padding:0;}}
-  .sum-box,.goal-box,.card-wrap,.chart-box,.doc-header{{
-    box-shadow:none!important;border:1px solid #ddd!important;}}
-  .chart-inner{{height:160px!important;}}
-  tbody td{{font-size:9.5px!important;padding:2px 5px!important;}}
-  thead th{{font-size:9px!important;padding:3px 5px!important;}}
+  .a4{{max-width:100%;margin:0;padding:0;box-shadow:none!important;border-radius:0;}}
+  .tile,.goal-tile,.grid-card{{border:1px solid #ddd!important;}}
+  .grid-row:nth-child(even){{background:#f7f7f5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+  .bar-fill,.pbar-fill,.sw{{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 }}
 
-/* ─── Mobile ─── */
-@media(max-width:600px){{
-  .sum-strip{{grid-template-columns:repeat(2,1fr);gap:6px;}}
-  .goal-row,.chart-row,.table-row-3{{grid-template-columns:1fr;}}
-  .a4{{padding:8px;}}
-}}
-@media(min-width:601px) and (max-width:860px){{
-  .chart-row{{grid-template-columns:1fr 1fr;}}
-  .table-row-3{{grid-template-columns:1fr;}}
+/* ─── Mobile (จอเล็ก) ─── */
+@media(max-width:640px){{
+  .tile-row{{grid-template-columns:1fr 1fr;}}
+  .goal-row{{grid-template-columns:1fr;}}
+  .grid-head,.grid-row{{grid-template-columns:14px 50px 1fr;row-gap:2px;}}
+  .grid-head .gh-c,.grid-head .gh-m2,.gr-metric.m2{{display:none;}}
 }}
 </style>
 </head>
 <body>
 
 <div class="topbar no-print">
-  <span class="brand">Jetts RRA — PT Dashboard</span>
-  <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+  <div class="brand">Jetts RRA — PT Performance Dashboard<small>Robinson Ratchaphruek</small></div>
+  <div class="topbar-right">
+    <div class="print-hint">เคล็ดลับ: ก่อนกดพิมพ์ ให้ปิดตัวเลือก "Headers and footers" ในหน้าต่างพิมพ์ของเบราว์เซอร์ เพื่อไม่ให้แสดง URL/วันที่บนกระดาษ</div>
+    <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+  </div>
 </div>
 
 <div class="a4">
@@ -258,184 +291,76 @@ tbody tr:hover td{{background:#fff5f7;}}
   <div class="doc-header">
     <div>
       <div class="doc-title">Report — Jetts Robinson Ratchaphruek</div>
-      <div class="doc-sub">ช่วงเวลา: {period['start']} — {period['end']} &nbsp;|&nbsp; อัพเดต: {updated_at}</div>
+      <div class="doc-sub">ช่วงเวลา {period['start']} – {period['end']}</div>
     </div>
-    <div style="text-align:right;font-size:10px;color:#aaa;">
-      Conduct: {len(conduct_sorted)} Trainers<br>
-      Sold: {len(sold_sorted)} Trainers
+    <div class="doc-meta">
+      อัพเดต <b>{updated_at}</b><br>
+      เทรนเนอร์ทั้งหมด <b>{len(trainers)}</b> คน
     </div>
   </div>
 
-  <!-- Summary Strip (3 การ์ด) -->
-  <div class="sum-strip">
-    <div class="sum-box">
+  <!-- KPI tiles -->
+  <div class="tile-row">
+    <div class="tile">
       <div class="lbl">Total Session</div>
-      <div class="val">{conduct_summary.get('Total Session','—')}</div>
-      <div class="unit">ครั้ง</div>
+      <div class="val">{conduct_summary.get('Total Session','—')}<span class="unit">ครั้ง</span></div>
     </div>
-    <div class="sum-box">
+    <div class="tile">
       <div class="lbl">PT Sold</div>
-      <div class="val">{fmt(sold_actual)}</div>
-      <div class="unit">฿</div>
+      <div class="val">{fmt(sold_actual)}<span class="unit">฿</span></div>
     </div>
-    <div class="sum-box">
+    <div class="tile">
       <div class="lbl">สมาชิกใหม่</div>
-      <div class="val">{mem_total}</div>
-      <div class="unit">คน</div>
+      <div class="val">{mem_total}<span class="unit">คน</span></div>
     </div>
   </div>
 
-  <!-- Goal Cards -->
+  <!-- Goal tiles -->
   <div class="goal-row">
-    <div class="goal-box">
+    <div class="goal-tile">
       <div class="gtitle">เป้าหมาย PT Sold (2,400,000 + VAT 7%)</div>
       <div class="goal-nums">
         <div class="goal-pct" style="color:{sc};">{sold_pct:.1f}%</div>
         <div class="goal-actual">{fmt(sold_actual)} / {fmt(GOAL_PT_SOLD)} ฿</div>
       </div>
       <div class="pbar"><div class="pbar-fill" style="width:{min(sold_pct,100):.1f}%;background:{sc};"></div></div>
-      <div class="goal-note">เป้า: {fmt(GOAL_PT_SOLD)} ฿ &nbsp;|&nbsp; {'✅ บรรลุเป้าแล้ว' if sold_pct >= 100 else f'คงเหลือ {fmt(GOAL_PT_SOLD - sold_actual)} ฿'}</div>
+      <div class="goal-note">{'✅ บรรลุเป้าแล้ว' if sold_pct >= 100 else f'คงเหลือ {fmt(GOAL_PT_SOLD - sold_actual)} ฿'}</div>
     </div>
-    <div class="goal-box">
-      <div class="gtitle">เป้าหมายสมาชิก (เป้ารายคน {GOAL_MEM_EACH} คน)</div>
+    <div class="goal-tile">
+      <div class="gtitle">เป้าหมายสมาชิกรวมคลับ ({GOAL_MEMBER} คน)</div>
       <div class="goal-nums">
         <div class="goal-pct" style="color:{mc};">{mem_pct:.1f}%</div>
         <div class="goal-actual">{mem_total} / {GOAL_MEMBER} คน</div>
       </div>
       <div class="pbar"><div class="pbar-fill" style="width:{min(mem_pct,100):.1f}%;background:{mc};"></div></div>
-      <div class="goal-note">เป้ารวม: {GOAL_MEMBER} คน &nbsp;|&nbsp; {'✅ บรรลุเป้าแล้ว' if mem_pct >= 100 else f'คงเหลือ {GOAL_MEMBER - mem_total} คน'}</div>
+      <div class="goal-note">{'✅ บรรลุเป้าแล้ว' if mem_pct >= 100 else f'คงเหลือ {GOAL_MEMBER - mem_total} คน'}</div>
     </div>
   </div>
 
-  <!-- Charts: ★ height บน .chart-inner div → Chart.js ใช้ fillParent ★ -->
-  <div class="chart-row">
-    <div class="chart-box">
-      <div class="st">PT Conduct — Sessions รายคน</div>
-      <div class="chart-inner" style="height:{max(len(c_names)*24+20,160)}px;">
-        <canvas id="cChart"></canvas>
-      </div>
+  <!-- Trainer grid: PT Sold + PT Conducted + New Member รวมรายคน -->
+  <div class="st-row">
+    <div class="st">ผลงานรายบุคคล — เรียงตามคะแนนรวม 3 ตัวชี้วัด</div>
+    <div class="legend">
+      <span><span class="sw sold"></span>PT Sold</span>
+      <span><span class="sw conduct"></span>PT Conducted</span>
+      <span><span class="sw mem"></span>New Member</span>
     </div>
-    <div class="chart-box">
-      <div class="st">PT Sold — ยอดขายรายคน</div>
-      <div class="chart-inner" style="height:{max(len(s_names)*24+20,160)}px;">
-        <canvas id="sChart"></canvas>
-      </div>
+  </div>
+  <div class="grid-card">
+    <div class="grid-head">
+      <div class="gh-r">#</div>
+      <div class="gh-n">เทรนเนอร์</div>
+      <div class="gh-m gh-m1">PT Sold (฿)</div>
+      <div class="gh-m gh-m2">PT Conducted (ครั้ง)</div>
+      <div class="gh-m gh-m3">สมาชิกใหม่ (เป้า {GOAL_MEM_EACH})</div>
     </div>
-    <div class="chart-box">
-      <div class="st">Membership รายคน (เป้า {GOAL_MEM_EACH})</div>
-      <div class="chart-inner" style="height:{max(len(m_names)*30+20,160)}px;">
-        <canvas id="mChart"></canvas>
-      </div>
-    </div>
+    <div class="grid-body">{grid_rows_html()}</div>
   </div>
 
-  <!-- Conduct + Membership -->
-  <div class="table-row-3">
-    <div class="tbox card-wrap">
-      <div class="st">PT Conduct — Sessions รายบุคคล</div>
-      <table>
-        <thead><tr>
-          <th>#</th><th>Trainer</th>
-          <th class="tr">Fitstart</th><th class="tr">Trial</th>
-          <th class="tr">Total Session</th>
-        </tr></thead>
-        <tbody>{conduct_rows_html()}</tbody>
-      </table>
-    </div>
-    <div class="tbox card-wrap">
-      <div class="st">Membership รายบุคคล (เป้า {GOAL_MEM_EACH})</div>
-      <table>
-        <thead><tr><th>#</th><th>Sold by</th><th>จำนวน / เป้า</th></tr></thead>
-        <tbody>{mem_rows_html()}</tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- PT Sold -->
-  <div class="tbox card-wrap">
-    <div class="st">PT Sold — รายบุคคล</div>
-    <table>
-      <thead><tr>
-        <th>#</th><th>Trainer</th>
-        <th class="tr">Total Amount ฿</th>
-        <th class="tr">Before VAT ฿</th>
-      </tr></thead>
-      <tbody>{sold_rows_html()}</tbody>
-    </table>
-  </div>
+  <div class="footnote">ความยาวแท่งของ PT Sold และ PT Conducted เทียบกับค่าสูงสุดของแต่ละตัวชี้วัดในทีม &nbsp;·&nbsp; แท่งสมาชิกใหม่เทียบกับเป้าหมายรายบุคคล {GOAL_MEM_EACH} คน</div>
 
 </div><!-- /a4 -->
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
-<script>
-Chart.register(ChartDataLabels);
-const goalLine = {GOAL_MEM_EACH};
-
-// สร้างสี gradient จากเข้ม→อ่อน ตามจำนวน n
-function redGrad(n) {{
-  return Array.from({{length:n}}, (_,i) => {{
-    const t = n===1 ? 0 : i/(n-1);
-    const r = Math.round(192 + (254-192)*t);
-    const g = Math.round(0   + (213-0)*t);
-    const b = Math.round(42  + (224-42)*t);
-    return `rgb(${{r}},${{g}},${{b}})`;
-  }});
-}}
-
-const labelFmt = (val) => val >= 1000 ? (val/1000).toFixed(0)+'k' : val;
-
-const opts = (fmtFn) => ({{
-  indexAxis: 'y',
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins:{{
-    legend:{{display:false}},
-    tooltip:{{
-      backgroundColor:'rgba(0,0,0,.85)',
-      titleColor:'#ffd',
-      bodyColor:'#fff',
-      callbacks:{{ label: ctx => '  ' + ctx.raw.toLocaleString() }}
-    }},
-    datalabels:{{
-      anchor:'end', align:'start',
-      color:'#fff',
-      font:{{size:9, weight:'bold'}},
-      formatter: fmtFn || labelFmt,
-      clamp:true
-    }}
-  }},
-  scales:{{
-    x:{{
-      ticks:{{ color:'#666', font:{{size:9}}, callback: v => v>=1000?Math.round(v/1000)+'k':v }},
-      grid:{{ color:'#f0f0f0' }}
-    }},
-    y:{{
-      ticks:{{ color:'#333', font:{{size:10}}, padding:4 }},
-      grid:{{ display:false }}
-    }}
-  }}
-}});
-
-new Chart('cChart', {{ type:'bar', data:{{
-  labels:{json.dumps(c_names, ensure_ascii=False)},
-  datasets:[{{ data:{json.dumps(c_vals)}, backgroundColor:redGrad({len(c_vals)}), borderRadius:3 }}]
-}}, options:opts(v => v) }});
-
-new Chart('sChart', {{ type:'bar', data:{{
-  labels:{json.dumps(s_names, ensure_ascii=False)},
-  datasets:[{{ data:{json.dumps(s_vals)}, backgroundColor:redGrad({len(s_vals)}), borderRadius:3 }}]
-}}, options:opts(v => v>=1000?(v/1000).toFixed(0)+'k':v) }});
-
-new Chart('mChart', {{ type:'bar', data:{{
-  labels:{json.dumps(m_names, ensure_ascii=False)},
-  datasets:[{{
-    data:{json.dumps(m_vals)},
-    backgroundColor: {json.dumps(m_vals)}.map(v => v >= goalLine ? '#2e7d32' : v >= goalLine-2 ? '#f57c00' : '#c0002a'),
-    borderRadius:3
-  }}]
-}}, options:opts(v => v) }});
-</script>
 </body>
 </html>"""
 

@@ -4,115 +4,142 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Jetts RRA — PT Dashboard</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{
-  font-family:'Segoe UI',sans-serif;font-size:12px;color:#222;
-  min-height:100vh;
-  /* พื้นหลัง: ดำ + เส้น Red & Gold */
-  background-color:#0d0d0d;
-  background-image:
-    repeating-linear-gradient(45deg,  transparent, transparent 60px, rgba(192,0,42,.12) 60px,  rgba(192,0,42,.12) 61px),
-    repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(200,149,42,.08) 80px, rgba(200,149,42,.08) 81px),
-    linear-gradient(160deg, rgba(192,0,42,.06) 0%, transparent 40%, rgba(200,149,42,.06) 100%);
+
+:root{
+  --ink-1:#0b0b0b;
+  --ink-2:#52514e;
+  --ink-muted:#898781;
+  --surface:#fcfcfb;
+  --page:#f2f1ec;
+  --line:#e1e0d9;
+  --border:rgba(11,11,11,.10);
+  --brand:#c0002a;
+  --brand-dark:#8f0020;
+  --gold:#c8952a;
+  --sold:#d6342f;
+  --conduct:#2a78d6;
+  --member:#f2b705;
 }
 
-/* ─── Navbar ─── */
-.topbar{background:#c0002a;padding:7px 14px;display:flex;justify-content:space-between;align-items:center;}
-.topbar .brand{font-size:14px;font-weight:700;color:white;}
-.topbar .upd{font-size:10px;color:rgba(255,255,255,.7);}
-.print-btn{background:white;color:#c0002a;border:none;border-radius:6px;padding:4px 12px;font-size:11px;font-weight:700;cursor:pointer;}
-.print-btn:hover{background:#ffe;}
+body{
+  font-family:'Inter','Noto Sans Thai',system-ui,-apple-system,sans-serif;
+  font-size:12px;color:var(--ink-1);
+  background:var(--page);
+  min-height:100vh;
+}
 
-/* ─── Wrapper ─── */
-.a4{max-width:980px;margin:0 auto;padding:12px 14px;}
+/* ─── Topbar (ไม่พิมพ์) ─── */
+.topbar{background:linear-gradient(100deg,var(--brand),var(--brand-dark));padding:9px 16px;display:flex;justify-content:space-between;align-items:center;}
+.topbar .brand{font-size:14px;font-weight:800;color:#fff;letter-spacing:.2px;}
+.topbar .brand small{display:block;font-weight:500;font-size:9.5px;color:rgba(255,255,255,.75);margin-top:1px;}
+.topbar-right{display:flex;align-items:center;gap:10px;}
+.print-hint{font-size:9.5px;color:rgba(255,255,255,.8);max-width:260px;line-height:1.35;text-align:right;}
+.print-btn{background:#fff;color:var(--brand);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;}
+.print-btn:hover{background:#ffe9ee;}
+
+/* ─── Wrapper (หน้า A4) ─── */
+.a4{max-width:800px;margin:16px auto;padding:20px 24px;background:var(--surface);border-radius:10px;box-shadow:0 4px 24px rgba(0,0,0,.12);}
 
 /* ─── Header ─── */
-.doc-header{display:flex;justify-content:space-between;align-items:flex-start;background:white;border-radius:10px;padding:10px 14px;border-left:4px solid #c0002a;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.3);}
-.doc-title{font-size:15px;font-weight:800;color:#c0002a;}
-.doc-sub{font-size:10px;color:#888;margin-top:2px;}
-.doc-meta{text-align:right;font-size:10px;color:#aaa;}
+.doc-header{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid var(--brand);padding-bottom:11px;margin-bottom:14px;}
+.doc-title{font-size:19px;font-weight:800;color:var(--brand);letter-spacing:.1px;}
+.doc-sub{font-size:11px;color:var(--ink-muted);margin-top:3px;}
+.doc-meta{text-align:right;font-size:11px;color:var(--ink-muted);line-height:1.55;}
+.doc-meta b{color:var(--ink-2);font-weight:700;}
 
-/* ─── Summary strip ─── */
-.sum-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-.sum-box{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);border-top:3px solid #c0002a;}
-.sum-box .lbl{font-size:9px;color:#999;}
-.sum-box .val{font-size:15px;font-weight:800;color:#c0002a;line-height:1.3;}
-.sum-box .unit{font-size:9px;color:#bbb;}
+/* ─── Stat / Goal tiles ─── */
+.tile-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px;}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.tile .lbl{font-size:9.5px;color:var(--ink-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
+.tile .val{font-size:20px;font-weight:800;color:var(--ink-1);line-height:1.4;font-variant-numeric:tabular-nums;}
+.tile .val .unit{font-size:11px;color:var(--ink-muted);font-weight:600;margin-left:3px;}
 
-/* ─── Goal cards ─── */
-.goal-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
-.goal-box{background:white;border-radius:10px;padding:10px 14px;box-shadow:0 2px 8px rgba(0,0,0,.25);}
-.goal-box .gtitle{font-size:10px;font-weight:700;color:#555;margin-bottom:5px;}
+.goal-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.goal-tile{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;}
+.goal-tile .gtitle{font-size:10.5px;font-weight:700;color:var(--ink-2);margin-bottom:5px;}
 .goal-nums{display:flex;align-items:baseline;gap:8px;}
-.goal-pct{font-size:24px;font-weight:900;line-height:1;}
-.goal-actual{font-size:10px;color:#999;}
-.pbar{height:6px;background:#eee;border-radius:3px;margin:6px 0 4px;}
+.goal-pct{font-size:24px;font-weight:800;line-height:1;font-variant-numeric:tabular-nums;}
+.goal-actual{font-size:10.5px;color:var(--ink-muted);font-variant-numeric:tabular-nums;}
+.pbar{height:6px;background:var(--line);border-radius:3px;margin:7px 0 4px;overflow:hidden;}
 .pbar-fill{height:6px;border-radius:3px;}
-.goal-note{font-size:9px;color:#aaa;}
+.goal-note{font-size:10px;color:var(--ink-muted);}
 
-/* ─── Section title ─── */
-.st{font-size:11px;font-weight:700;color:#c0002a;border-left:3px solid #c0002a;padding-left:6px;margin-bottom:6px;}
+/* ─── Section title + legend ─── */
+.st-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;}
+.st{font-size:13px;font-weight:700;color:var(--ink-1);}
+.legend{display:flex;gap:12px;font-size:10px;color:var(--ink-2);}
+.legend span{display:inline-flex;align-items:center;gap:4px;}
+.sw{width:9px;height:9px;border-radius:2px;display:inline-block;}
+.sw.sold{background:var(--sold);}
+.sw.conduct{background:var(--conduct);}
+.sw.mem{background:var(--member);}
 
-/* ─── Cards ─── */
-.card-wrap{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);}
-.tbox{margin-bottom:10px;}
+/* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) ─── */
+.grid-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px 6px;}
+.grid-head,.grid-row{
+  display:grid;
+  grid-template-columns:20px 74px 1fr 1fr 1fr;
+  column-gap:12px;
+  align-items:center;
+}
+.grid-head{padding:4px 2px 7px;border-bottom:1.5px solid var(--ink-1);}
+.grid-head > div{font-size:9.5px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.2px;}
+.grid-head .gh-m{display:flex;align-items:center;gap:4px;}
+.grid-body{display:flex;flex-direction:column;}
+.grid-row:last-child{border-bottom:none;}
+.grid-row:nth-child(even){background:#faf9f6;}
+.postag{display:inline-block;font-weight:700;color:var(--ink-muted);border:1px solid var(--line);border-radius:3px;padding:0 3px;margin-right:4px;vertical-align:middle;}
+.gr-metric{display:flex;align-items:center;gap:7px;}
+.bar-track{flex:1;min-width:0;background:var(--line);border-radius:3px;overflow:hidden;}
+.bar-fill{border-radius:3px;min-width:3px;}
+.bar-fill.sold{background:var(--sold);}
+.bar-fill.conduct{background:var(--conduct);}
+.bar-fill.mem{background:var(--member);}
+.bar-val{flex:0 0 auto;width:58px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}
 
-/* ─── Tables ─── */
-table{width:100%;border-collapse:collapse;}
-thead th{background:#c0002a;color:white;font-size:10px;font-weight:600;padding:4px 6px;white-space:nowrap;}
-tbody td{font-size:11px;padding:4px 6px;border-bottom:1px solid #f0f0f0;vertical-align:middle;}
-tbody tr:last-child td{border-bottom:none;}
-tbody tr:nth-child(even){background:#fafafa;}
-tbody tr:hover td{background:#fff5f7;}
-.tc{text-align:center;width:22px;}
-.tr{text-align:right;}
-.fw{font-weight:700;}
-.green{color:#2e7d32;font-weight:600;}
-.bp{display:inline-block;padding:1px 4px;border-radius:5px;font-size:9px;font-weight:700;margin-right:2px;}
-.etred{background:#ffe0e0;color:#c0002a;}
-.stred{background:#fff0e0;color:#c06000;}
-.ptred{background:#e0eeff;color:#1565c0;}
+/* ─── ขนาดแถวไดนามิก: คำนวณจากจำนวนเทรนเนอร์ (n_trainers=23) ให้พอดี A4 เสมอ ─── */
+.grid-row{padding:5.7px 2px;border-bottom:1px solid var(--line);}
+.gr-rank{font-size:9.5px;color:var(--ink-muted);text-align:center;font-variant-numeric:tabular-nums;}
+.gr-name{font-size:12.0px;font-weight:700;color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.postag{font-size:7.98px;}
+.bar-track,.bar-fill{height:11.0px;}
+.bar-val{font-size:10.5px;}
 
-/* ─── Charts ─── */
-.chart-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px;}
-.chart-box{background:white;border-radius:10px;padding:10px 12px;box-shadow:0 2px 8px rgba(0,0,0,.25);}
-.chart-inner{position:relative;}
-
-/* ─── Table layout ─── */
-.table-row-3{display:grid;grid-template-columns:3fr 2fr;gap:8px;margin-bottom:10px;}
+.footnote{margin-top:10px;font-size:9.5px;color:var(--ink-muted);text-align:center;line-height:1.5;}
 
 /* ════════════ PRINT ════════════ */
 @media print{
   @page{size:A4 portrait;margin:8mm;}
-  body{background:#fff!important;background-image:none!important;font-size:10px;}
+  html,body{background:#fff!important;}
   .topbar{display:none!important;}
-  .a4{max-width:100%;padding:0;}
-  .sum-box,.goal-box,.card-wrap,.chart-box,.doc-header{
-    box-shadow:none!important;border:1px solid #ddd!important;}
-  .chart-inner{height:160px!important;}
-  tbody td{font-size:9.5px!important;padding:2px 5px!important;}
-  thead th{font-size:9px!important;padding:3px 5px!important;}
+  .a4{max-width:100%;margin:0;padding:0;box-shadow:none!important;border-radius:0;}
+  .tile,.goal-tile,.grid-card{border:1px solid #ddd!important;}
+  .grid-row:nth-child(even){background:#f7f7f5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .bar-fill,.pbar-fill,.sw{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
 }
 
-/* ─── Mobile ─── */
-@media(max-width:600px){
-  .sum-strip{grid-template-columns:repeat(2,1fr);gap:6px;}
-  .goal-row,.chart-row,.table-row-3{grid-template-columns:1fr;}
-  .a4{padding:8px;}
-}
-@media(min-width:601px) and (max-width:860px){
-  .chart-row{grid-template-columns:1fr 1fr;}
-  .table-row-3{grid-template-columns:1fr;}
+/* ─── Mobile (จอเล็ก) ─── */
+@media(max-width:640px){
+  .tile-row{grid-template-columns:1fr 1fr;}
+  .goal-row{grid-template-columns:1fr;}
+  .grid-head,.grid-row{grid-template-columns:14px 50px 1fr;row-gap:2px;}
+  .grid-head .gh-c,.grid-head .gh-m2,.gr-metric.m2{display:none;}
 }
 </style>
 </head>
 <body>
 
 <div class="topbar no-print">
-  <span class="brand">Jetts RRA — PT Dashboard</span>
-  <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+  <div class="brand">Jetts RRA — PT Performance Dashboard<small>Robinson Ratchaphruek</small></div>
+  <div class="topbar-right">
+    <div class="print-hint">เคล็ดลับ: ก่อนกดพิมพ์ ให้ปิดตัวเลือก "Headers and footers" ในหน้าต่างพิมพ์ของเบราว์เซอร์ เพื่อไม่ให้แสดง URL/วันที่บนกระดาษ</div>
+    <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+  </div>
 </div>
 
 <div class="a4">
@@ -121,531 +148,420 @@ tbody tr:hover td{background:#fff5f7;}
   <div class="doc-header">
     <div>
       <div class="doc-title">Report — Jetts Robinson Ratchaphruek</div>
-      <div class="doc-sub">ช่วงเวลา: 01/07/2026 — 07/07/2026 &nbsp;|&nbsp; อัพเดต: 07/07/2026 08:57</div>
+      <div class="doc-sub">ช่วงเวลา 01/07/2026 – 07/07/2026</div>
     </div>
-    <div style="text-align:right;font-size:10px;color:#aaa;">
-      Conduct: 23 Trainers<br>
-      Sold: 16 Trainers
+    <div class="doc-meta">
+      อัพเดต <b>07/07/2026 08:57</b><br>
+      เทรนเนอร์ทั้งหมด <b>23</b> คน
     </div>
   </div>
 
-  <!-- Summary Strip (3 การ์ด) -->
-  <div class="sum-strip">
-    <div class="sum-box">
+  <!-- KPI tiles -->
+  <div class="tile-row">
+    <div class="tile">
       <div class="lbl">Total Session</div>
-      <div class="val">529</div>
-      <div class="unit">ครั้ง</div>
+      <div class="val">529<span class="unit">ครั้ง</span></div>
     </div>
-    <div class="sum-box">
+    <div class="tile">
       <div class="lbl">PT Sold</div>
-      <div class="val">708,560</div>
-      <div class="unit">฿</div>
+      <div class="val">708,560<span class="unit">฿</span></div>
     </div>
-    <div class="sum-box">
+    <div class="tile">
       <div class="lbl">สมาชิกใหม่</div>
-      <div class="val">18</div>
-      <div class="unit">คน</div>
+      <div class="val">18<span class="unit">คน</span></div>
     </div>
   </div>
 
-  <!-- Goal Cards -->
+  <!-- Goal tiles -->
   <div class="goal-row">
-    <div class="goal-box">
+    <div class="goal-tile">
       <div class="gtitle">เป้าหมาย PT Sold (2,400,000 + VAT 7%)</div>
       <div class="goal-nums">
-        <div class="goal-pct" style="color:#c0002a;">27.6%</div>
+        <div class="goal-pct" style="color:#d03b3b;">27.6%</div>
         <div class="goal-actual">708,560 / 2,568,000 ฿</div>
       </div>
-      <div class="pbar"><div class="pbar-fill" style="width:27.6%;background:#c0002a;"></div></div>
-      <div class="goal-note">เป้า: 2,568,000 ฿ &nbsp;|&nbsp; คงเหลือ 1,859,440 ฿</div>
+      <div class="pbar"><div class="pbar-fill" style="width:27.6%;background:#d03b3b;"></div></div>
+      <div class="goal-note">คงเหลือ 1,859,440 ฿</div>
     </div>
-    <div class="goal-box">
-      <div class="gtitle">เป้าหมายสมาชิก (เป้ารายคน 6 คน)</div>
+    <div class="goal-tile">
+      <div class="gtitle">เป้าหมายสมาชิกรวมคลับ (125 คน)</div>
       <div class="goal-nums">
-        <div class="goal-pct" style="color:#c0002a;">14.4%</div>
+        <div class="goal-pct" style="color:#d03b3b;">14.4%</div>
         <div class="goal-actual">18 / 125 คน</div>
       </div>
-      <div class="pbar"><div class="pbar-fill" style="width:14.4%;background:#c0002a;"></div></div>
-      <div class="goal-note">เป้ารวม: 125 คน &nbsp;|&nbsp; คงเหลือ 107 คน</div>
+      <div class="pbar"><div class="pbar-fill" style="width:14.4%;background:#d03b3b;"></div></div>
+      <div class="goal-note">คงเหลือ 107 คน</div>
     </div>
   </div>
 
-  <!-- Charts: ★ height บน .chart-inner div → Chart.js ใช้ fillParent ★ -->
-  <div class="chart-row">
-    <div class="chart-box">
-      <div class="st">PT Conduct — Sessions รายคน</div>
-      <div class="chart-inner" style="height:572px;">
-        <canvas id="cChart"></canvas>
-      </div>
+  <!-- Trainer grid: PT Sold + PT Conducted + New Member รวมรายคน -->
+  <div class="st-row">
+    <div class="st">ผลงานรายบุคคล — เรียงตามคะแนนรวม 3 ตัวชี้วัด</div>
+    <div class="legend">
+      <span><span class="sw sold"></span>PT Sold</span>
+      <span><span class="sw conduct"></span>PT Conducted</span>
+      <span><span class="sw mem"></span>New Member</span>
     </div>
-    <div class="chart-box">
-      <div class="st">PT Sold — ยอดขายรายคน</div>
-      <div class="chart-inner" style="height:404px;">
-        <canvas id="sChart"></canvas>
-      </div>
+  </div>
+  <div class="grid-card">
+    <div class="grid-head">
+      <div class="gh-r">#</div>
+      <div class="gh-n">เทรนเนอร์</div>
+      <div class="gh-m gh-m1">PT Sold (฿)</div>
+      <div class="gh-m gh-m2">PT Conducted (ครั้ง)</div>
+      <div class="gh-m gh-m3">สมาชิกใหม่ (เป้า 6)</div>
     </div>
-    <div class="chart-box">
-      <div class="st">Membership รายคน (เป้า 6)</div>
-      <div class="chart-inner" style="height:160px;">
-        <canvas id="mChart"></canvas>
-      </div>
-    </div>
+    <div class="grid-body"><div class="grid-row">
+          <div class="gr-rank">1</div>
+          <div class="gr-name"><span class="postag">ET</span>Ae</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:49.2%"></div></div>
+            <span class="bar-val">62,600</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:100.0%"></div></div>
+            <span class="bar-val">46</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
+            <span class="bar-val">2/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">2</div>
+          <div class="gr-name"><span class="postag">ET</span>Lion</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:63.0%"></div></div>
+            <span class="bar-val">80,100</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:67.4%"></div></div>
+            <span class="bar-val">31</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
+            <span class="bar-val">2/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">3</div>
+          <div class="gr-name"><span class="postag">ET</span>Mew</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:43.6%"></div></div>
+            <span class="bar-val">55,400</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:71.7%"></div></div>
+            <span class="bar-val">33</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
+            <span class="bar-val">2/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">4</div>
+          <div class="gr-name"><span class="postag">PT</span>Zico</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:25.6%"></div></div>
+            <span class="bar-val">32,600</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:78.3%"></div></div>
+            <span class="bar-val">36</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
+            <span class="bar-val">2/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">5</div>
+          <div class="gr-name"><span class="postag">ST</span>Paul</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:28.3%"></div></div>
+            <span class="bar-val">36,000</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:67.4%"></div></div>
+            <span class="bar-val">31</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
+            <span class="bar-val">2/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">6</div>
+          <div class="gr-name"><span class="postag">ST</span>Ice</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:100.0%"></div></div>
+            <span class="bar-val">127,185</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:19.6%"></div></div>
+            <span class="bar-val">9</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">7</div>
+          <div class="gr-name"><span class="postag">PT</span>Man</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:25.8%"></div></div>
+            <span class="bar-val">32,775</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:47.8%"></div></div>
+            <span class="bar-val">22</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">8</div>
+          <div class="gr-name"><span class="postag">ET</span>Bos</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:22.6%"></div></div>
+            <span class="bar-val">28,800</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:45.7%"></div></div>
+            <span class="bar-val">21</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">9</div>
+          <div class="gr-name"><span class="postag">ET</span>Golf</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:67.4%"></div></div>
+            <span class="bar-val">31</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">10</div>
+          <div class="gr-name"><span class="postag">ST</span>Lekza</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:54.3%"></div></div>
+            <span class="bar-val">69,000</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:63.0%"></div></div>
+            <span class="bar-val">29</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">11</div>
+          <div class="gr-name"><span class="postag">ET</span>Peet</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:60.9%"></div></div>
+            <span class="bar-val">28</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">12</div>
+          <div class="gr-name"><span class="postag">PT</span>Ford</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:16.0%"></div></div>
+            <span class="bar-val">20,300</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:43.5%"></div></div>
+            <span class="bar-val">20</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">13</div>
+          <div class="gr-name"><span class="postag">PT</span>Nine</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:20.0%"></div></div>
+            <span class="bar-val">25,400</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:39.1%"></div></div>
+            <span class="bar-val">18</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">14</div>
+          <div class="gr-name"><span class="postag">PT</span>Tiger</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:17.4%"></div></div>
+            <span class="bar-val">22,100</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:37.0%"></div></div>
+            <span class="bar-val">17</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">15</div>
+          <div class="gr-name"><span class="postag">PT</span>Yean</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:27.1%"></div></div>
+            <span class="bar-val">34,500</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:69.6%"></div></div>
+            <span class="bar-val">32</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">16</div>
+          <div class="gr-name"><span class="postag">PT</span>Nill</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:27.1%"></div></div>
+            <span class="bar-val">34,500</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:43.5%"></div></div>
+            <span class="bar-val">20</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">17</div>
+          <div class="gr-name"><span class="postag">PT</span>Benz</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:50.0%"></div></div>
+            <span class="bar-val">23</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">18</div>
+          <div class="gr-name"><span class="postag">PT</span>Poom</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:1.4%"></div></div>
+            <span class="bar-val">1,800</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:45.7%"></div></div>
+            <span class="bar-val">21</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">19</div>
+          <div class="gr-name"><span class="postag">ST</span>Deaw</div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill sold" style="width:35.8%"></div></div>
+            <span class="bar-val">45,500</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:10.9%"></div></div>
+            <span class="bar-val">5</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">20</div>
+          <div class="gr-name"><span class="postag">PT</span>Put</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:39.1%"></div></div>
+            <span class="bar-val">18</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">21</div>
+          <div class="gr-name"><span class="postag">CM</span>Tonmai</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:34.8%"></div></div>
+            <span class="bar-val">16</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">22</div>
+          <div class="gr-name"><span class="postag">PT</span>Sataem</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:26.1%"></div></div>
+            <span class="bar-val">12</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">23</div>
+          <div class="gr-name"><span class="postag">PT</span>Baifern</div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"><div class="bar-fill conduct" style="width:21.7%"></div></div>
+            <span class="bar-val">10</span>
+          </div>
+          <div class="gr-metric">
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div></div>
   </div>
 
-  <!-- Conduct + Membership -->
-  <div class="table-row-3">
-    <div class="tbox card-wrap">
-      <div class="st">PT Conduct — Sessions รายบุคคล</div>
-      <table>
-        <thead><tr>
-          <th>#</th><th>Trainer</th>
-          <th class="tr">Fitstart</th><th class="tr">Trial</th>
-          <th class="tr">Total Session</th>
-        </tr></thead>
-        <tbody><tr>
-          <td class="tc">🥇</td>
-          <td><span class="bp etred">ET-RED</span> Ae_02227</td>
-          <td class="tr">1</td>
-          <td class="tr">0</td>
-          <td class="tr fw">46</td>
-        </tr><tr>
-          <td class="tc">🥈</td>
-          <td><span class="bp etred">ET-RED</span> Golf_01913</td>
-          <td class="tr">0</td>
-          <td class="tr">0</td>
-          <td class="tr fw">31</td>
-        </tr><tr>
-          <td class="tc">🥉</td>
-          <td><span class="bp etred">ET-RED</span> Mew_01974</td>
-          <td class="tr">1</td>
-          <td class="tr">1</td>
-          <td class="tr fw">33</td>
-        </tr><tr>
-          <td class="tc">4</td>
-          <td><span class="bp etred">ET-RED</span> Lion_02391</td>
-          <td class="tr">0</td>
-          <td class="tr">1</td>
-          <td class="tr fw">31</td>
-        </tr><tr>
-          <td class="tc">5</td>
-          <td><span class="bp ptred">PT-RED</span> Zico_01805</td>
-          <td class="tr">0</td>
-          <td class="tr">0</td>
-          <td class="tr fw">36</td>
-        </tr><tr>
-          <td class="tc">6</td>
-          <td><span class="bp etred">ET-RED</span> Peet_02169</td>
-          <td class="tr">1</td>
-          <td class="tr">1</td>
-          <td class="tr fw">28</td>
-        </tr><tr>
-          <td class="tc">7</td>
-          <td><span class="bp ptred">PT-RED</span> Yean_03170</td>
-          <td class="tr">2</td>
-          <td class="tr">0</td>
-          <td class="tr fw">32</td>
-        </tr><tr>
-          <td class="tc">8</td>
-          <td><span class="bp stred">ST-RED</span> Paul_02228</td>
-          <td class="tr">1</td>
-          <td class="tr">0</td>
-          <td class="tr fw">31</td>
-        </tr><tr>
-          <td class="tc">9</td>
-          <td><span class="bp etred">ET-RED</span> Bos_01915</td>
-          <td class="tr">0</td>
-          <td class="tr">1</td>
-          <td class="tr fw">21</td>
-        </tr><tr>
-          <td class="tc">10</td>
-          <td><span class="bp stred">ST-RED</span> Lekza_01909</td>
-          <td class="tr">1</td>
-          <td class="tr">0</td>
-          <td class="tr fw">29</td>
-        </tr><tr>
-          <td class="tc">11</td>
-          <td><span class="bp ptred">PT-RED</span> Man_01911</td>
-          <td class="tr">1</td>
-          <td class="tr">1</td>
-          <td class="tr fw">22</td>
-        </tr><tr>
-          <td class="tc">12</td>
-          <td><span class="bp ptred">PT-RED</span> Poom_03173</td>
-          <td class="tr">2</td>
-          <td class="tr">0</td>
-          <td class="tr fw">21</td>
-        </tr><tr>
-          <td class="tc">13</td>
-          <td><span class="bp ptred">PT-RED</span> Benz_03155</td>
-          <td class="tr">4</td>
-          <td class="tr">0</td>
-          <td class="tr fw">23</td>
-        </tr><tr>
-          <td class="tc">14</td>
-          <td><span class="bp ptred">PT-RED</span> Put_02910</td>
-          <td class="tr">0</td>
-          <td class="tr">0</td>
-          <td class="tr fw">18</td>
-        </tr><tr>
-          <td class="tc">15</td>
-          <td><span class="bp ptred">PT-RED</span> Ford_02742</td>
-          <td class="tr">2</td>
-          <td class="tr">0</td>
-          <td class="tr fw">20</td>
-        </tr><tr>
-          <td class="tc">16</td>
-          <td><span class="bp cm">CM</span> Tonmai_01312</td>
-          <td class="tr">0</td>
-          <td class="tr">0</td>
-          <td class="tr fw">16</td>
-        </tr><tr>
-          <td class="tc">17</td>
-          <td><span class="bp ptred">PT-RED</span> Nill_03116</td>
-          <td class="tr">3</td>
-          <td class="tr">0</td>
-          <td class="tr fw">20</td>
-        </tr><tr>
-          <td class="tc">18</td>
-          <td><span class="bp ptred">PT-RED</span> Nine_02024</td>
-          <td class="tr">1</td>
-          <td class="tr">0</td>
-          <td class="tr fw">18</td>
-        </tr><tr>
-          <td class="tc">19</td>
-          <td><span class="bp ptred">PT-RED</span> Tiger_01923</td>
-          <td class="tr">2</td>
-          <td class="tr">0</td>
-          <td class="tr fw">17</td>
-        </tr><tr>
-          <td class="tc">20</td>
-          <td><span class="bp stred">ST-RED</span> Ice_01548</td>
-          <td class="tr">0</td>
-          <td class="tr">1</td>
-          <td class="tr fw">9</td>
-        </tr><tr>
-          <td class="tc">21</td>
-          <td><span class="bp ptred">PT-RED</span> Sataem_03348</td>
-          <td class="tr">2</td>
-          <td class="tr">1</td>
-          <td class="tr fw">12</td>
-        </tr><tr>
-          <td class="tc">22</td>
-          <td><span class="bp ptred">PT-RED</span> Baifern_01910</td>
-          <td class="tr">2</td>
-          <td class="tr">0</td>
-          <td class="tr fw">10</td>
-        </tr><tr>
-          <td class="tc">23</td>
-          <td><span class="bp stred">ST-RED</span> Deaw_02058</td>
-          <td class="tr">0</td>
-          <td class="tr">0</td>
-          <td class="tr fw">5</td>
-        </tr></tbody>
-      </table>
-    </div>
-    <div class="tbox card-wrap">
-      <div class="st">Membership รายบุคคล (เป้า 6)</div>
-      <table>
-        <thead><tr><th>#</th><th>Sold by</th><th>จำนวน / เป้า</th></tr></thead>
-        <tbody><tr>
-          <td class="tc">🥇</td>
-          <td>Mew_01974</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">2</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:33%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">🥈</td>
-          <td>Zico_01805</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">2</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:33%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">🥉</td>
-          <td>Lion_02391</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">2</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:33%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">4</td>
-          <td>Paul_02228</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">2</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:33%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">5</td>
-          <td>Ae_02227</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">2</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:33%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">6</td>
-          <td>Bos_01915</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">7</td>
-          <td>Golf_01913</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">8</td>
-          <td>Man_01911</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">9</td>
-          <td>Ford_02742</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">10</td>
-          <td>Tiger_01923</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">11</td>
-          <td>Ice_01548</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">12</td>
-          <td>Nine_02024</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr><tr>
-          <td class="tc">13</td>
-          <td>Peet_02169</td>
-          <td><div style="display:flex;align-items:center;gap:4px;">
-      <span style="font-weight:700;color:#c0002a;min-width:18px;">1</span>
-      <div style="flex:1;height:5px;background:#eee;border-radius:3px;">
-        <div style="width:17%;height:5px;background:#c0002a;border-radius:3px;"></div>
-      </div>
-      <span style="font-size:9px;color:#aaa;">/6</span>
-    </div></td>
-        </tr></tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- PT Sold -->
-  <div class="tbox card-wrap">
-    <div class="st">PT Sold — รายบุคคล</div>
-    <table>
-      <thead><tr>
-        <th>#</th><th>Trainer</th>
-        <th class="tr">Total Amount ฿</th>
-        <th class="tr">Before VAT ฿</th>
-      </tr></thead>
-      <tbody><tr>
-          <td class="tc">🥇</td>
-          <td><span class="bp stred">ST-RED</span> Ice_01548</td>
-          <td class="tr fw">127,185</td>
-          <td class="tr">118,864</td>
-        </tr><tr>
-          <td class="tc">🥈</td>
-          <td><span class="bp etred">ET-RED</span> Lion_02391</td>
-          <td class="tr fw">80,100</td>
-          <td class="tr">74,860</td>
-        </tr><tr>
-          <td class="tc">🥉</td>
-          <td><span class="bp stred">ST-RED</span> Lekza_01909</td>
-          <td class="tr fw">69,000</td>
-          <td class="tr">64,486</td>
-        </tr><tr>
-          <td class="tc">4</td>
-          <td><span class="bp etred">ET-RED</span> Ae_02227</td>
-          <td class="tr fw">62,600</td>
-          <td class="tr">58,505</td>
-        </tr><tr>
-          <td class="tc">5</td>
-          <td><span class="bp etred">ET-RED</span> Mew_01974</td>
-          <td class="tr fw">55,400</td>
-          <td class="tr">51,776</td>
-        </tr><tr>
-          <td class="tc">6</td>
-          <td><span class="bp stred">ST-RED</span> Deaw_02058</td>
-          <td class="tr fw">45,500</td>
-          <td class="tr">42,523</td>
-        </tr><tr>
-          <td class="tc">7</td>
-          <td><span class="bp stred">ST-RED</span> Paul_02228</td>
-          <td class="tr fw">36,000</td>
-          <td class="tr">33,645</td>
-        </tr><tr>
-          <td class="tc">8</td>
-          <td><span class="bp ptred">PT-RED</span> Yean_03170</td>
-          <td class="tr fw">34,500</td>
-          <td class="tr">32,243</td>
-        </tr><tr>
-          <td class="tc">9</td>
-          <td><span class="bp ptred">PT-RED</span> Nill_03116</td>
-          <td class="tr fw">34,500</td>
-          <td class="tr">32,243</td>
-        </tr><tr>
-          <td class="tc">10</td>
-          <td><span class="bp ptred">PT-RED</span> Man_01911</td>
-          <td class="tr fw">32,775</td>
-          <td class="tr">30,631</td>
-        </tr><tr>
-          <td class="tc">11</td>
-          <td><span class="bp ptred">PT-RED</span> Zico_01805</td>
-          <td class="tr fw">32,600</td>
-          <td class="tr">30,467</td>
-        </tr><tr>
-          <td class="tc">12</td>
-          <td><span class="bp etred">ET-RED</span> Bos_01915</td>
-          <td class="tr fw">28,800</td>
-          <td class="tr">26,916</td>
-        </tr><tr>
-          <td class="tc">13</td>
-          <td><span class="bp ptred">PT-RED</span> Nine_02024</td>
-          <td class="tr fw">25,400</td>
-          <td class="tr">23,738</td>
-        </tr><tr>
-          <td class="tc">14</td>
-          <td><span class="bp ptred">PT-RED</span> Tiger_01923</td>
-          <td class="tr fw">22,100</td>
-          <td class="tr">20,654</td>
-        </tr><tr>
-          <td class="tc">15</td>
-          <td><span class="bp ptred">PT-RED</span> Ford_02742</td>
-          <td class="tr fw">20,300</td>
-          <td class="tr">18,972</td>
-        </tr><tr>
-          <td class="tc">16</td>
-          <td><span class="bp ptred">PT-RED</span> Poom_03173</td>
-          <td class="tr fw">1,800</td>
-          <td class="tr">1,682</td>
-        </tr></tbody>
-    </table>
-  </div>
+  <div class="footnote">ความยาวแท่งของ PT Sold และ PT Conducted เทียบกับค่าสูงสุดของแต่ละตัวชี้วัดในทีม &nbsp;·&nbsp; แท่งสมาชิกใหม่เทียบกับเป้าหมายรายบุคคล 6 คน</div>
 
 </div><!-- /a4 -->
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
-<script>
-Chart.register(ChartDataLabels);
-const goalLine = 6;
-
-// สร้างสี gradient จากเข้ม→อ่อน ตามจำนวน n
-function redGrad(n) {
-  return Array.from({length:n}, (_,i) => {
-    const t = n===1 ? 0 : i/(n-1);
-    const r = Math.round(192 + (254-192)*t);
-    const g = Math.round(0   + (213-0)*t);
-    const b = Math.round(42  + (224-42)*t);
-    return `rgb(${r},${g},${b})`;
-  });
-}
-
-const labelFmt = (val) => val >= 1000 ? (val/1000).toFixed(0)+'k' : val;
-
-const opts = (fmtFn) => ({
-  indexAxis: 'y',
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins:{
-    legend:{display:false},
-    tooltip:{
-      backgroundColor:'rgba(0,0,0,.85)',
-      titleColor:'#ffd',
-      bodyColor:'#fff',
-      callbacks:{ label: ctx => '  ' + ctx.raw.toLocaleString() }
-    },
-    datalabels:{
-      anchor:'end', align:'start',
-      color:'#fff',
-      font:{size:9, weight:'bold'},
-      formatter: fmtFn || labelFmt,
-      clamp:true
-    }
-  },
-  scales:{
-    x:{
-      ticks:{ color:'#666', font:{size:9}, callback: v => v>=1000?Math.round(v/1000)+'k':v },
-      grid:{ color:'#f0f0f0' }
-    },
-    y:{
-      ticks:{ color:'#333', font:{size:10}, padding:4 },
-      grid:{ display:false }
-    }
-  }
-});
-
-new Chart('cChart', { type:'bar', data:{
-  labels:["Ae", "Golf", "Mew", "Lion", "Zico", "Peet", "Yean", "Paul", "Bos", "Lekza", "Man", "Poom", "Benz", "Put", "Ford", "Tonmai", "Nill", "Nine", "Tiger", "Ice", "Sataem", "Baifern", "Deaw"],
-  datasets:[{ data:[46.0, 31.0, 33.0, 31.0, 36.0, 28.0, 32.0, 31.0, 21.0, 29.0, 22.0, 21.0, 23.0, 18.0, 20.0, 16.0, 20.0, 18.0, 17.0, 9.0, 12.0, 10.0, 5.0], backgroundColor:redGrad(23), borderRadius:3 }]
-}, options:opts(v => v) });
-
-new Chart('sChart', { type:'bar', data:{
-  labels:["Ice", "Lion", "Lekza", "Ae", "Mew", "Deaw", "Paul", "Yean", "Nill", "Man", "Zico", "Bos", "Nine", "Tiger", "Ford", "Poom"],
-  datasets:[{ data:[127185.0, 80100.0, 69000.0, 62600.0, 55400.0, 45500.0, 36000.0, 34500.0, 34500.0, 32775.0, 32600.0, 28800.0, 25400.0, 22100.0, 20300.0, 1800.0], backgroundColor:redGrad(16), borderRadius:3 }]
-}, options:opts(v => v>=1000?(v/1000).toFixed(0)+'k':v) });
-
-new Chart('mChart', { type:'bar', data:{
-  labels:["Mew, Zico, Lion, Paul, Ae", "Bos, Golf, Man, Ford, Tiger, Ice, Nine, Peet"],
-  datasets:[{
-    data:[2, 1],
-    backgroundColor: [2, 1].map(v => v >= goalLine ? '#2e7d32' : v >= goalLine-2 ? '#f57c00' : '#c0002a'),
-    borderRadius:3
-  }]
-}, options:opts(v => v) });
-</script>
 </body>
 </html>
