@@ -1,8 +1,8 @@
 {
-  "updated_at": "07/07/2026 08:57",
+  "updated_at": "16/08/2026 01:37",
   "period": {
-    "start": "01/07/2026",
-    "end": "07/07/2026"
+    "start": "01/08/2026",
+    "end": "16/08/2026"
   },
   "conduct": {
     "headers": [
@@ -24,29 +24,57 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Fitstart": "26",
-        "Trial Session": "7",
-        "Total Session (Expept Fitstart and Trial)": "496",
-        "Total Session": "529",
-        "Per Session": "420,811.87",
+        "Fitstart": "71",
+        "Trial Session": "6",
+        "Total Session (Expept Fitstart and Trial)": "1,108",
+        "Total Session": "1,185",
+        "Per Session": "952,581.91",
         "Comm PT": "",
         "Flat Rate": "0.00",
-        "Commission": "135,940.27",
-        "Total Commission": "135,940.27"
+        "Commission": "318,037.75",
+        "Total Commission": "318,037.75"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Ae_02227",
         "Position Rate": "ET-RED",
-        "Fitstart": "1",
+        "Fitstart": "3",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "45",
-        "Total Session": "46",
-        "Per Session": "46,179.75",
+        "Total Session (Expept Fitstart and Trial)": "86",
+        "Total Session": "89",
+        "Per Session": "84,605.03",
         "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "16,162.91",
-        "Total Commission": "16,162.91"
+        "Commission": "29,611.76",
+        "Total Commission": "29,611.76"
+      },
+      {
+        "Ext": "",
+        "Trainer": "IBA_Deaw_02058",
+        "Position Rate": "ET-RED",
+        "Fitstart": "3",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "79",
+        "Total Session": "83",
+        "Per Session": "70,504.33",
+        "Comm PT": "40%",
+        "Flat Rate": "0",
+        "Commission": "28,201.73",
+        "Total Commission": "28,201.73"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Bos_01915",
+        "Position Rate": "ET-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "64",
+        "Total Session": "64",
+        "Per Session": "63,215.78",
+        "Comm PT": "40%",
+        "Flat Rate": "0",
+        "Commission": "25,286.31",
+        "Total Commission": "25,286.31"
       },
       {
         "Ext": "",
@@ -54,181 +82,69 @@
         "Position Rate": "ET-RED",
         "Fitstart": "0",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "31",
-        "Total Session": "31",
-        "Per Session": "28,619.76",
+        "Total Session (Expept Fitstart and Trial)": "75",
+        "Total Session": "75",
+        "Per Session": "67,261.57",
         "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "10,016.91",
-        "Total Commission": "10,016.91"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Mew_01974",
-        "Position Rate": "ET-RED",
-        "Fitstart": "1",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "31",
-        "Total Session": "33",
-        "Per Session": "28,030.80",
-        "Comm PT": "35%",
-        "Flat Rate": "0",
-        "Commission": "9,810.78",
-        "Total Commission": "9,810.78"
+        "Commission": "23,541.55",
+        "Total Commission": "23,541.55"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Lion_02391",
         "Position Rate": "ET-RED",
-        "Fitstart": "0",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "30",
-        "Total Session": "31",
-        "Per Session": "26,675.54",
-        "Comm PT": "35%",
-        "Flat Rate": "0",
-        "Commission": "9,336.44",
-        "Total Commission": "9,336.44"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Zico_01805",
-        "Position Rate": "PT-RED",
-        "Fitstart": "0",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "36",
-        "Total Session": "36",
-        "Per Session": "28,228.75",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "8,468.62",
-        "Total Commission": "8,468.62"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Peet_02169",
-        "Position Rate": "ET-RED",
-        "Fitstart": "1",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "26",
-        "Total Session": "28",
-        "Per Session": "21,420.90",
-        "Comm PT": "35%",
-        "Flat Rate": "0",
-        "Commission": "7,497.31",
-        "Total Commission": "7,497.31"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Yean_03170",
-        "Position Rate": "PT-RED",
         "Fitstart": "2",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "30",
-        "Total Session": "32",
-        "Per Session": "24,598.85",
-        "Comm PT": "30%",
+        "Total Session (Expept Fitstart and Trial)": "68",
+        "Total Session": "70",
+        "Per Session": "62,596.37",
+        "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "7,379.65",
-        "Total Commission": "7,379.65"
+        "Commission": "21,908.73",
+        "Total Commission": "21,908.73"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Paul_02228",
         "Position Rate": "ST-RED",
-        "Fitstart": "1",
+        "Fitstart": "5",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "30",
-        "Total Session": "31",
-        "Per Session": "23,634.59",
+        "Total Session (Expept Fitstart and Trial)": "85",
+        "Total Session": "90",
+        "Per Session": "67,587.77",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "7,090.38",
-        "Total Commission": "7,090.38"
+        "Commission": "20,276.33",
+        "Total Commission": "20,276.33"
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Bos_01915",
-        "Position Rate": "ET-RED",
-        "Fitstart": "0",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "20",
-        "Total Session": "21",
-        "Per Session": "19,224.74",
-        "Comm PT": "35%",
-        "Flat Rate": "0",
-        "Commission": "6,728.66",
-        "Total Commission": "6,728.66"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Lekza_01909",
-        "Position Rate": "ST-RED",
-        "Fitstart": "1",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "28",
-        "Total Session": "29",
-        "Per Session": "22,370.71",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "6,711.21",
-        "Total Commission": "6,711.21"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Man_01911",
-        "Position Rate": "PT-RED",
-        "Fitstart": "1",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "20",
-        "Total Session": "22",
-        "Per Session": "16,285.60",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "4,885.68",
-        "Total Commission": "4,885.68"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Poom_03173",
-        "Position Rate": "PT-RED",
-        "Fitstart": "2",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "19",
-        "Total Session": "21",
-        "Per Session": "15,509.49",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "4,652.85",
-        "Total Commission": "4,652.85"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Benz_03155",
+        "Trainer": "RRA_Yean_03170",
         "Position Rate": "PT-RED",
         "Fitstart": "4",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "19",
-        "Total Session": "23",
-        "Per Session": "15,416.99",
+        "Total Session (Expept Fitstart and Trial)": "71",
+        "Total Session": "75",
+        "Per Session": "60,000.10",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "4,625.10",
-        "Total Commission": "4,625.10"
+        "Commission": "18,000.03",
+        "Total Commission": "18,000.03"
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Put_02910",
-        "Position Rate": "PT-RED",
-        "Fitstart": "0",
+        "Trainer": "RRA_Mew_01974",
+        "Position Rate": "ET-RED",
+        "Fitstart": "6",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "18",
-        "Total Session": "18",
-        "Per Session": "15,187.17",
-        "Comm PT": "30%",
+        "Total Session (Expept Fitstart and Trial)": "48",
+        "Total Session": "54",
+        "Per Session": "45,748.81",
+        "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "4,556.15",
-        "Total Commission": "4,556.15"
+        "Commission": "16,012.08",
+        "Total Commission": "16,012.08"
       },
       {
         "Ext": "",
@@ -236,41 +152,139 @@
         "Position Rate": "PT-RED",
         "Fitstart": "2",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "18",
-        "Total Session": "20",
-        "Per Session": "14,973.21",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "4,491.96",
-        "Total Commission": "4,491.96"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Tonmai_01312",
-        "Position Rate": "CM",
-        "Fitstart": "0",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "16",
-        "Total Session": "16",
-        "Per Session": "12,635",
+        "Total Session (Expept Fitstart and Trial)": "49",
+        "Total Session": "51",
+        "Per Session": "38,620.79",
         "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "4,422.25",
-        "Total Commission": "4,422.25"
+        "Commission": "13,517.28",
+        "Total Commission": "13,517.28"
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Nill_03116",
-        "Position Rate": "PT-RED",
-        "Fitstart": "3",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "17",
-        "Total Session": "20",
-        "Per Session": "13,541.74",
+        "Trainer": "RRA_Lekza_01909",
+        "Position Rate": "ST-RED",
+        "Fitstart": "6",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "55",
+        "Total Session": "62",
+        "Per Session": "44,993.41",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "4,062.52",
-        "Total Commission": "4,062.52"
+        "Commission": "13,498.02",
+        "Total Commission": "13,498.02"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Peet_02169",
+        "Position Rate": "ET-RED",
+        "Fitstart": "3",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "44",
+        "Total Session": "47",
+        "Per Session": "34,136.60",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "11,947.81",
+        "Total Commission": "11,947.81"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Tiger_01923",
+        "Position Rate": "PT-RED",
+        "Fitstart": "5",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "50",
+        "Total Session": "55",
+        "Per Session": "37,150.31",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "11,145.09",
+        "Total Commission": "11,145.09"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Poom_03173",
+        "Position Rate": "PT-RED",
+        "Fitstart": "3",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "37",
+        "Total Session": "41",
+        "Per Session": "31,022.25",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "10,857.79",
+        "Total Commission": "10,857.79"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Baifern_01910",
+        "Position Rate": "PT-RED",
+        "Fitstart": "1",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "40",
+        "Total Session": "41",
+        "Per Session": "31,949.71",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "9,584.91",
+        "Total Commission": "9,584.91"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Man_01911",
+        "Position Rate": "PT-RED",
+        "Fitstart": "4",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "40",
+        "Total Session": "44",
+        "Per Session": "31,307.60",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "9,392.28",
+        "Total Commission": "9,392.28"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Put_02910",
+        "Position Rate": "PT-RED",
+        "Fitstart": "2",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "36",
+        "Total Session": "39",
+        "Per Session": "30,227.40",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "9,068.22",
+        "Total Commission": "9,068.22"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ice_01548",
+        "Position Rate": "ST-RED",
+        "Fitstart": "1",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "32",
+        "Total Session": "34",
+        "Per Session": "27,040.78",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "8,112.23",
+        "Total Commission": "8,112.23"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Zico_01805",
+        "Position Rate": "PT-RED",
+        "Fitstart": "0",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "31",
+        "Total Session": "32",
+        "Per Session": "24,637.65",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "7,391.29",
+        "Total Commission": "7,391.29"
       },
       {
         "Ext": "",
@@ -278,83 +292,69 @@
         "Position Rate": "PT-RED",
         "Fitstart": "1",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "17",
-        "Total Session": "18",
-        "Per Session": "13,295.05",
+        "Total Session (Expept Fitstart and Trial)": "29",
+        "Total Session": "30",
+        "Per Session": "22,898.29",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "3,988.52",
-        "Total Commission": "3,988.52"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Tiger_01923",
-        "Position Rate": "PT-RED",
-        "Fitstart": "2",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "15",
-        "Total Session": "17",
-        "Per Session": "10,776.35",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "3,232.90",
-        "Total Commission": "3,232.90"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Ice_01548",
-        "Position Rate": "ST-RED",
-        "Fitstart": "0",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "8",
-        "Total Session": "9",
-        "Per Session": "6,967.33",
-        "Comm PT": "38%",
-        "Flat Rate": "0",
-        "Commission": "2,647.59",
-        "Total Commission": "2,647.59"
+        "Commission": "6,869.49",
+        "Total Commission": "6,869.49"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Sataem_03348",
         "Position Rate": "PT-RED",
-        "Fitstart": "2",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "9",
-        "Total Session": "12",
-        "Per Session": "7,447.74",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "2,234.32",
-        "Total Commission": "2,234.32"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Baifern_01910",
-        "Position Rate": "PT-RED",
-        "Fitstart": "2",
+        "Fitstart": "7",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "8",
-        "Total Session": "10",
-        "Per Session": "5,764.47",
+        "Total Session (Expept Fitstart and Trial)": "26",
+        "Total Session": "33",
+        "Per Session": "22,616.43",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "1,729.34",
-        "Total Commission": "1,729.34"
+        "Commission": "6,784.93",
+        "Total Commission": "6,784.93"
       },
       {
         "Ext": "",
-        "Trainer": "IBA_Deaw_02058",
-        "Position Rate": "ST-RED",
+        "Trainer": "RRA_Nill_03116",
+        "Position Rate": "PT-RED",
+        "Fitstart": "5",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "25",
+        "Total Session": "30",
+        "Per Session": "22,576.83",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "6,773.05",
+        "Total Commission": "6,773.05"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Benz_03155",
+        "Position Rate": "PT-RED",
+        "Fitstart": "8",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "21",
+        "Total Session": "29",
+        "Per Session": "18,052.20",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "5,415.66",
+        "Total Commission": "5,415.66"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Tonmai_01312",
+        "Position Rate": "CM",
         "Fitstart": "0",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "5",
-        "Total Session": "5",
-        "Per Session": "4,027.35",
-        "Comm PT": "30%",
+        "Total Session (Expept Fitstart and Trial)": "17",
+        "Total Session": "17",
+        "Per Session": "13,831.90",
+        "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "1,208.20",
-        "Total Commission": "1,208.20"
+        "Commission": "4,841.16",
+        "Total Commission": "4,841.16"
       }
     ]
   },
@@ -373,114 +373,159 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "708,560",
-        "Amount Before VAT": "662,205.61",
+        "Total Amount": "1,624,580",
+        "Amount Before VAT": "1,518,299.07",
         "Comm Sold": "",
-        "Commission Price": "16,810.05"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Ice_01548",
-        "Position Rate": "ST-RED",
-        "Total Amount": "127,185",
-        "Amount Before VAT": "118,864.49",
-        "Comm Sold": "5%",
-        "Commission Price": "5,943.22"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Lion_02391",
-        "Position Rate": "ET-RED",
-        "Total Amount": "80,100",
-        "Amount Before VAT": "74,859.81",
-        "Comm Sold": "2%",
-        "Commission Price": "1,497.20"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Lekza_01909",
-        "Position Rate": "ST-RED",
-        "Total Amount": "69,000",
-        "Amount Before VAT": "64,485.98",
-        "Comm Sold": "2%",
-        "Commission Price": "1,289.72"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Ae_02227",
-        "Position Rate": "ET-RED",
-        "Total Amount": "62,600",
-        "Amount Before VAT": "58,504.67",
-        "Comm Sold": "2%",
-        "Commission Price": "1,170.09"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Mew_01974",
-        "Position Rate": "ET-RED",
-        "Total Amount": "55,400",
-        "Amount Before VAT": "51,775.70",
-        "Comm Sold": "2%",
-        "Commission Price": "1,035.51"
-      },
-      {
-        "Ext": "",
-        "Trainer": "IBA_Deaw_02058",
-        "Position Rate": "ST-RED",
-        "Total Amount": "45,500",
-        "Amount Before VAT": "42,523.36",
-        "Comm Sold": "2%",
-        "Commission Price": "850.47"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Paul_02228",
-        "Position Rate": "ST-RED",
-        "Total Amount": "36,000",
-        "Amount Before VAT": "33,644.86",
-        "Comm Sold": "2%",
-        "Commission Price": "672.90"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Yean_03170",
-        "Position Rate": "PT-RED",
-        "Total Amount": "34,500",
-        "Amount Before VAT": "32,242.99",
-        "Comm Sold": "2%",
-        "Commission Price": "644.86"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Nill_03116",
-        "Position Rate": "PT-RED",
-        "Total Amount": "34,500",
-        "Amount Before VAT": "32,242.99",
-        "Comm Sold": "2%",
-        "Commission Price": "644.86"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Man_01911",
-        "Position Rate": "PT-RED",
-        "Total Amount": "32,775",
-        "Amount Before VAT": "30,630.84",
-        "Comm Sold": "2%",
-        "Commission Price": "612.62"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Zico_01805",
-        "Position Rate": "PT-RED",
-        "Total Amount": "32,600",
-        "Amount Before VAT": "30,467.29",
-        "Comm Sold": "2%",
-        "Commission Price": "609.35"
+        "Commission Price": "62,721.23"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Bos_01915",
         "Position Rate": "ET-RED",
+        "Total Amount": "193,900",
+        "Amount Before VAT": "181,214.95",
+        "Comm Sold": "7%",
+        "Commission Price": "12,685.05"
+      },
+      {
+        "Ext": "",
+        "Trainer": "IBA_Deaw_02058",
+        "Position Rate": "ET-RED",
+        "Total Amount": "158,400",
+        "Amount Before VAT": "148,037.38",
+        "Comm Sold": "7%",
+        "Commission Price": "10,362.62"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Yean_03170",
+        "Position Rate": "PT-RED",
+        "Total Amount": "140,500",
+        "Amount Before VAT": "131,308.41",
+        "Comm Sold": "7%",
+        "Commission Price": "9,191.59"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Lion_02391",
+        "Position Rate": "ET-RED",
+        "Total Amount": "116,275",
+        "Amount Before VAT": "108,668.22",
+        "Comm Sold": "2%",
+        "Commission Price": "2,173.36"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Poom_03173",
+        "Position Rate": "PT-RED",
+        "Total Amount": "114,230",
+        "Amount Before VAT": "106,757.01",
+        "Comm Sold": "5%",
+        "Commission Price": "5,337.85"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ford_02742",
+        "Position Rate": "PT-RED",
+        "Total Amount": "109,535",
+        "Amount Before VAT": "102,369.16",
+        "Comm Sold": "5%",
+        "Commission Price": "5,118.46"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Paul_02228",
+        "Position Rate": "ST-RED",
+        "Total Amount": "108,905",
+        "Amount Before VAT": "101,780.37",
+        "Comm Sold": "5%",
+        "Commission Price": "5,089.02"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Golf_01913",
+        "Position Rate": "ET-RED",
+        "Total Amount": "97,600",
+        "Amount Before VAT": "91,214.95",
+        "Comm Sold": "2%",
+        "Commission Price": "1,824.30"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ae_02227",
+        "Position Rate": "ET-RED",
+        "Total Amount": "80,000",
+        "Amount Before VAT": "74,766.36",
+        "Comm Sold": "2%",
+        "Commission Price": "1,495.33"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Lekza_01909",
+        "Position Rate": "ST-RED",
+        "Total Amount": "78,485",
+        "Amount Before VAT": "73,350.47",
+        "Comm Sold": "2%",
+        "Commission Price": "1,467.01"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Mew_01974",
+        "Position Rate": "ET-RED",
+        "Total Amount": "69,575",
+        "Amount Before VAT": "65,023.36",
+        "Comm Sold": "2%",
+        "Commission Price": "1,300.47"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Man_01911",
+        "Position Rate": "PT-RED",
+        "Total Amount": "54,400",
+        "Amount Before VAT": "50,841.12",
+        "Comm Sold": "2%",
+        "Commission Price": "1,016.82"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Peet_02169",
+        "Position Rate": "ET-RED",
+        "Total Amount": "49,875",
+        "Amount Before VAT": "46,612.15",
+        "Comm Sold": "2%",
+        "Commission Price": "932.24"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Sataem_03348",
+        "Position Rate": "PT-RED",
+        "Total Amount": "45,000",
+        "Amount Before VAT": "42,056.07",
+        "Comm Sold": "2%",
+        "Commission Price": "841.12"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Benz_03155",
+        "Position Rate": "PT-RED",
+        "Total Amount": "38,100",
+        "Amount Before VAT": "35,607.48",
+        "Comm Sold": "2%",
+        "Commission Price": "712.15"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Nine_02024",
+        "Position Rate": "PT-RED",
+        "Total Amount": "30,200",
+        "Amount Before VAT": "28,224.30",
+        "Comm Sold": "2%",
+        "Commission Price": "564.49"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ton_03601",
+        "Position Rate": "PT-RED",
         "Total Amount": "28,800",
         "Amount Before VAT": "26,915.89",
         "Comm Sold": "2%",
@@ -488,8 +533,17 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Nine_02024",
+        "Trainer": "RRA_Baifern_01910",
         "Position Rate": "PT-RED",
+        "Total Amount": "27,000",
+        "Amount Before VAT": "25,233.64",
+        "Comm Sold": "2%",
+        "Commission Price": "504.67"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ice_01548",
+        "Position Rate": "ST-RED",
         "Total Amount": "25,400",
         "Amount Before VAT": "23,738.32",
         "Comm Sold": "2%",
@@ -506,7 +560,7 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Ford_02742",
+        "Trainer": "RRA_Put_02910",
         "Position Rate": "PT-RED",
         "Total Amount": "20,300",
         "Amount Before VAT": "18,971.96",
@@ -515,219 +569,644 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Poom_03173",
+        "Trainer": "RRA_Nill_03116",
         "Position Rate": "PT-RED",
-        "Total Amount": "1,800",
-        "Amount Before VAT": "1,682.24",
+        "Total Amount": "16,000",
+        "Amount Before VAT": "14,953.27",
         "Comm Sold": "2%",
-        "Commission Price": "33.64"
+        "Commission Price": "299.07"
       }
     ]
   },
   "membership": {
     "rows": [
       {
-        "sold_date": "01 July 2026",
-        "app_id": "046202601008",
-        "membership": "Freedom Direct Debit Membership 2026",
-        "client": "Saiyai Yangsuk",
-        "sold_by": "RRA_Mew_01974"
+        "sold_date": "01 August 2026",
+        "app_id": "046202601181",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Veerapat Hongsamlit",
+        "sold_by": "RRA_Baifern_01910"
       },
       {
-        "sold_date": "02 July 2026",
-        "app_id": "046202601009",
-        "membership": "Corporate Promotion Flexi Membership",
-        "client": "Jirapipart Prasertsom",
-        "sold_by": "RRA_Bos_01915"
-      },
-      {
-        "sold_date": "02 July 2026",
-        "app_id": "046202601010",
-        "membership": "6 Month PIA - Membership 2026",
-        "client": "Kupati Choosin",
-        "sold_by": "RRA_Golf_01913"
-      },
-      {
-        "sold_date": "02 July 2026",
-        "app_id": "046202601011",
-        "membership": "Freedom Direct Debit Membership 2026",
-        "client": "Stanislav Anosov",
+        "sold_date": "01 August 2026",
+        "app_id": "046202601182",
+        "membership": "One Day Pass",
+        "client": "Sirichut Thongdetsri",
         "sold_by": "BGPL_Ou_00936"
       },
       {
-        "sold_date": "02 July 2026",
-        "app_id": "046202601012",
-        "membership": "Freedom Direct Debit Membership 2026",
-        "client": "Nattapat Thonguamyai",
-        "sold_by": "RRA_Man_01911"
+        "sold_date": "02 August 2026",
+        "app_id": "046202601183",
+        "membership": "Corporate Jetts Love's Freedom Membership",
+        "client": "Jakkarin Thong-on",
+        "sold_by": "RRA_Paul_02228"
       },
       {
-        "sold_date": "02 July 2026",
-        "app_id": "046202601013",
-        "membership": "6 Month PIA - Membership 2026",
-        "client": "Warinthip Chaloeipap",
-        "sold_by": "BGPL_Ou_00936"
-      },
-      {
-        "sold_date": "02 July 2026",
-        "app_id": "046202601014",
-        "membership": "Corporate Promotion 12 Months PIA Membership",
-        "client": "Kanookwan Wangdee",
-        "sold_by": "RRA_Ford_02742"
-      },
-      {
-        "sold_date": "03 July 2026",
-        "app_id": "046202601015",
-        "membership": "Corporate Promotion 6 Months PIA Membership",
-        "client": "Tashasorn Kitcharoen",
+        "sold_date": "03 August 2026",
+        "app_id": "046202601184",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Suphatchada Damthaisong",
         "sold_by": "RRA_Tiger_01923"
       },
       {
-        "sold_date": "03 July 2026",
-        "app_id": "046202601016",
-        "membership": "Corporate Promotion 6 Months PIA Membership",
-        "client": "Kornphob Panprasong",
-        "sold_by": "RRA_Zico_01805"
-      },
-      {
-        "sold_date": "03 July 2026",
-        "app_id": "046202601017",
-        "membership": "3 Month PIA - Membership 2026",
-        "client": "Thapakron Yaemthat",
-        "sold_by": "BGPL_Ou_00936"
-      },
-      {
-        "sold_date": "03 July 2026",
-        "app_id": "046202601018",
-        "membership": "Corporate Promotion 6 Months PIA Membership",
-        "client": "Apiwat Apiwatsayree",
-        "sold_by": "BGPL_Ou_00936"
-      },
-      {
-        "sold_date": "04 July 2026",
-        "app_id": "046202601019",
+        "sold_date": "10 July 2026",
+        "app_id": "046202601185",
         "membership": "Stay Fit Direct Debit Membership 2026",
-        "client": "Ruengchai Saikham",
-        "sold_by": "RRA_Lion_02391"
+        "client": "Paripat Chinpinklyo",
+        "sold_by": "ecommerce_website"
       },
       {
-        "sold_date": "04 July 2026",
-        "app_id": "046202601020",
-        "membership": "Flexi Direct Debit Membership 2026",
-        "client": "Jaturong Puthongkum",
-        "sold_by": "RRA_Paul_02228"
+        "sold_date": "03 August 2026",
+        "app_id": "046202601186",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Navy Deesubin",
+        "sold_by": "RRA_Put_02910"
       },
       {
-        "sold_date": "04 July 2026",
-        "app_id": "046202601021",
-        "membership": "Flexi Direct Debit Membership 2026",
-        "client": "Kanticha Puthongkum",
-        "sold_by": "RRA_Ice_01548"
-      },
-      {
-        "sold_date": "04 July 2026",
-        "app_id": "046202601022",
-        "membership": "Corporate Promotion 6 Months PIA Membership",
-        "client": "Somjai Sae-Tang",
-        "sold_by": "BGPL_Ou_00936"
-      },
-      {
-        "sold_date": "05 July 2026",
-        "app_id": "046202601023",
-        "membership": "Freedom Direct Debit Membership 2026",
-        "client": "Phanfah Tanawarankul",
-        "sold_by": "RRA_Zico_01805"
-      },
-      {
-        "sold_date": "05 July 2026",
-        "app_id": "046202601024",
-        "membership": "Flexi Direct Debit Membership 2026",
-        "client": "Korn Phiboonknasap",
-        "sold_by": "RRA_Nine_02024"
-      },
-      {
-        "sold_date": "05 July 2026",
-        "app_id": "046202601025",
+        "sold_date": "03 August 2026",
+        "app_id": "046202601187",
         "membership": "3 Month PIA - Membership 2026",
-        "client": "Vachiravit Pakpitpiloool",
-        "sold_by": "RRA_Paul_02228"
+        "client": "Chanyoot Keepaiboon",
+        "sold_by": "RRA_Ford_02742"
       },
       {
-        "sold_date": "05 July 2026",
-        "app_id": "046202601026",
-        "membership": "Freedom Direct Debit Membership 2026",
-        "client": "Peerasak Pantong",
-        "sold_by": "RRA_Ae_02227"
+        "sold_date": "03 August 2026",
+        "app_id": "046202601188",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Phubate Thiangtham",
+        "sold_by": "RRA_Ford_02742"
       },
       {
-        "sold_date": "05 July 2026",
-        "app_id": "046202601027",
-        "membership": "Freedom Direct Debit Membership 2026",
-        "client": "Pimnara Intasuwan",
-        "sold_by": "RRA_Lion_02391"
-      },
-      {
-        "sold_date": "06 July 2026",
-        "app_id": "046202601028",
-        "membership": "6 Month PIA - Membership 2026",
-        "client": "Nonrawat Makradee",
+        "sold_date": "03 August 2026",
+        "app_id": "046202601189",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Katitep Ngamket",
         "sold_by": "BGPL_Ou_00936"
       },
       {
-        "sold_date": "06 July 2026",
-        "app_id": "046202601029",
-        "membership": "Flexi Direct Debit Membership 2026",
-        "client": "Phon Kountavong",
+        "sold_date": "03 August 2026",
+        "app_id": "046202601190",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Rawitsara Chanasit",
         "sold_by": "RRA_Peet_02169"
       },
       {
-        "sold_date": "06 July 2026",
-        "app_id": "046202601030",
+        "sold_date": "03 August 2026",
+        "app_id": "046202601191",
         "membership": "3 Month PIA - Membership 2026",
-        "client": "Manatsanan Leelapornpinit",
+        "client": "Chat Ketpratum",
+        "sold_by": "RRA_Benz_03155"
+      },
+      {
+        "sold_date": "04 August 2026",
+        "app_id": "046202601192",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Sarin Lertlumsombat",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "04 August 2026",
+        "app_id": "046202601193",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Panyakorn Sirasarit",
         "sold_by": "RRA_Ae_02227"
       },
       {
-        "sold_date": "06 July 2026",
-        "app_id": "046202601031",
+        "sold_date": "04 August 2026",
+        "app_id": "046202601194",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Sittichoke Phiman",
+        "sold_by": "RRA_Benz_03155"
+      },
+      {
+        "sold_date": "04 August 2026",
+        "app_id": "046202601195",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Sopita Nonkaew",
+        "sold_by": "RRA_Sataem_03348"
+      },
+      {
+        "sold_date": "04 August 2026",
+        "app_id": "046202601196",
         "membership": "Stay Fit Direct Debit Membership 2026",
-        "client": "Kornchanok Sudsawat",
-        "sold_by": "BGPL_Ou_00936"
+        "client": "Teeladat Piyakit",
+        "sold_by": "RRA_Nine_02024"
       },
       {
-        "sold_date": "07 July 2026",
-        "app_id": "046202601032",
-        "membership": "Corporate Promotion Stay Fit Membership",
-        "client": "Orrachorn Longruk",
-        "sold_by": "BGPL_Ou_00936"
+        "sold_date": "05 August 2026",
+        "app_id": "046202601197",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Inthita Wangchin",
+        "sold_by": "RRA_Poom_03173"
       },
       {
-        "sold_date": "07 July 2026",
-        "app_id": "046202601033",
-        "membership": "Corporate Promotion Stay Fit Membership",
-        "client": "Unchasa Abhidhammajinda",
+        "sold_date": "05 August 2026",
+        "app_id": "046202601198",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Ratanathorn Nithinattanathorn",
+        "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "05 August 2026",
+        "app_id": "046202601199",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Mareeyah Chantee",
+        "sold_by": "RRA_Nine_02024"
+      },
+      {
+        "sold_date": "05 August 2026",
+        "app_id": "046202601200",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Wankamon Sae-Chang",
+        "sold_by": "RRA_Lion_02391"
+      },
+      {
+        "sold_date": "05 August 2026",
+        "app_id": "046202601201",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Kalida Wongphol",
         "sold_by": "RRA_Mew_01974"
+      },
+      {
+        "sold_date": "06 August 2026",
+        "app_id": "046202601202",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Urapong Sathitmannaithum",
+        "sold_by": "RRA_Golf_01913"
+      },
+      {
+        "sold_date": "06 August 2026",
+        "app_id": "046202601203",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Panupong Lek-Sad",
+        "sold_by": "RRA_Ford_02742"
+      },
+      {
+        "sold_date": "06 August 2026",
+        "app_id": "046202601204",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Pongsathorn Samadeh",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "06 August 2026",
+        "app_id": "046202601205",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Wijittra Sawangwong",
+        "sold_by": "RRA_Ae_02227"
+      },
+      {
+        "sold_date": "07 August 2026",
+        "app_id": "046202601206",
+        "membership": "12 Month PIA - Membership 2026",
+        "client": "Araya Tananartruedee",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "07 August 2026",
+        "app_id": "046202601207",
+        "membership": "Corporate Jetts Love's Freedom Membership",
+        "client": "Sirawut Tanthasomboon",
+        "sold_by": "RRA_Benz_03155"
+      },
+      {
+        "sold_date": "07 August 2026",
+        "app_id": "046202601208",
+        "membership": "Corporate Jetts Love's 12 Months PIA Membership",
+        "client": "Areerat Benchaphothisiwawong",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "07 August 2026",
+        "app_id": "046202601209",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Danai Kaosala",
+        "sold_by": "RRA_Peet_02169"
+      },
+      {
+        "sold_date": "07 August 2026",
+        "app_id": "046202601211",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Bubpha Kaosala",
+        "sold_by": "IBA_Deaw_02058"
+      },
+      {
+        "sold_date": "07 August 2026",
+        "app_id": "046202601212",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Boontarika Saelim",
+        "sold_by": "RRA_Benz_03155"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601213",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Sineenuch Chuntasri",
+        "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601214",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Tanasak Kanjanaratvaree",
+        "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601215",
+        "membership": "12 Month PIA - Membership 2026",
+        "client": "Pongsawat Moopongsuwan",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601216",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Thares Noonark",
+        "sold_by": "RRA_Peet_02169"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601217",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Supitcha Phomwijit",
+        "sold_by": "RRA_Man_01911"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601219",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Rawee Bunciam",
+        "sold_by": "RRA_Man_01911"
+      },
+      {
+        "sold_date": "08 August 2026",
+        "app_id": "046202601220",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Phonphan Nuisri",
+        "sold_by": "RRA_Golf_01913"
+      },
+      {
+        "sold_date": "09 August 2026",
+        "app_id": "046202601221",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Purimphat Sinsaenganan",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "09 August 2026",
+        "app_id": "046202601222",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Rattapong Pithakvasin",
+        "sold_by": "RRA_Ford_02742"
+      },
+      {
+        "sold_date": "09 August 2026",
+        "app_id": "046202601223",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Siripat Pithakvasin",
+        "sold_by": "RRA_Put_02910"
+      },
+      {
+        "sold_date": "09 August 2026",
+        "app_id": "046202601224",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Phathira Wannakan",
+        "sold_by": "RRA_Nill_03116"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601225",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Chanrit Anantaprayoon",
+        "sold_by": "RRA_Nill_03116"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601226",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Butree Kaljaruek",
+        "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601227",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Jit-Aree Boriboon",
+        "sold_by": "RRA_Nill_03116"
+      },
+      {
+        "sold_date": "02 August 2026",
+        "app_id": "046202601228",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Hayley Harker",
+        "sold_by": "ecommerce_website"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601229",
+        "membership": "Corporate Jetts Love's Flexi Membership",
+        "client": "Thitikan Thaweesri",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601230",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Kraisit Cheepsamutr",
+        "sold_by": "RRA_Poom_03173"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601231",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Yonglan Ma",
+        "sold_by": "RRA_Benz_03155"
+      },
+      {
+        "sold_date": "10 August 2026",
+        "app_id": "046202601232",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Panthanut Promachot",
+        "sold_by": "IBA_Deaw_02058"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601233",
+        "membership": "6 Month PIA - Membership 2026",
+        "client": "Phutthimet Pasingchop",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601234",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Theeraphong Chaisukhirunphokin",
+        "sold_by": "RRA_Baifern_01910"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601235",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Rinnata Chaisukhirunphokin",
+        "sold_by": "RRA_Golf_01913"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601236",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Tassanewan Wantapocathum",
+        "sold_by": "IBA_Deaw_02058"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601237",
+        "membership": "Corporate Jetts Love's 6 Months PIA Membership",
+        "client": "Sittharmanin Suwannasing",
+        "sold_by": "RRA_Peet_02169"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601238",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Ariya Sangkharat",
+        "sold_by": "RRA_Nine_02024"
+      },
+      {
+        "sold_date": "11 August 2026",
+        "app_id": "046202601239",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Wipatsana Srijan",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "12 August 2026",
+        "app_id": "046202601240",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Thipkanya Surawitthayanon",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "12 August 2026",
+        "app_id": "046202601241",
+        "membership": "Corporate Jetts Love's Flexi Membership",
+        "client": "Piemsook Raluek",
+        "sold_by": "RRA_Ice_01548"
+      },
+      {
+        "sold_date": "12 August 2026",
+        "app_id": "046202601242",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Kanawut Banchakorn",
+        "sold_by": "RRA_Sataem_03348"
+      },
+      {
+        "sold_date": "12 August 2026",
+        "app_id": "046202601243",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Yotsaphon Liupolvanish",
+        "sold_by": "RRA_Yean_03170"
+      },
+      {
+        "sold_date": "12 August 2026",
+        "app_id": "046202601244",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Kanokporn Panich",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "12 August 2026",
+        "app_id": "046202601245",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Nattakamon Raiyawong",
+        "sold_by": "RRA_Mew_01974"
+      },
+      {
+        "sold_date": "13 August 2026",
+        "app_id": "046202601246",
+        "membership": "Corporate Jetts Love's Freedom Membership",
+        "client": "Phruekpaya Tantiphol",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "13 August 2026",
+        "app_id": "046202601247",
+        "membership": "1 Month pass",
+        "client": "Goncalves Roque",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "13 August 2026",
+        "app_id": "046202601248",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Pathawee Dolma-Ard",
+        "sold_by": "RRA_Sataem_03348"
+      },
+      {
+        "sold_date": "13 August 2026",
+        "app_id": "046202601249",
+        "membership": "12 Month PIA - Membership 2026",
+        "client": "Techit Wongthian",
+        "sold_by": "Online"
+      },
+      {
+        "sold_date": "13 August 2026",
+        "app_id": "046202601250",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Pongpat Jariya",
+        "sold_by": "RRA_Zico_01805"
+      },
+      {
+        "sold_date": "14 August 2026",
+        "app_id": "046202601251",
+        "membership": "Corporate Promotion 12 Months PIA Membership",
+        "client": "Kamonrak Teamdoungtawan",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "14 August 2026",
+        "app_id": "046202601252",
+        "membership": "6 Month PIA - Membership 2026",
+        "client": "Thantad Rurkwararuk",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "14 August 2026",
+        "app_id": "046202601253",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Tawisa Pothai",
+        "sold_by": "RRA_Benz_03155"
+      },
+      {
+        "sold_date": "14 August 2026",
+        "app_id": "046202601254",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Kamonwan Issarakul",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601255",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Thana Boontherawara",
+        "sold_by": "RRA_Paul_02228"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601256",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Onvirut Boontherawara",
+        "sold_by": "RRA_Paul_02228"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601257",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Timpika Jitsom",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601258",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Arpamas Somchana",
+        "sold_by": "RRA_Tiger_01923"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601259",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Napakcharat Kitcharoenka",
+        "sold_by": "RRA_Ice_01548"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601260",
+        "membership": "Corporate Promotion 12 Months PIA Membership",
+        "client": "Tharin Pongchaiyapoom",
+        "sold_by": "RRA_Nine_02024"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601261",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Suwatjana Pumisart",
+        "sold_by": "RRA_Ton_03601"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601262",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Yanawut Lapjit",
+        "sold_by": "RRA_Baifern_01910"
+      },
+      {
+        "sold_date": "15 August 2026",
+        "app_id": "046202601263",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Jennarong Kundern",
+        "sold_by": "RRA_Nill_03116"
       }
     ],
     "summary": [
       {
         "sold_by": "BGPL_Ou_00936",
-        "count": 8
+        "count": 19
       },
       {
-        "sold_by": "RRA_Mew_01974",
-        "count": 2
+        "sold_by": "RRA_Benz_03155",
+        "count": 6
       },
       {
-        "sold_by": "RRA_Zico_01805",
-        "count": 2
+        "sold_by": "RRA_Ford_02742",
+        "count": 4
       },
       {
-        "sold_by": "RRA_Lion_02391",
-        "count": 2
+        "sold_by": "RRA_Peet_02169",
+        "count": 4
+      },
+      {
+        "sold_by": "RRA_Nine_02024",
+        "count": 4
+      },
+      {
+        "sold_by": "RRA_Bos_01915",
+        "count": 4
+      },
+      {
+        "sold_by": "RRA_Nill_03116",
+        "count": 4
+      },
+      {
+        "sold_by": "RRA_Baifern_01910",
+        "count": 3
       },
       {
         "sold_by": "RRA_Paul_02228",
+        "count": 3
+      },
+      {
+        "sold_by": "RRA_Sataem_03348",
+        "count": 3
+      },
+      {
+        "sold_by": "RRA_Golf_01913",
+        "count": 3
+      },
+      {
+        "sold_by": "IBA_Deaw_02058",
+        "count": 3
+      },
+      {
+        "sold_by": "RRA_Tiger_01923",
+        "count": 2
+      },
+      {
+        "sold_by": "ecommerce_website",
+        "count": 2
+      },
+      {
+        "sold_by": "RRA_Put_02910",
         "count": 2
       },
       {
@@ -735,35 +1214,39 @@
         "count": 2
       },
       {
-        "sold_by": "RRA_Bos_01915",
-        "count": 1
+        "sold_by": "RRA_Poom_03173",
+        "count": 2
       },
       {
-        "sold_by": "RRA_Golf_01913",
-        "count": 1
+        "sold_by": "RRA_Mew_01974",
+        "count": 2
       },
       {
         "sold_by": "RRA_Man_01911",
-        "count": 1
-      },
-      {
-        "sold_by": "RRA_Ford_02742",
-        "count": 1
-      },
-      {
-        "sold_by": "RRA_Tiger_01923",
-        "count": 1
+        "count": 2
       },
       {
         "sold_by": "RRA_Ice_01548",
+        "count": 2
+      },
+      {
+        "sold_by": "RRA_Lion_02391",
         "count": 1
       },
       {
-        "sold_by": "RRA_Nine_02024",
+        "sold_by": "RRA_Yean_03170",
         "count": 1
       },
       {
-        "sold_by": "RRA_Peet_02169",
+        "sold_by": "Online",
+        "count": 1
+      },
+      {
+        "sold_by": "RRA_Zico_01805",
+        "count": 1
+      },
+      {
+        "sold_by": "RRA_Ton_03601",
         "count": 1
       }
     ]

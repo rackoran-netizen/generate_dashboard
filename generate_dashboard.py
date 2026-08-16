@@ -8,7 +8,7 @@ period       = data["period"]
 conduct_rows = data["conduct"]["rows"]
 sold_rows    = data["sold"]["rows"]
 # ตัด BGPL_Ou_00936 ออกจาก membership (บัญชีกลาง ไม่ใช่เทรนเนอร์จริง)
-EXCLUDE_MEM = {"BGPL_Ou_00936"}
+EXCLUDE_MEM = {"BGPL_Ou_00936", "ecommerce_website", "Online"}
 mem_summary  = [r for r in data["membership"]["summary"] if r["sold_by"] not in EXCLUDE_MEM]
 mem_total    = sum(r["count"] for r in mem_summary)
 
