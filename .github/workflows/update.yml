@@ -1,9 +1,10 @@
 name: Update Dashboard
 
 on:
-  schedule:
-    - cron: '0 1 * * *'   # 08:00 Bangkok (UTC+7)
-  workflow_dispatch:        # กดปุ่มรันเองได้จาก GitHub
+  # ไม่ใช้ `schedule:` ของ GitHub Actions เอง เพราะเคยดีเลย์ ~2-3 ชม. (ดู CLAUDE.md)
+  # ตัวสั่งรันประจำวันคือ Cloudflare Cron Trigger ใน worker/ ที่ยิง workflow_dispatch
+  # ตรงเวลา 07:00 Bangkok แทน — แม่นยำกว่ามาก
+  workflow_dispatch:        # กดปุ่มรันเองได้จาก GitHub หรือถูกยิงจาก Cloudflare Worker
 
 permissions:
   contents: write
@@ -35,10 +36,23 @@ jobs:
       - name: Generate dashboard
         run: python generate_dashboard.py
 
+      - name: Screenshot dashboard (สำหรับส่ง LINE)
+        run: python screenshot_dashboard.py
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json index.html
+          git add data.json index.html dashboard.png
           git diff --cached --quiet || git commit -m "update: $(date +'%d/%m/%Y %H:%M') UTC+7"
           git push
+
+      - name: รอ GitHub Pages deploy รูปที่เพิ่ง push
+        run: sleep 90
+
+      - name: ส่งแจ้งเตือนเข้า LINE
+        continue-on-error: true   # ส่งไม่สำเร็จก็ไม่ให้กระทบการอัปเดต dashboard หลัก
+        env:
+          LINE_CHANNEL_TOKEN: ${{ secrets.LINE_CHANNEL_TOKEN }}
+          LINE_USER_ID: ${{ secrets.LINE_USER_ID }}
+        run: python send_line.py

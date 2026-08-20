@@ -5,3 +5,7 @@ compatibility_date = "2024-01-01"
 # GH_TOKEN ไม่ได้อยู่ในไฟล์นี้ — ตั้งด้วยคำสั่ง:
 #   wrangler secret put GH_TOKEN
 # (token ไม่ถูก commit และไม่โผล่ในโค้ดที่ public เห็น)
+
+[triggers]
+crons = ["0 0 * * *"]   # 07:00 Bangkok (UTC+7) — ยิง workflow_dispatch ตรงเวลา แทน GitHub schedule ที่ไม่แม่นยำ
+

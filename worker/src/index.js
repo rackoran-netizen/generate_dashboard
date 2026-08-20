@@ -14,6 +14,21 @@ function corsHeaders() {
   };
 }
 
+async function triggerDispatch(env) {
+  return fetch(
+    `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
+    {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${env.GH_TOKEN}`,
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "jetts-rra-refresh-worker",
+      },
+      body: JSON.stringify({ ref: "main" }),
+    }
+  );
+}
+
 export default {
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
@@ -24,18 +39,7 @@ export default {
       return new Response("Method not allowed", { status: 405, headers: corsHeaders() });
     }
 
-    const ghRes = await fetch(
-      `https://api.github.com/repos/${OWNER}/${REPO}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
-      {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${env.GH_TOKEN}`,
-          "Accept": "application/vnd.github+json",
-          "User-Agent": "jetts-rra-refresh-worker",
-        },
-        body: JSON.stringify({ ref: "main" }),
-      }
-    );
+    const ghRes = await triggerDispatch(env);
 
     if (ghRes.status === 204) {
       return new Response(JSON.stringify({ ok: true }), {
@@ -49,5 +53,11 @@ export default {
       status: 502,
       headers: { "Content-Type": "application/json", ...corsHeaders() },
     });
+  },
+
+  // Cloudflare Cron Trigger — สั่ง workflow_dispatch ตรงเวลาแม่นยำทุกเช้า
+  // แทนการพึ่ง GitHub Actions `schedule:` ซึ่งเคยดีเลย์ ~2-3 ชม. (ดู CLAUDE.md)
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(triggerDispatch(env));
   },
 };
