@@ -1,5 +1,5 @@
 {
-  "updated_at": "20/08/2026 02:12",
+  "updated_at": "20/08/2026 19:25",
   "period": {
     "start": "01/08/2026",
     "end": "20/08/2026"
@@ -373,10 +373,10 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "1,776,280",
-        "Amount Before VAT": "1,660,074.77",
+        "Total Amount": "2,063,180",
+        "Amount Before VAT": "1,928,205.61",
         "Comm Sold": "",
-        "Commission Price": "69,188.75"
+        "Commission Price": "90,574.37"
       },
       {
         "Ext": "",
@@ -386,6 +386,15 @@
         "Amount Before VAT": "185,233.64",
         "Comm Sold": "7%",
         "Commission Price": "12,966.36"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ae_02227",
+        "Position Rate": "ET-RED",
+        "Total Amount": "175,000",
+        "Amount Before VAT": "163,551.40",
+        "Comm Sold": "7%",
+        "Commission Price": "11,448.60"
       },
       {
         "Ext": "",
@@ -407,30 +416,21 @@
       },
       {
         "Ext": "",
+        "Trainer": "RRA_Poom_03173",
+        "Position Rate": "PT-RED",
+        "Total Amount": "128,430",
+        "Amount Before VAT": "120,028.04",
+        "Comm Sold": "7%",
+        "Commission Price": "8,401.96"
+      },
+      {
+        "Ext": "",
         "Trainer": "RRA_Lion_02391",
         "Position Rate": "ET-RED",
         "Total Amount": "120,575",
         "Amount Before VAT": "112,686.92",
         "Comm Sold": "5%",
         "Commission Price": "5,634.35"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Ae_02227",
-        "Position Rate": "ET-RED",
-        "Total Amount": "114,500",
-        "Amount Before VAT": "107,009.35",
-        "Comm Sold": "2%",
-        "Commission Price": "2,140.19"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Poom_03173",
-        "Position Rate": "PT-RED",
-        "Total Amount": "114,230",
-        "Amount Before VAT": "106,757.01",
-        "Comm Sold": "5%",
-        "Commission Price": "5,337.85"
       },
       {
         "Ext": "",
@@ -472,28 +472,64 @@
         "Ext": "",
         "Trainer": "RRA_Lekza_01909",
         "Position Rate": "ST-RED",
-        "Total Amount": "78,485",
-        "Amount Before VAT": "73,350.47",
+        "Total Amount": "92,685",
+        "Amount Before VAT": "86,621.50",
         "Comm Sold": "2%",
-        "Commission Price": "1,467.01"
+        "Commission Price": "1,732.43"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Put_02910",
         "Position Rate": "PT-RED",
-        "Total Amount": "56,600",
-        "Amount Before VAT": "52,897.20",
-        "Comm Sold": "2%",
-        "Commission Price": "1,057.94"
+        "Total Amount": "91,100",
+        "Amount Before VAT": "85,140.19",
+        "Comm Sold": "5%",
+        "Commission Price": "4,257.01"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Man_01911",
         "Position Rate": "PT-RED",
-        "Total Amount": "54,400",
-        "Amount Before VAT": "50,841.12",
+        "Total Amount": "88,900",
+        "Amount Before VAT": "83,084.11",
+        "Comm Sold": "5%",
+        "Commission Price": "4,154.21"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Baifern_01910",
+        "Position Rate": "PT-RED",
+        "Total Amount": "78,100",
+        "Amount Before VAT": "72,990.65",
         "Comm Sold": "2%",
-        "Commission Price": "1,016.82"
+        "Commission Price": "1,459.81"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Benz_03155",
+        "Position Rate": "PT-RED",
+        "Total Amount": "70,500",
+        "Amount Before VAT": "65,887.85",
+        "Comm Sold": "2%",
+        "Commission Price": "1,317.76"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Peet_02169",
+        "Position Rate": "ET-RED",
+        "Total Amount": "63,075",
+        "Amount Before VAT": "58,948.60",
+        "Comm Sold": "2%",
+        "Commission Price": "1,178.97"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Sataem_03348",
+        "Position Rate": "PT-RED",
+        "Total Amount": "58,800",
+        "Amount Before VAT": "54,953.27",
+        "Comm Sold": "2%",
+        "Commission Price": "1,099.07"
       },
       {
         "Ext": "",
@@ -506,30 +542,12 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Peet_02169",
-        "Position Rate": "ET-RED",
-        "Total Amount": "49,875",
-        "Amount Before VAT": "46,612.15",
-        "Comm Sold": "2%",
-        "Commission Price": "932.24"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Sataem_03348",
+        "Trainer": "RRA_Tiger_01923",
         "Position Rate": "PT-RED",
-        "Total Amount": "46,800",
-        "Amount Before VAT": "43,738.32",
+        "Total Amount": "42,400",
+        "Amount Before VAT": "39,626.17",
         "Comm Sold": "2%",
-        "Commission Price": "874.77"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Benz_03155",
-        "Position Rate": "PT-RED",
-        "Total Amount": "38,100",
-        "Amount Before VAT": "35,607.48",
-        "Comm Sold": "2%",
-        "Commission Price": "712.15"
+        "Commission Price": "792.52"
       },
       {
         "Ext": "",
@@ -551,30 +569,12 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Baifern_01910",
-        "Position Rate": "PT-RED",
-        "Total Amount": "27,000",
-        "Amount Before VAT": "25,233.64",
-        "Comm Sold": "2%",
-        "Commission Price": "504.67"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Ice_01548",
         "Position Rate": "ST-RED",
         "Total Amount": "25,400",
         "Amount Before VAT": "23,738.32",
         "Comm Sold": "2%",
         "Commission Price": "474.77"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Tiger_01923",
-        "Position Rate": "PT-RED",
-        "Total Amount": "22,100",
-        "Amount Before VAT": "20,654.21",
-        "Comm Sold": "2%",
-        "Commission Price": "413.08"
       },
       {
         "Ext": "",
@@ -1386,12 +1386,26 @@
         "membership": "Corporate Promotion Freedom Membership",
         "client": "Pheeranut Kabkaew",
         "sold_by": "RRA_Baifern_01910"
+      },
+      {
+        "sold_date": "20 August 2026",
+        "app_id": "046202601298",
+        "membership": "Corporate Promotion 6 Months PIA Membership",
+        "client": "Supattra Chittangbunya",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "20 August 2026",
+        "app_id": "046202601299",
+        "membership": "1 Month pass",
+        "client": "Jarunan Rungrueang",
+        "sold_by": "BGPL_Ou_00936"
       }
     ],
     "summary": [
       {
         "sold_by": "BGPL_Ou_00936",
-        "count": 28
+        "count": 30
       },
       {
         "sold_by": "RRA_Paul_02228",
