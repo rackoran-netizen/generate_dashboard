@@ -38,8 +38,7 @@ body{
 .topbar{background:linear-gradient(100deg,var(--brand),var(--brand-dark));padding:9px 16px;display:flex;justify-content:space-between;align-items:center;}
 .topbar .brand{font-size:14px;font-weight:800;color:#fff;letter-spacing:.2px;}
 .topbar .brand small{display:block;font-weight:500;font-size:9.5px;color:rgba(255,255,255,.75);margin-top:1px;}
-.topbar-right{display:flex;align-items:center;gap:10px;}
-.print-hint{font-size:9.5px;color:rgba(255,255,255,.8);max-width:260px;line-height:1.35;text-align:right;}
+.topbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}
 .print-btn{background:#fff;color:var(--brand);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:inherit;}
 .print-btn:hover{background:#ffe9ee;}
 .print-btn:disabled{opacity:.6;cursor:default;}
@@ -83,7 +82,7 @@ body{
 .sw.trial{background:var(--trial);}
 .sw.mem{background:var(--member);}
 
-/* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) ─── */
+/* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) — ใช้ค่าคงที่ที่อ่านง่ายบนจอ ─── */
 .grid-card{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px 6px;}
 .grid-head,.grid-row{
   display:grid;
@@ -99,41 +98,94 @@ body{
 .grid-row:nth-child(even){background:#faf9f6;}
 .postag{display:inline-block;font-weight:700;color:var(--ink-muted);border:1px solid var(--line);border-radius:3px;padding:0 3px;margin-right:4px;vertical-align:middle;}
 .gr-metric{display:flex;align-items:center;gap:7px;}
+.m-label{display:none;flex:0 0 auto;font-size:10px;color:var(--ink-muted);}
 .bar-track{flex:1;min-width:0;background:var(--line);border-radius:3px;overflow:hidden;}
 .bar-fill{border-radius:3px;min-width:3px;}
 .bar-fill.sold{background:var(--sold);}
 .bar-fill.conduct{background:var(--conduct);}
 .bar-fill.trial{background:var(--trial);}
 .bar-fill.mem{background:var(--member);}
-.bar-val{flex:0 0 auto;width:48px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}
+.bar-val{flex:0 0 auto;width:52px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}
 
-/* ─── ขนาดแถวไดนามิก: คำนวณจากจำนวนเทรนเนอร์ (n_trainers=23) ให้พอดี A4 เสมอ ─── */
-.grid-row{padding:5.7px 2px;border-bottom:1px solid var(--line);}
-.gr-rank{font-size:9.5px;color:var(--ink-muted);text-align:center;font-variant-numeric:tabular-nums;}
-.gr-name{font-size:12.0px;font-weight:700;color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.postag{font-size:7.98px;}
-.bar-track,.bar-fill{height:11.0px;}
-.bar-val{font-size:10.5px;}
+.grid-row{padding:8px 2px;border-bottom:1px solid var(--line);}
+.gr-rank{font-size:11px;color:var(--ink-muted);text-align:center;font-variant-numeric:tabular-nums;}
+.gr-name{font-size:13px;font-weight:700;color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.postag{font-size:9.5px;}
+.bar-track,.bar-fill{height:10px;}
+.bar-val{font-size:11.5px;}
 
 .footnote{margin-top:10px;font-size:9.5px;color:var(--ink-muted);text-align:center;line-height:1.5;}
 
-/* ════════════ PRINT ════════════ */
+/* ════════════════════════════════════════════════════════════════
+   PRINT / PDF EXPORT — แยกจากหน้าจอโดยสิ้นเชิง
+   ใช้ขนาดไดนามิกที่คำนวณจากจำนวนเทรนเนอร์ (n_trainers=23)
+   ให้พอดี A4 หนึ่งหน้าเสมอ ไม่ยุ่งกับ layout หน้าจอ/มือถือเลย
+   .pdf-export = คลาสที่ JS ใส่ชั่วคราวตอน capture ด้วย html2canvas
+   (ปุ่ม "ดาวน์โหลด PDF") ส่วน @media print ใช้ตอนกด Ctrl+P ปกติ
+   ═══════════════════════════════════════════════════════════════ */
 @media print{
   @page{size:A4 portrait;margin:8mm;}
-  html,body{background:#fff!important;}
+  body{background:#fff!important;}
   .topbar{display:none!important;}
-  .a4{max-width:100%;margin:0;padding:0;box-shadow:none!important;border-radius:0;}
-  .tile,.goal-tile,.grid-card{border:1px solid #ddd!important;}
-  .grid-row:nth-child(even){background:#f7f7f5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  .bar-fill,.pbar-fill,.sw{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .a4{max-width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;background:#fff!important;}
+  .tile, .goal-tile, .grid-card{border:1px solid #ddd!important;background:#fff!important;}
+  .grid-row{padding:5.7px 2px!important;}
+  .gr-rank{font-size:9.5px!important;}
+  .gr-name{font-size:12.0px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .postag{font-size:7.98px!important;}
+  .bar-track, .bar-fill{height:11.0px!important;}
+  .bar-val{font-size:10.5px!important;width:48px!important;}
+  .m-label{display:none!important;}
+  .grid-row:nth-child(even){background:#f7f7f5!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .bar-fill, .pbar-fill, .sw{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 }
+  .pdf-export{background:#fff!important;}
+  .pdf-export .topbar{display:none!important;}
+  .pdf-export .a4{max-width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;background:#fff!important;}
+  .pdf-export .tile, .pdf-export .goal-tile, .pdf-export .grid-card{border:1px solid #ddd!important;background:#fff!important;}
+  .pdf-export .grid-row{padding:5.7px 2px!important;}
+  .pdf-export .gr-rank{font-size:9.5px!important;}
+  .pdf-export .gr-name{font-size:12.0px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;}
+  .pdf-export .postag{font-size:7.98px!important;}
+  .pdf-export .bar-track, .pdf-export .bar-fill{height:11.0px!important;}
+  .pdf-export .bar-val{font-size:10.5px!important;width:48px!important;}
+  .pdf-export .m-label{display:none!important;}
+  .pdf-export .grid-row:nth-child(even){background:#f7f7f5!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+  .pdf-export .bar-fill, .pdf-export .pbar-fill, .pdf-export .sw{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
 
-/* ─── Mobile (จอเล็ก) ─── */
-@media(max-width:640px){
+/* ─── Mobile screen (จอเล็ก) — เฉพาะตอนดูบนจอ ไม่เกี่ยวกับพิมพ์/PDF ─── */
+@media screen and (max-width:640px){
+  .a4{margin:10px auto;padding:14px 12px;border-radius:8px;}
+  .topbar{flex-wrap:wrap;row-gap:8px;padding:10px 12px;}
+  .doc-header{flex-direction:column;gap:8px;}
+  .doc-meta{text-align:left;}
   .tile-row{grid-template-columns:1fr 1fr;}
   .goal-row{grid-template-columns:1fr;}
-  .grid-head,.grid-row{grid-template-columns:14px 50px 1fr;row-gap:2px;}
-  .grid-head .gh-m2,.gr-metric.m2,.grid-head .gh-m3,.gr-metric.m3{display:none;}
+  .st-row{flex-direction:column;align-items:flex-start;gap:6px;}
+  .legend{flex-wrap:wrap;gap:8px 12px;}
+
+  .grid-head{display:none;}
+  .grid-row{
+    display:grid;
+    grid-template-columns:22px 1fr;
+    grid-template-areas:
+      "rank name"
+      "m1 m1"
+      "m2 m2"
+      "m3 m3"
+      "m4 m4";
+    row-gap:6px;
+    padding:12px 4px;
+  }
+  .gr-rank{grid-area:rank;font-size:12px;}
+  .gr-name{grid-area:name;font-size:14.5px;white-space:normal;overflow:visible;text-overflow:unset;}
+  .gr-metric.m1{grid-area:m1;}
+  .gr-metric.m2{grid-area:m2;}
+  .gr-metric.m3{grid-area:m3;}
+  .gr-metric.m4{grid-area:m4;}
+  .m-label{display:inline-block;width:76px;}
+  .bar-val{width:auto;min-width:56px;font-size:12.5px;}
+  .bar-track,.bar-fill{height:11px;}
 }
 </style>
 </head>
@@ -147,10 +199,14 @@ body{
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
       Refresh ข้อมูล
     </button>
-    <div class="print-hint">เคล็ดลับ: ก่อนกดพิมพ์ ให้ปิดตัวเลือก "Headers and footers" ในหน้าต่างพิมพ์ของเบราว์เซอร์ เพื่อไม่ให้แสดง URL/วันที่บนกระดาษ</div>
-    <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+    <button class="print-btn" id="pdfBtn" onclick="downloadPDF()" title="ดาวน์โหลดไฟล์ PDF สำหรับพิมพ์/แชร์ (ไม่มี URL เว็บไซต์ติดมา)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+      ดาวน์โหลด PDF
+    </button>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 async function triggerRefresh() {
   const btn = document.getElementById('refreshBtn');
@@ -168,6 +224,43 @@ async function triggerRefresh() {
     status.textContent = 'เชื่อมต่อไม่ได้ ลองใหม่อีกครั้ง';
   }
   btn.disabled = false;
+}
+
+// สร้างไฟล์ PDF จริงฝั่ง client (html2canvas + jsPDF) แทนการเรียก window.print()
+// เพราะ browser/OS print dialog (โดยเฉพาะ AirPrint บน iPhone) ควบคุม header/footer
+// (URL, วันที่) เองไม่สามารถปิดจากโค้ดหน้าเว็บได้ — วิธีนี้จึงการันตีว่าไม่มี URL ติดมา
+async function downloadPDF() {
+  const btn = document.getElementById('pdfBtn');
+  const status = document.getElementById('refreshStatus');
+  const prevStatus = status.textContent;
+  btn.disabled = true;
+  status.textContent = 'กำลังสร้าง PDF...';
+  document.body.classList.add('pdf-export');
+  await new Promise(r => setTimeout(r, 60)); // ให้ browser reflow ด้วยสไตล์โหมดพิมพ์ก่อน capture
+  try {
+    const target = document.querySelector('.a4');
+    const canvas = await html2canvas(target, {
+      scale: 2,
+      backgroundColor: '#ffffff',
+      windowWidth: 900,   // บังคับให้ render เท่าจอเดสก์ท็อป ไม่ให้ mobile layout มาปน
+      useCORS: true
+    });
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const imgW = pageW;
+    const imgH = Math.min(canvas.height * imgW / canvas.width, pageH);
+    pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, imgW, imgH);
+    pdf.save('Jetts_RRA_Report.pdf');
+    status.textContent = 'ดาวน์โหลด PDF แล้ว';
+  } catch (e) {
+    console.error(e);
+    status.textContent = 'สร้าง PDF ไม่สำเร็จ ลองใหม่อีกครั้ง';
+  }
+  document.body.classList.remove('pdf-export');
+  btn.disabled = false;
+  setTimeout(() => { status.textContent = prevStatus; }, 4000);
 }
 </script>
 
@@ -246,18 +339,22 @@ async function triggerRefresh() {
           <div class="gr-rank">1</div>
           <div class="gr-name"><span class="postag">ST</span>Paul</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:54.9%"></div></div>
             <span class="bar-val">108,905</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:100.0%"></div></div>
             <span class="bar-val">120</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:60.0%"></div></div>
             <span class="bar-val">6</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
             <span class="bar-val">6/6</span>
           </div>
@@ -265,18 +362,22 @@ async function triggerRefresh() {
           <div class="gr-rank">2</div>
           <div class="gr-name"><span class="postag">ET</span>Deaw</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:79.9%"></div></div>
             <span class="bar-val">158,400</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:95.0%"></div></div>
             <span class="bar-val">114</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
             <span class="bar-val">4</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:50.0%"></div></div>
             <span class="bar-val">3/6</span>
           </div>
@@ -284,18 +385,22 @@ async function triggerRefresh() {
           <div class="gr-rank">3</div>
           <div class="gr-name"><span class="postag">ET</span>Ae</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:57.8%"></div></div>
             <span class="bar-val">114,500</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:98.3%"></div></div>
             <span class="bar-val">118</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
             <span class="bar-val">4</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:66.7%"></div></div>
             <span class="bar-val">4/6</span>
           </div>
@@ -303,18 +408,22 @@ async function triggerRefresh() {
           <div class="gr-rank">4</div>
           <div class="gr-name"><span class="postag">PT</span>Nill</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:27.3%"></div></div>
             <span class="bar-val">54,100</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:39.2%"></div></div>
             <span class="bar-val">47</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:90.0%"></div></div>
             <span class="bar-val">9</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
             <span class="bar-val">6/6</span>
           </div>
@@ -322,18 +431,22 @@ async function triggerRefresh() {
           <div class="gr-rank">5</div>
           <div class="gr-name"><span class="postag">ET</span>Lion</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:60.8%"></div></div>
             <span class="bar-val">120,575</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:79.2%"></div></div>
             <span class="bar-val">95</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
             <span class="bar-val">4</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:66.7%"></div></div>
             <span class="bar-val">4/6</span>
           </div>
@@ -341,18 +454,22 @@ async function triggerRefresh() {
           <div class="gr-rank">6</div>
           <div class="gr-name"><span class="postag">ET</span>Bos</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:100.0%"></div></div>
             <span class="bar-val">198,200</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:69.2%"></div></div>
             <span class="bar-val">83</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:10.0%"></div></div>
             <span class="bar-val">1</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:66.7%"></div></div>
             <span class="bar-val">4/6</span>
           </div>
@@ -360,18 +477,22 @@ async function triggerRefresh() {
           <div class="gr-rank">7</div>
           <div class="gr-name"><span class="postag">PT</span>Ford</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:56.2%"></div></div>
             <span class="bar-val">111,335</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:63.3%"></div></div>
             <span class="bar-val">76</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
             <span class="bar-val">4</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
             <span class="bar-val">5/6</span>
           </div>
@@ -379,18 +500,22 @@ async function triggerRefresh() {
           <div class="gr-rank">8</div>
           <div class="gr-name"><span class="postag">PT</span>Sataem</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:23.6%"></div></div>
             <span class="bar-val">46,800</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:35.0%"></div></div>
             <span class="bar-val">42</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
             <span class="bar-val">10</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
             <span class="bar-val">5/6</span>
           </div>
@@ -398,18 +523,22 @@ async function triggerRefresh() {
           <div class="gr-rank">9</div>
           <div class="gr-name"><span class="postag">PT</span>Yean</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:70.9%"></div></div>
             <span class="bar-val">140,500</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:75.8%"></div></div>
             <span class="bar-val">91</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:60.0%"></div></div>
             <span class="bar-val">6</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
             <span class="bar-val">2/6</span>
           </div>
@@ -417,18 +546,22 @@ async function triggerRefresh() {
           <div class="gr-rank">10</div>
           <div class="gr-name"><span class="postag">PT</span>Benz</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:19.2%"></div></div>
             <span class="bar-val">38,100</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:25.0%"></div></div>
             <span class="bar-val">30</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:90.0%"></div></div>
             <span class="bar-val">9</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
             <span class="bar-val">6/6</span>
           </div>
@@ -436,18 +569,22 @@ async function triggerRefresh() {
           <div class="gr-rank">11</div>
           <div class="gr-name"><span class="postag">ET</span>Mew</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:49.6%"></div></div>
             <span class="bar-val">98,375</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:64.2%"></div></div>
             <span class="bar-val">77</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:70.0%"></div></div>
             <span class="bar-val">7</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:50.0%"></div></div>
             <span class="bar-val">3/6</span>
           </div>
@@ -455,18 +592,22 @@ async function triggerRefresh() {
           <div class="gr-rank">12</div>
           <div class="gr-name"><span class="postag">ST</span>Lekza</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:39.6%"></div></div>
             <span class="bar-val">78,485</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:66.7%"></div></div>
             <span class="bar-val">80</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:80.0%"></div></div>
             <span class="bar-val">8</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
             <span class="bar-val">1/6</span>
           </div>
@@ -474,18 +615,22 @@ async function triggerRefresh() {
           <div class="gr-rank">13</div>
           <div class="gr-name"><span class="postag">ET</span>Peet</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:25.2%"></div></div>
             <span class="bar-val">49,875</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:54.2%"></div></div>
             <span class="bar-val">65</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
             <span class="bar-val">4</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
             <span class="bar-val">5/6</span>
           </div>
@@ -493,18 +638,22 @@ async function triggerRefresh() {
           <div class="gr-rank">14</div>
           <div class="gr-name"><span class="postag">PT</span>Tiger</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:11.2%"></div></div>
             <span class="bar-val">22,100</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:53.3%"></div></div>
             <span class="bar-val">64</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:70.0%"></div></div>
             <span class="bar-val">7</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:66.7%"></div></div>
             <span class="bar-val">4/6</span>
           </div>
@@ -512,18 +661,22 @@ async function triggerRefresh() {
           <div class="gr-rank">15</div>
           <div class="gr-name"><span class="postag">PT</span>Poom</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:57.6%"></div></div>
             <span class="bar-val">114,230</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:47.5%"></div></div>
             <span class="bar-val">57</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
             <span class="bar-val">4</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:50.0%"></div></div>
             <span class="bar-val">3/6</span>
           </div>
@@ -531,18 +684,22 @@ async function triggerRefresh() {
           <div class="gr-rank">16</div>
           <div class="gr-name"><span class="postag">ET</span>Golf</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:49.2%"></div></div>
             <span class="bar-val">97,600</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:81.7%"></div></div>
             <span class="bar-val">98</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"></div>
             <span class="bar-val">0</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:50.0%"></div></div>
             <span class="bar-val">3/6</span>
           </div>
@@ -550,18 +707,22 @@ async function triggerRefresh() {
           <div class="gr-rank">17</div>
           <div class="gr-name"><span class="postag">PT</span>Put</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:28.6%"></div></div>
             <span class="bar-val">56,600</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:43.3%"></div></div>
             <span class="bar-val">52</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:50.0%"></div></div>
             <span class="bar-val">5</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:50.0%"></div></div>
             <span class="bar-val">3/6</span>
           </div>
@@ -569,18 +730,22 @@ async function triggerRefresh() {
           <div class="gr-rank">18</div>
           <div class="gr-name"><span class="postag">PT</span>Man</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:27.4%"></div></div>
             <span class="bar-val">54,400</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:48.3%"></div></div>
             <span class="bar-val">58</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:60.0%"></div></div>
             <span class="bar-val">6</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
             <span class="bar-val">2/6</span>
           </div>
@@ -588,18 +753,22 @@ async function triggerRefresh() {
           <div class="gr-rank">19</div>
           <div class="gr-name"><span class="postag">ST</span>Ice</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:12.8%"></div></div>
             <span class="bar-val">25,400</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:38.3%"></div></div>
             <span class="bar-val">46</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:70.0%"></div></div>
             <span class="bar-val">7</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:33.3%"></div></div>
             <span class="bar-val">2/6</span>
           </div>
@@ -607,18 +776,22 @@ async function triggerRefresh() {
           <div class="gr-rank">20</div>
           <div class="gr-name"><span class="postag">PT</span>Baifern</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:13.6%"></div></div>
             <span class="bar-val">27,000</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:41.7%"></div></div>
             <span class="bar-val">50</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:20.0%"></div></div>
             <span class="bar-val">2</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:66.7%"></div></div>
             <span class="bar-val">4/6</span>
           </div>
@@ -626,18 +799,22 @@ async function triggerRefresh() {
           <div class="gr-rank">21</div>
           <div class="gr-name"><span class="postag">PT</span>Nine</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:15.2%"></div></div>
             <span class="bar-val">30,200</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:35.8%"></div></div>
             <span class="bar-val">43</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:20.0%"></div></div>
             <span class="bar-val">2</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:66.7%"></div></div>
             <span class="bar-val">4/6</span>
           </div>
@@ -645,18 +822,22 @@ async function triggerRefresh() {
           <div class="gr-rank">22</div>
           <div class="gr-name"><span class="postag">PT</span>Zico</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"><div class="bar-fill sold" style="width:0.9%"></div></div>
             <span class="bar-val">1,800</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:31.7%"></div></div>
             <span class="bar-val">38</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"><div class="bar-fill trial" style="width:20.0%"></div></div>
             <span class="bar-val">2</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"><div class="bar-fill mem" style="width:50.0%"></div></div>
             <span class="bar-val">3/6</span>
           </div>
@@ -664,18 +845,22 @@ async function triggerRefresh() {
           <div class="gr-rank">23</div>
           <div class="gr-name"><span class="postag">CM</span>Tonmai</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track"></div>
             <span class="bar-val">0</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track"><div class="bar-fill conduct" style="width:20.8%"></div></div>
             <span class="bar-val">25</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track"></div>
             <span class="bar-val">0</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track"></div>
             <span class="bar-val">0/6</span>
           </div>

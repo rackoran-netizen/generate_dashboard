@@ -110,18 +110,22 @@ def grid_rows_html():
           <div class="gr-rank">{i+1}</div>
           <div class="gr-name">{pos_html}{t['name']}</div>
           <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
             <div class="bar-track">{sold_fill}</div>
             <span class="bar-val">{fmt(t['sold'])}</span>
           </div>
           <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
             <div class="bar-track">{sess_fill}</div>
             <span class="bar-val">{fmt(t['sessions'])}</span>
           </div>
           <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
             <div class="bar-track">{trial_fill}</div>
             <span class="bar-val">{fmt(t['trial'])}</span>
           </div>
           <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
             <div class="bar-track">{mem_fill}</div>
             <span class="bar-val">{t['members']}/{GOAL_MEM_EACH}</span>
           </div>
@@ -151,6 +155,41 @@ val_fs   = round(9.0 + _t * (10.5 - 9.0), 2)
 bar_h    = round(8.0 + _t * (11.0 - 8.0), 2)
 row_pad  = round(max((row_h - name_fs * 1.3) / 2.0, 1.0), 2)  # เนื้อหาในแถวสูงตามบรรทัดชื่อ (line-height ~1.3x)
 postag_fs = round(max(7.0, val_fs * 0.76), 2)
+
+# ─────────────────────────────────────────────────────────────
+# กฎ CSS สำหรับโหมดพิมพ์/PDF เท่านั้น (ไม่แตะ layout หน้าจอ)
+# ใช้ generate ซ้ำ 2 ที่: @media print (Ctrl+P ปกติ) และ .pdf-export
+# (คลาสที่ JS ใส่ชั่วคราวตอน capture ด้วย html2canvas สำหรับปุ่ม "ดาวน์โหลด PDF")
+# เขียนเป็น list of (selector, declaration) แล้ว generate ทั้งสองแบบ
+# เพื่อไม่ให้ค่าที่คำนวณไดนามิกด้านบนหลุด sync กันระหว่างสองโหมด
+# ─────────────────────────────────────────────────────────────
+_PRINT_RULES = [
+    ("body", "background:#fff!important;"),
+    (".topbar", "display:none!important;"),
+    (".a4", "max-width:100%!important;margin:0!important;padding:0!important;box-shadow:none!important;border-radius:0!important;background:#fff!important;"),
+    (".tile,.goal-tile,.grid-card", "border:1px solid #ddd!important;background:#fff!important;"),
+    (".grid-row", f"padding:{row_pad}px 2px!important;"),
+    (".gr-rank", f"font-size:{rank_fs}px!important;"),
+    (".gr-name", f"font-size:{name_fs}px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;"),
+    (".postag", f"font-size:{postag_fs}px!important;"),
+    (".bar-track,.bar-fill", f"height:{bar_h}px!important;"),
+    (".bar-val", f"font-size:{val_fs}px!important;width:48px!important;"),
+    (".m-label", "display:none!important;"),
+    (".grid-row:nth-child(even)", "background:#f7f7f5!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;"),
+    (".bar-fill,.pbar-fill,.sw", "-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;"),
+]
+
+def _print_rules_css(prefix):
+    # prefix ว่าง = ใช้ตรงๆ ใน @media print, prefix = ".pdf-export " = ใช้กับคลาสที่ JS ใส่ให้ <body>
+    # กรณี selector เป็น "body" เอง ต้องจับคู่ตัว body ที่มีคลาสนั้นตรงๆ (ไม่ใช่ descendant)
+    lines = []
+    for sel, decl in _PRINT_RULES:
+        if sel.strip() == "body" and prefix:
+            scoped = prefix.strip()
+        else:
+            scoped = ", ".join(f"{prefix}{s.strip()}" for s in sel.split(","))
+        lines.append(f"  {scoped}{{{decl}}}")
+    return "\n".join(lines)
 
 html = f"""<!DOCTYPE html>
 <html lang="th">
@@ -192,8 +231,7 @@ body{{
 .topbar{{background:linear-gradient(100deg,var(--brand),var(--brand-dark));padding:9px 16px;display:flex;justify-content:space-between;align-items:center;}}
 .topbar .brand{{font-size:14px;font-weight:800;color:#fff;letter-spacing:.2px;}}
 .topbar .brand small{{display:block;font-weight:500;font-size:9.5px;color:rgba(255,255,255,.75);margin-top:1px;}}
-.topbar-right{{display:flex;align-items:center;gap:10px;}}
-.print-hint{{font-size:9.5px;color:rgba(255,255,255,.8);max-width:260px;line-height:1.35;text-align:right;}}
+.topbar-right{{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end;}}
 .print-btn{{background:#fff;color:var(--brand);border:none;border-radius:7px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:inherit;}}
 .print-btn:hover{{background:#ffe9ee;}}
 .print-btn:disabled{{opacity:.6;cursor:default;}}
@@ -237,7 +275,7 @@ body{{
 .sw.trial{{background:var(--trial);}}
 .sw.mem{{background:var(--member);}}
 
-/* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) ─── */
+/* ─── Trainer grid (ตาราง + กราฟแท่งแนวนอนในตัว) — ใช้ค่าคงที่ที่อ่านง่ายบนจอ ─── */
 .grid-card{{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 14px 6px;}}
 .grid-head,.grid-row{{
   display:grid;
@@ -253,41 +291,70 @@ body{{
 .grid-row:nth-child(even){{background:#faf9f6;}}
 .postag{{display:inline-block;font-weight:700;color:var(--ink-muted);border:1px solid var(--line);border-radius:3px;padding:0 3px;margin-right:4px;vertical-align:middle;}}
 .gr-metric{{display:flex;align-items:center;gap:7px;}}
+.m-label{{display:none;flex:0 0 auto;font-size:10px;color:var(--ink-muted);}}
 .bar-track{{flex:1;min-width:0;background:var(--line);border-radius:3px;overflow:hidden;}}
 .bar-fill{{border-radius:3px;min-width:3px;}}
 .bar-fill.sold{{background:var(--sold);}}
 .bar-fill.conduct{{background:var(--conduct);}}
 .bar-fill.trial{{background:var(--trial);}}
 .bar-fill.mem{{background:var(--member);}}
-.bar-val{{flex:0 0 auto;width:48px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}}
+.bar-val{{flex:0 0 auto;width:52px;text-align:right;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums;}}
 
-/* ─── ขนาดแถวไดนามิก: คำนวณจากจำนวนเทรนเนอร์ (n_trainers={n_trainers}) ให้พอดี A4 เสมอ ─── */
-.grid-row{{padding:{row_pad}px 2px;border-bottom:1px solid var(--line);}}
-.gr-rank{{font-size:{rank_fs}px;color:var(--ink-muted);text-align:center;font-variant-numeric:tabular-nums;}}
-.gr-name{{font-size:{name_fs}px;font-weight:700;color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
-.postag{{font-size:{postag_fs}px;}}
-.bar-track,.bar-fill{{height:{bar_h}px;}}
-.bar-val{{font-size:{val_fs}px;}}
+.grid-row{{padding:8px 2px;border-bottom:1px solid var(--line);}}
+.gr-rank{{font-size:11px;color:var(--ink-muted);text-align:center;font-variant-numeric:tabular-nums;}}
+.gr-name{{font-size:13px;font-weight:700;color:var(--ink-1);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}}
+.postag{{font-size:9.5px;}}
+.bar-track,.bar-fill{{height:10px;}}
+.bar-val{{font-size:11.5px;}}
 
 .footnote{{margin-top:10px;font-size:9.5px;color:var(--ink-muted);text-align:center;line-height:1.5;}}
 
-/* ════════════ PRINT ════════════ */
+/* ════════════════════════════════════════════════════════════════
+   PRINT / PDF EXPORT — แยกจากหน้าจอโดยสิ้นเชิง
+   ใช้ขนาดไดนามิกที่คำนวณจากจำนวนเทรนเนอร์ (n_trainers={n_trainers})
+   ให้พอดี A4 หนึ่งหน้าเสมอ ไม่ยุ่งกับ layout หน้าจอ/มือถือเลย
+   .pdf-export = คลาสที่ JS ใส่ชั่วคราวตอน capture ด้วย html2canvas
+   (ปุ่ม "ดาวน์โหลด PDF") ส่วน @media print ใช้ตอนกด Ctrl+P ปกติ
+   ═══════════════════════════════════════════════════════════════ */
 @media print{{
   @page{{size:A4 portrait;margin:8mm;}}
-  html,body{{background:#fff!important;}}
-  .topbar{{display:none!important;}}
-  .a4{{max-width:100%;margin:0;padding:0;box-shadow:none!important;border-radius:0;}}
-  .tile,.goal-tile,.grid-card{{border:1px solid #ddd!important;}}
-  .grid-row:nth-child(even){{background:#f7f7f5!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
-  .bar-fill,.pbar-fill,.sw{{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+{_print_rules_css("")}
 }}
+{_print_rules_css(".pdf-export ")}
 
-/* ─── Mobile (จอเล็ก) ─── */
-@media(max-width:640px){{
+/* ─── Mobile screen (จอเล็ก) — เฉพาะตอนดูบนจอ ไม่เกี่ยวกับพิมพ์/PDF ─── */
+@media screen and (max-width:640px){{
+  .a4{{margin:10px auto;padding:14px 12px;border-radius:8px;}}
+  .topbar{{flex-wrap:wrap;row-gap:8px;padding:10px 12px;}}
+  .doc-header{{flex-direction:column;gap:8px;}}
+  .doc-meta{{text-align:left;}}
   .tile-row{{grid-template-columns:1fr 1fr;}}
   .goal-row{{grid-template-columns:1fr;}}
-  .grid-head,.grid-row{{grid-template-columns:14px 50px 1fr;row-gap:2px;}}
-  .grid-head .gh-m2,.gr-metric.m2,.grid-head .gh-m3,.gr-metric.m3{{display:none;}}
+  .st-row{{flex-direction:column;align-items:flex-start;gap:6px;}}
+  .legend{{flex-wrap:wrap;gap:8px 12px;}}
+
+  .grid-head{{display:none;}}
+  .grid-row{{
+    display:grid;
+    grid-template-columns:22px 1fr;
+    grid-template-areas:
+      "rank name"
+      "m1 m1"
+      "m2 m2"
+      "m3 m3"
+      "m4 m4";
+    row-gap:6px;
+    padding:12px 4px;
+  }}
+  .gr-rank{{grid-area:rank;font-size:12px;}}
+  .gr-name{{grid-area:name;font-size:14.5px;white-space:normal;overflow:visible;text-overflow:unset;}}
+  .gr-metric.m1{{grid-area:m1;}}
+  .gr-metric.m2{{grid-area:m2;}}
+  .gr-metric.m3{{grid-area:m3;}}
+  .gr-metric.m4{{grid-area:m4;}}
+  .m-label{{display:inline-block;width:76px;}}
+  .bar-val{{width:auto;min-width:56px;font-size:12.5px;}}
+  .bar-track,.bar-fill{{height:11px;}}
 }}
 </style>
 </head>
@@ -301,10 +368,14 @@ body{{
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
       Refresh ข้อมูล
     </button>
-    <div class="print-hint">เคล็ดลับ: ก่อนกดพิมพ์ ให้ปิดตัวเลือก "Headers and footers" ในหน้าต่างพิมพ์ของเบราว์เซอร์ เพื่อไม่ให้แสดง URL/วันที่บนกระดาษ</div>
-    <button class="print-btn" onclick="window.print()">🖨 พิมพ์ A4</button>
+    <button class="print-btn" id="pdfBtn" onclick="downloadPDF()" title="ดาวน์โหลดไฟล์ PDF สำหรับพิมพ์/แชร์ (ไม่มี URL เว็บไซต์ติดมา)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>
+      ดาวน์โหลด PDF
+    </button>
   </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 <script>
 async function triggerRefresh() {{
   const btn = document.getElementById('refreshBtn');
@@ -322,6 +393,43 @@ async function triggerRefresh() {{
     status.textContent = 'เชื่อมต่อไม่ได้ ลองใหม่อีกครั้ง';
   }}
   btn.disabled = false;
+}}
+
+// สร้างไฟล์ PDF จริงฝั่ง client (html2canvas + jsPDF) แทนการเรียก window.print()
+// เพราะ browser/OS print dialog (โดยเฉพาะ AirPrint บน iPhone) ควบคุม header/footer
+// (URL, วันที่) เองไม่สามารถปิดจากโค้ดหน้าเว็บได้ — วิธีนี้จึงการันตีว่าไม่มี URL ติดมา
+async function downloadPDF() {{
+  const btn = document.getElementById('pdfBtn');
+  const status = document.getElementById('refreshStatus');
+  const prevStatus = status.textContent;
+  btn.disabled = true;
+  status.textContent = 'กำลังสร้าง PDF...';
+  document.body.classList.add('pdf-export');
+  await new Promise(r => setTimeout(r, 60)); // ให้ browser reflow ด้วยสไตล์โหมดพิมพ์ก่อน capture
+  try {{
+    const target = document.querySelector('.a4');
+    const canvas = await html2canvas(target, {{
+      scale: 2,
+      backgroundColor: '#ffffff',
+      windowWidth: 900,   // บังคับให้ render เท่าจอเดสก์ท็อป ไม่ให้ mobile layout มาปน
+      useCORS: true
+    }});
+    const {{ jsPDF }} = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageW = pdf.internal.pageSize.getWidth();
+    const pageH = pdf.internal.pageSize.getHeight();
+    const imgW = pageW;
+    const imgH = Math.min(canvas.height * imgW / canvas.width, pageH);
+    pdf.addImage(canvas.toDataURL('image/jpeg', 0.95), 'JPEG', 0, 0, imgW, imgH);
+    pdf.save('Jetts_RRA_Report.pdf');
+    status.textContent = 'ดาวน์โหลด PDF แล้ว';
+  }} catch (e) {{
+    console.error(e);
+    status.textContent = 'สร้าง PDF ไม่สำเร็จ ลองใหม่อีกครั้ง';
+  }}
+  document.body.classList.remove('pdf-export');
+  btn.disabled = false;
+  setTimeout(() => {{ status.textContent = prevStatus; }}, 4000);
 }}
 </script>
 
