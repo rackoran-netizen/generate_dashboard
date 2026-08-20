@@ -4,7 +4,7 @@
 
 ระบบ scrape ข้อมูล PT จาก jettsapp.jetts.co.th แล้วสร้าง HTML dashboard deploy บน GitHub Pages
 อัตโนมัติทุกวัน **07:00 Bangkok** (สั่งโดย Cloudflare Cron Trigger ไม่ใช่ GitHub schedule — ดูเหตุผลด้านล่าง)
-จากนั้นส่งภาพสรุป dashboard เข้า LINE ผู้ดูแลอัตโนมัติ (เป้าหมายถึงก่อน 7:30)
+จากนั้นส่งไฟล์ PDF สรุป dashboard เข้า Telegram ผู้ดูแลอัตโนมัติ (เป้าหมายถึงก่อน 7:30)
 
 ---
 
@@ -27,11 +27,11 @@
 Jetts_RRA_Report/
 ├── scraper.py                # Playwright ดึงข้อมูลจาก jettsapp → data.json
 ├── generate_dashboard.py     # สร้าง index.html จาก data.json (screen + print/PDF แยกกัน)
-├── screenshot_dashboard.py   # Playwright ถ่าย index.html (โหมด .pdf-export) → dashboard.png
-├── send_line.py              # push dashboard.png + ลิงก์เข้า LINE ผ่าน Messaging API
+├── generate_pdf.py           # Playwright page.pdf() จาก index.html → dashboard.pdf (ใช้ @media print)
+├── send_telegram.py          # อัปโหลด dashboard.pdf เข้า Telegram ผ่าน Bot API sendDocument
 ├── data.json                 # ข้อมูลดิบ (commit ด้วย)
 ├── index.html                # Dashboard (commit ด้วย)
-├── dashboard.png             # snapshot สำหรับ LINE (commit ด้วย, gen ทุกรอบ)
+├── dashboard.pdf              # generate ชั่วคราวใน CI เพื่อส่ง Telegram เท่านั้น (ไม่ commit)
 ├── run.sh                    # รัน manual บน Mac (cd เข้าโฟลเดอร์ตัวเอง + source .env เอง)
 ├── .env                      # credentials (ห้าม commit)
 ├── .gitignore
@@ -50,7 +50,7 @@ Jetts_RRA_Report/
 | ที่เก็บ | ตัวแปร | ใช้ทำอะไร |
 |---|---|---|
 | `.env` (local, gitignored) + GitHub Actions Secrets | `JETTS_USERNAME`, `JETTS_PASSWORD` | login jettsapp (`scraper.py` อ่านจาก `os.environ[...]` เท่านั้น **ไม่มีค่า default** — ถ้าลืมตั้งจะ error ทันทีแทนที่จะ fallback ไปใช้ค่าที่หลุด) |
-| GitHub Actions Secrets | `LINE_CHANNEL_TOKEN`, `LINE_USER_ID` | ส่ง push message เข้า LINE (`send_line.py`) |
+| GitHub Actions Secrets | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | อัปโหลด `dashboard.pdf` เข้า Telegram (`send_telegram.py`) |
 | Cloudflare Worker secret (`wrangler secret put GH_TOKEN`) | `GH_TOKEN` | Worker ยิง `workflow_dispatch` แทนผู้ใช้ (ปุ่ม Refresh + cron รายวัน) — token ไม่โผล่ในโค้ด public |
 
 ห้ามเขียนค่าจริงไว้ในไฟล์เอกสารหรือโค้ดใดๆ ที่จะถูก commit
@@ -134,11 +134,11 @@ Browser/OS print dialog (โดยเฉพาะ iOS AirPrint) ควบคุ�
 ```yaml
 on: workflow_dispatch   # ไม่มี schedule: — ดูเหตุผลใน "Cloudflare Worker" ด้านล่าง
 python-version: '3.11'
-secrets: JETTS_USERNAME, JETTS_PASSWORD, LINE_CHANNEL_TOKEN, LINE_USER_ID
-steps: checkout → pip install playwright → playwright install chromium --with-deps
-       → scraper.py → generate_dashboard.py → screenshot_dashboard.py
-       → git add data.json index.html dashboard.png + commit + push
-       → sleep 90 (รอ GitHub Pages deploy รูป) → send_line.py (continue-on-error: true)
+secrets: JETTS_USERNAME, JETTS_PASSWORD, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+steps: checkout → pip install playwright requests → playwright install chromium --with-deps
+       → scraper.py → generate_dashboard.py → generate_pdf.py
+       → git add data.json index.html + commit + push
+       → send_telegram.py (continue-on-error: true — อัปโหลด dashboard.pdf ตรงๆ ไม่ต้องรอ Pages deploy)
 ```
 
 ---
@@ -153,7 +153,7 @@ steps: checkout → pip install playwright → playwright install chromium --wit
    — ยิง `workflow_dispatch` ตรงเวลาทุกเช้าแทน `schedule:` ของ GitHub Actions เอง
 
 **ทำไมไม่ใช้ GitHub `schedule:` ตรงๆ**: เคยพบว่า GitHub Actions scheduled runs ดีเลย์ ~2-3 ชม.
-(บันทึกไว้ใน commit เก่า `df0c705`) ทำให้ควบคุมเวลาส่ง LINE ตอน 7:30 ไม่ได้ — Cloudflare Cron
+(บันทึกไว้ใน commit เก่า `df0c705`) ทำให้ควบคุมเวลาส่ง Telegram ตอน 7:30 ไม่ได้ — Cloudflare Cron
 แม่นยำกว่ามาก จึงย้ายให้เป็นตัวสั่งหลัก และถอด `schedule:` ออกจาก `update.yml` (กัน run ซ้ำสองครั้ง/วัน)
 
 Deploy หลังแก้ `worker/`:
@@ -163,20 +163,20 @@ cd worker && npx wrangler deploy
 
 ---
 
-## LINE notification (`screenshot_dashboard.py` + `send_line.py`)
+## Telegram notification (`generate_pdf.py` + `send_telegram.py`)
 
-LINE Messaging API **ไม่มี message type สำหรับแนบไฟล์ PDF ตรงๆ** (มีแค่ text/image/video/sticker/flex ฯลฯ)
-จึงถ่ายภาพ dashboard เป็น PNG แทน:
+ต่างจาก LINE Messaging API (ไม่มี message type สำหรับไฟล์), **Telegram Bot API ส่งไฟล์ PDF แนบตรงๆ
+ได้เลย** ผ่าน `sendDocument` — เลยไม่ต้องแปลงเป็นรูปภาพ และไม่ต้องพึ่ง URL สาธารณะ/รอ Pages deploy:
 
-1. `screenshot_dashboard.py` — Playwright เปิด `index.html` ในเครื่อง ใส่คลาส `.pdf-export`
-   (สไตล์เดียวกับปุ่มดาวน์โหลด PDF) แล้ว screenshot element `.a4` → `dashboard.png`
-2. commit + push `dashboard.png` ขึ้น GitHub Pages พร้อม `data.json`/`index.html`
-3. รอ ~90 วินาทีให้ Pages build เสร็จ (LINE ต้องดึงรูปจาก URL จริงได้)
-4. `send_line.py` — push message ชนิด `image` (ชี้ไป `dashboard.png` บน Pages) + `text` แนบลิงก์
-   dashboard เต็ม ไปยัง `LINE_USER_ID` ผ่าน `https://api.line.me/v2/bot/message/push`
+1. `generate_pdf.py` — Playwright เปิด `index.html` ในเครื่อง แล้วเรียก `page.pdf()` โดยตรง
+   (`prefer_css_page_size=True` ให้ยึด `@page{{size:A4;margin:8mm}}` ที่กำหนดไว้ใน `generate_dashboard.py`
+   เป็นตัวกำหนดขนาด, `print_background=True` ให้แถบกราฟ/สีพื้นหลังติดมาด้วย) → `dashboard.pdf`
+2. `send_telegram.py` — อัปโหลด `dashboard.pdf` ตรงๆ แบบ multipart ไปยัง
+   `https://api.telegram.org/bot<TOKEN>/sendDocument` พร้อม caption แนบลิงก์ dashboard เต็ม
+3. `dashboard.pdf` เป็นไฟล์ชั่วคราวใน CI runner เท่านั้น **ไม่ commit เข้า repo**
 
-ขั้นตอนส่ง LINE ใน workflow ใส่ `continue-on-error: true` ไว้ — ส่งไม่สำเร็จก็ไม่กระทบการอัปเดต
-dashboard หลัก (LINE Notify **ปิดให้บริการไปแล้วตั้งแต่ปี 2025** ต้องใช้ Messaging API เท่านั้น)
+ขั้นตอนส่ง Telegram ใน workflow ใส่ `continue-on-error: true` ไว้ — ส่งไม่สำเร็จก็ไม่กระทบการอัปเดต
+dashboard หลัก
 
 ---
 
@@ -195,8 +195,8 @@ bash run.sh
 set -a && source .env && set +a
 python3 scraper.py
 python3 generate_dashboard.py
-python3 screenshot_dashboard.py   # ถ้าต้องการทดสอบรูปสำหรับ LINE ด้วย
-git add data.json index.html dashboard.png
+python3 generate_pdf.py           # ถ้าต้องการทดสอบไฟล์ PDF สำหรับ Telegram ด้วย
+git add data.json index.html
 git commit -m "update: $(date +'%d/%m/%Y %H:%M')"
 git push
 ```
@@ -244,4 +244,4 @@ garbage collect — แต่ทางที่ดีกว่าคือ **com
 | GitHub Actions `schedule:` ดีเลย์ ~2-3 ชม. | GitHub เอง (ยืนยันจาก commit เก่า) | ย้ายไปใช้ Cloudflare Cron Trigger ยิง `workflow_dispatch` แทน (ดูหัวข้อ Cloudflare Worker) |
 | มือถือแสดงข้อมูลไม่ครบ (ชื่อถูกตัด, คอลัมน์ New Member หลุดจอ) | `@media(max-width:640px)` เดิมบีบ `grid-template-columns` เหลือ 3 คอลัมน์แต่ซ่อนแค่ 2 ใน 4 metric ทำให้ตัวที่ 4 ล้น grid | เขียนใหม่เป็น layout การ์ดสแต็ก (`grid-template-areas`) + label กำกับแต่ละแถบ, สโคป media query เป็น `screen` แยกจาก `print` เด็ดขาด |
 | print/PDF มี URL เว็บไซต์ติดมา | browser print dialog (โดยเฉพาะ iOS AirPrint) ควบคุม header/footer เอง แก้จาก CSS/JS ไม่ได้ | สร้าง PDF จริงฝั่ง client ด้วย html2canvas+jsPDF แทนการเรียก `window.print()` |
-| LINE ส่งไฟล์ PDF แนบตรงๆไม่ได้ | LINE Messaging API ไม่มี message type สำหรับไฟล์ | ถ่าย screenshot เป็น PNG แล้วส่งเป็น image message แทน |
+| LINE ส่งไฟล์ PDF แนบตรงๆไม่ได้ | LINE Messaging API ไม่มี message type สำหรับไฟล์ | เปลี่ยนไปใช้ Telegram Bot API (`sendDocument`) แทน ส่งไฟล์ PDF จริงได้เลย ไม่ต้องแปลงเป็นรูป |
