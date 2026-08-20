@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
-cd /Users/oran_raurhotmail.com/team-request-hub
+cd "$(dirname "$0")"
+set -a
+source .env
+set +a
 
 echo "=== $(date) ==="
 echo "1. ดึงข้อมูลจาก Jetts..."

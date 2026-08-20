@@ -6,8 +6,8 @@ import os, json, time
 from datetime import datetime
 from playwright.sync_api import sync_playwright
 
-USERNAME = os.getenv("JETTS_USERNAME", "00936")
-PASSWORD = os.getenv("JETTS_PASSWORD", "Ou.oraya00936")
+USERNAME = os.environ["JETTS_USERNAME"]
+PASSWORD = os.environ["JETTS_PASSWORD"]
 
 def get_date_range():
     today = datetime.now()
