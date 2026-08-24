@@ -1,5 +1,5 @@
 {
-  "updated_at": "24/08/2026 05:29",
+  "updated_at": "24/08/2026 16:46",
   "period": {
     "start": "01/08/2026",
     "end": "24/08/2026"
@@ -373,10 +373,10 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "2,285,155",
-        "Amount Before VAT": "2,135,658.88",
+        "Total Amount": "2,406,155",
+        "Amount Before VAT": "2,248,742.99",
         "Comm Sold": "",
-        "Commission Price": "111,241.46"
+        "Commission Price": "117,248.94"
       },
       {
         "Ext": "",
@@ -443,6 +443,15 @@
       },
       {
         "Ext": "",
+        "Trainer": "RRA_Golf_01913",
+        "Position Rate": "ET-RED",
+        "Total Amount": "133,600",
+        "Amount Before VAT": "124,859.81",
+        "Comm Sold": "5%",
+        "Commission Price": "6,242.99"
+      },
+      {
+        "Ext": "",
         "Trainer": "RRA_Poom_03173",
         "Position Rate": "PT-RED",
         "Total Amount": "128,430",
@@ -476,15 +485,6 @@
         "Amount Before VAT": "91,939.25",
         "Comm Sold": "2%",
         "Commission Price": "1,838.79"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Golf_01913",
-        "Position Rate": "ET-RED",
-        "Total Amount": "97,600",
-        "Amount Before VAT": "91,214.95",
-        "Comm Sold": "2%",
-        "Commission Price": "1,824.30"
       },
       {
         "Ext": "",
@@ -524,6 +524,24 @@
       },
       {
         "Ext": "",
+        "Trainer": "BGPL_Ou_00936",
+        "Position Rate": "PT-RED",
+        "Total Amount": "64,700",
+        "Amount Before VAT": "60,467.29",
+        "Comm Sold": "2%",
+        "Commission Price": "1,209.35"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Tiger_01923",
+        "Position Rate": "PT-RED",
+        "Total Amount": "62,700",
+        "Amount Before VAT": "58,598.13",
+        "Comm Sold": "2%",
+        "Commission Price": "1,171.96"
+      },
+      {
+        "Ext": "",
         "Trainer": "RRA_Sataem_03348",
         "Position Rate": "PT-RED",
         "Total Amount": "58,800",
@@ -539,15 +557,6 @@
         "Amount Before VAT": "50,560.75",
         "Comm Sold": "2%",
         "Commission Price": "1,011.21"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Tiger_01923",
-        "Position Rate": "PT-RED",
-        "Total Amount": "42,400",
-        "Amount Before VAT": "39,626.17",
-        "Comm Sold": "2%",
-        "Commission Price": "792.52"
       },
       {
         "Ext": "",
@@ -1475,7 +1484,7 @@
         "sold_date": "23 August 2026",
         "app_id": "046202601310",
         "membership": "3 Month PIA - Membership 2026",
-        "client": "Maj.Gen Uthit",
+        "client": "Uthit Viwatanakit",
         "sold_by": "IBA_Deaw_02058"
       },
       {
@@ -1540,15 +1549,82 @@
         "membership": "3 Month PIA - Membership 2026",
         "client": "Warakorn Tienmongkolkij",
         "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601320",
+        "membership": "Corporate Jetts Love's Freedom Membership",
+        "client": "Anonthakan Pornkaew",
+        "sold_by": "RRA_Yean_03170"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601321",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Kanyanithi Sungsuwan",
+        "sold_by": "RRA_Nine_02024"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601322",
+        "membership": "Corporate Jetts Love's 12 Months PIA Membership",
+        "client": "Amornrat Sriwanut",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601323",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Patchanon Srakaew",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601324",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Pinyavee Chansirikulphat",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601325",
+        "membership": "Corporate Promotion 12 Months PIA Membership",
+        "client": "Thanakorn Wongphadungtham",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601326",
+        "membership": "Corporate Promotion 12 Months PIA Membership",
+        "client": "Napachsnunth Songchaipanakit",
+        "sold_by": "RRA_Tiger_01923"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601327",
+        "membership": "One Day Pass",
+        "client": "Nawatsapol Chaosuan",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "24 August 2026",
+        "app_id": "046202601328",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Supanut Pandee",
+        "sold_by": "RRA_Poom_03173"
       }
     ],
     "summary": [
       {
         "sold_by": "BGPL_Ou_00936",
-        "count": 32
+        "count": 37
       },
       {
         "sold_by": "RRA_Paul_02228",
+        "count": 6
+      },
+      {
+        "sold_by": "RRA_Tiger_01923",
         "count": 6
       },
       {
@@ -1580,15 +1656,23 @@
         "count": 6
       },
       {
-        "sold_by": "RRA_Tiger_01923",
-        "count": 5
-      },
-      {
         "sold_by": "RRA_Ae_02227",
         "count": 5
       },
       {
+        "sold_by": "RRA_Nine_02024",
+        "count": 5
+      },
+      {
+        "sold_by": "RRA_Poom_03173",
+        "count": 5
+      },
+      {
         "sold_by": "RRA_Man_01911",
+        "count": 5
+      },
+      {
+        "sold_by": "RRA_Yean_03170",
         "count": 5
       },
       {
@@ -1600,19 +1684,7 @@
         "count": 4
       },
       {
-        "sold_by": "RRA_Nine_02024",
-        "count": 4
-      },
-      {
-        "sold_by": "RRA_Poom_03173",
-        "count": 4
-      },
-      {
         "sold_by": "IBA_Deaw_02058",
-        "count": 4
-      },
-      {
-        "sold_by": "RRA_Yean_03170",
         "count": 4
       },
       {
