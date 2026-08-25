@@ -1,8 +1,8 @@
 {
-  "updated_at": "24/08/2026 16:46",
+  "updated_at": "25/08/2026 00:02",
   "period": {
     "start": "01/08/2026",
-    "end": "24/08/2026"
+    "end": "25/08/2026"
   },
   "conduct": {
     "headers": [
@@ -376,7 +376,7 @@
         "Total Amount": "2,406,155",
         "Amount Before VAT": "2,248,742.99",
         "Comm Sold": "",
-        "Commission Price": "117,248.94"
+        "Commission Price": "121,652.69"
       },
       {
         "Ext": "",
@@ -404,6 +404,15 @@
         "Amount Before VAT": "163,551.40",
         "Comm Sold": "7%",
         "Commission Price": "11,448.60"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Golf_01913",
+        "Position Rate": "ET-RED",
+        "Total Amount": "172,600",
+        "Amount Before VAT": "161,308.41",
+        "Comm Sold": "7%",
+        "Commission Price": "11,291.59"
       },
       {
         "Ext": "",
@@ -443,21 +452,12 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Golf_01913",
-        "Position Rate": "ET-RED",
-        "Total Amount": "133,600",
-        "Amount Before VAT": "124,859.81",
-        "Comm Sold": "5%",
-        "Commission Price": "6,242.99"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Poom_03173",
         "Position Rate": "PT-RED",
-        "Total Amount": "128,430",
-        "Amount Before VAT": "120,028.04",
+        "Total Amount": "130,230",
+        "Amount Before VAT": "121,710.28",
         "Comm Sold": "7%",
-        "Commission Price": "8,401.96"
+        "Commission Price": "8,519.72"
       },
       {
         "Ext": "",
@@ -508,10 +508,10 @@
         "Ext": "",
         "Trainer": "RRA_Baifern_01910",
         "Position Rate": "PT-RED",
-        "Total Amount": "78,100",
-        "Amount Before VAT": "72,990.65",
+        "Total Amount": "79,900",
+        "Amount Before VAT": "74,672.90",
         "Comm Sold": "2%",
-        "Commission Price": "1,459.81"
+        "Commission Price": "1,493.46"
       },
       {
         "Ext": "",
@@ -524,21 +524,12 @@
       },
       {
         "Ext": "",
-        "Trainer": "BGPL_Ou_00936",
-        "Position Rate": "PT-RED",
-        "Total Amount": "64,700",
-        "Amount Before VAT": "60,467.29",
-        "Comm Sold": "2%",
-        "Commission Price": "1,209.35"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Tiger_01923",
         "Position Rate": "PT-RED",
-        "Total Amount": "62,700",
-        "Amount Before VAT": "58,598.13",
+        "Total Amount": "64,500",
+        "Amount Before VAT": "60,280.37",
         "Comm Sold": "2%",
-        "Commission Price": "1,171.96"
+        "Commission Price": "1,205.61"
       },
       {
         "Ext": "",
@@ -557,6 +548,15 @@
         "Amount Before VAT": "50,560.75",
         "Comm Sold": "2%",
         "Commission Price": "1,011.21"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Zico_01805",
+        "Position Rate": "PT-RED",
+        "Total Amount": "34,100",
+        "Amount Before VAT": "31,869.16",
+        "Comm Sold": "2%",
+        "Commission Price": "637.38"
       },
       {
         "Ext": "",
@@ -584,15 +584,6 @@
         "Amount Before VAT": "23,738.32",
         "Comm Sold": "2%",
         "Commission Price": "474.77"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Zico_01805",
-        "Position Rate": "PT-RED",
-        "Total Amount": "13,800",
-        "Amount Before VAT": "12,897.20",
-        "Comm Sold": "2%",
-        "Commission Price": "257.94"
       }
     ]
   },
