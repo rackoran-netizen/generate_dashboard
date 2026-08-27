@@ -1,5 +1,8 @@
 import json
 
+from metrics import (GOAL_MEM_EACH, GOAL_MEMBER, GOAL_PT_SOLD,
+                     active_mem_summary, fmt, num, split_club)
+
 with open("data.json", encoding="utf-8") as f:
     data = json.load(f)
 
@@ -7,28 +10,11 @@ updated_at   = data["updated_at"]
 period       = data["period"]
 conduct_rows = data["conduct"]["rows"]
 sold_rows    = data["sold"]["rows"]
-# ตัด BGPL_Ou_00936 ออกจาก membership (บัญชีกลาง ไม่ใช่เทรนเนอร์จริง)
-EXCLUDE_MEM = {"BGPL_Ou_00936", "ecommerce_website", "Online"}
-mem_summary  = [r for r in data["membership"]["summary"] if r["sold_by"] not in EXCLUDE_MEM]
+mem_summary  = active_mem_summary(data)
 mem_total    = sum(r["count"] for r in mem_summary)
 
-# Goals
-GOAL_PT_SOLD  = 2_400_000 * 1.07   # 2,568,000 (รวม VAT 7%)
-GOAL_MEMBER   = 125                  # เป้ารวมคลับ
-GOAL_MEM_EACH = 6                    # เป้ารายบุคคล
-
-conduct_summary = next((r for r in conduct_rows if "Ratchaphruek" in r.get("Trainer","")), {})
-sold_summary    = next((r for r in sold_rows    if "Ratchaphruek" in r.get("Trainer","")), {})
-conduct_ind     = [r for r in conduct_rows if r.get("Trainer","") and "Ratchaphruek" not in r["Trainer"]]
-sold_ind        = [r for r in sold_rows    if r.get("Trainer","") and "Ratchaphruek" not in r["Trainer"]]
-
-def num(v):
-    try: return float(str(v).replace(",",""))
-    except: return 0.0
-
-def fmt(v):
-    try: return f"{num(v):,.0f}"
-    except: return str(v)
+conduct_summary, conduct_ind = split_club(conduct_rows)
+sold_summary,    sold_ind    = split_club(sold_rows)
 
 def pcolor(pct):
     if pct >= 100: return "#0ca30c"

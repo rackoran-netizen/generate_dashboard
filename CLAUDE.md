@@ -26,6 +26,7 @@
 ```
 Jetts_RRA_Report/
 ├── scraper.py                # Playwright ดึงข้อมูลจาก jettsapp → data.json
+├── metrics.py                # ค่าคงที่ + helper ที่ generate_dashboard.py / send_telegram.py ใช้ร่วมกัน (GOAL_*, EXCLUDE_MEM, num, fmt, split_club, active_mem_summary)
 ├── generate_dashboard.py     # สร้าง index.html จาก data.json (screen + print/PDF แยกกัน)
 ├── generate_pdf.py           # Playwright page.pdf() จาก index.html → dashboard.pdf (ใช้ @media print)
 ├── send_telegram.py          # อัปโหลด dashboard.pdf เข้า Telegram ผ่าน Bot API sendDocument
@@ -172,7 +173,10 @@ cd worker && npx wrangler deploy
    (`prefer_css_page_size=True` ให้ยึด `@page{{size:A4;margin:8mm}}` ที่กำหนดไว้ใน `generate_dashboard.py`
    เป็นตัวกำหนดขนาด, `print_background=True` ให้แถบกราฟ/สีพื้นหลังติดมาด้วย) → `dashboard.pdf`
 2. `send_telegram.py` — อัปโหลด `dashboard.pdf` ตรงๆ แบบ multipart ไปยัง
-   `https://api.telegram.org/bot<TOKEN>/sendDocument` พร้อม caption แนบลิงก์ dashboard เต็ม
+   `https://api.telegram.org/bot<TOKEN>/sendDocument` — caption **ไม่มีลิงก์** (แนบแค่ไฟล์ PDF)
+   สรุป PT Sold / สมาชิกใหม่ / Total Session + `%` ของเป้ากับ `%` เวลาที่ผ่านไป (เดือน/ปี อิงวันที่ส่งรายงาน)
+   แล้วบอกว่านำแผน/ช้ากว่าแผนกี่ %. `build_caption()` แยกจาก `main()` — `import` มาเรียกได้โดยไม่ต้องตั้ง env,
+   ดูตัวอย่างบน terminal: `python3 send_telegram.py --preview`
 3. `dashboard.pdf` เป็นไฟล์ชั่วคราวใน CI runner เท่านั้น **ไม่ commit เข้า repo**
 
 ขั้นตอนส่ง Telegram ใน workflow ใส่ `continue-on-error: true` ไว้ — ส่งไม่สำเร็จก็ไม่กระทบการอัปเดต
