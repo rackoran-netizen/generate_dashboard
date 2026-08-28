@@ -35,7 +35,6 @@ def build_caption(data_path=DATA_PATH, report_date=None):
     with open(data_path, encoding="utf-8") as f:
         data = json.load(f)
 
-    conduct, _ = split_club(data["conduct"]["rows"])
     sold, _ = split_club(data["sold"]["rows"])
     mem_total = sum(r["count"] for r in active_mem_summary(data))
 
@@ -55,8 +54,7 @@ def build_caption(data_path=DATA_PATH, report_date=None):
         f"เดือนผ่านไป {month_pct:.0f}% · ปีผ่านไป {year_pct:.0f}%\n"
         f"\n"
         f"PT Sold  {sold_actual:,.0f} ฿ · {sold_pct:.1f}% ของเป้าเดือน ({_pace(sold_pct, month_pct)})\n"
-        f"สมาชิกใหม่  {mem_total} คน · {mem_pct:.1f}% ของเป้าคลับ ({_pace(mem_pct, month_pct)})\n"
-        f"Total Session  {conduct.get('Total Session', '—')} ครั้ง"
+        f"สมาชิกใหม่  {mem_total} คน · {mem_pct:.1f}% ของเป้าคลับ ({_pace(mem_pct, month_pct)})"
     )
 
 
