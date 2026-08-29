@@ -1,8 +1,8 @@
 {
-  "updated_at": "28/08/2026 14:45",
+  "updated_at": "29/08/2026 00:02",
   "period": {
     "start": "01/08/2026",
-    "end": "28/08/2026"
+    "end": "29/08/2026"
   },
   "conduct": {
     "headers": [
@@ -1710,6 +1710,13 @@
         "membership": "Freedom Direct Debit Membership 2026",
         "client": "Udomchok Sangkavorn",
         "sold_by": "RRA_Baifern_01910"
+      },
+      {
+        "sold_date": "28 August 2026",
+        "app_id": "046202601344",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Thanut Jiraratchakit",
+        "sold_by": "RRA_Golf_01913"
       }
     ],
     "summary": [
@@ -1750,6 +1757,10 @@
         "count": 6
       },
       {
+        "sold_by": "RRA_Golf_01913",
+        "count": 6
+      },
+      {
         "sold_by": "RRA_Nill_03116",
         "count": 6
       },
@@ -1771,10 +1782,6 @@
       },
       {
         "sold_by": "RRA_Poom_03173",
-        "count": 5
-      },
-      {
-        "sold_by": "RRA_Golf_01913",
         "count": 5
       },
       {
