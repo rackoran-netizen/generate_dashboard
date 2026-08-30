@@ -1,8 +1,8 @@
 {
-  "updated_at": "29/08/2026 06:14",
+  "updated_at": "30/08/2026 00:02",
   "period": {
     "start": "01/08/2026",
-    "end": "29/08/2026"
+    "end": "30/08/2026"
   },
   "conduct": {
     "headers": [
@@ -373,10 +373,10 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "2,794,105",
-        "Amount Before VAT": "2,611,313.08",
+        "Total Amount": "2,844,180",
+        "Amount Before VAT": "2,658,112.15",
         "Comm Sold": "",
-        "Commission Price": "157,006.42"
+        "Commission Price": "163,947.30"
       },
       {
         "Ext": "",
@@ -413,6 +413,15 @@
         "Amount Before VAT": "143,714.95",
         "Comm Sold": "7%",
         "Commission Price": "10,060.05"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Golf_01913",
+        "Position Rate": "ET-RED",
+        "Total Amount": "152,100",
+        "Amount Before VAT": "142,149.53",
+        "Comm Sold": "7%",
+        "Commission Price": "9,950.47"
       },
       {
         "Ext": "",
@@ -470,15 +479,6 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Golf_01913",
-        "Position Rate": "ET-RED",
-        "Total Amount": "136,600",
-        "Amount Before VAT": "127,663.55",
-        "Comm Sold": "5%",
-        "Commission Price": "6,383.18"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Peet_02169",
         "Position Rate": "ET-RED",
         "Total Amount": "135,550",
@@ -533,6 +533,15 @@
       },
       {
         "Ext": "",
+        "Trainer": "RRA_Tiger_01923",
+        "Position Rate": "PT-RED",
+        "Total Amount": "97,275",
+        "Amount Before VAT": "90,911.21",
+        "Comm Sold": "5%",
+        "Commission Price": "4,545.56"
+      },
+      {
+        "Ext": "",
         "Trainer": "RRA_Baifern_01910",
         "Position Rate": "PT-RED",
         "Total Amount": "79,900",
@@ -544,19 +553,10 @@
         "Ext": "",
         "Trainer": "RRA_Benz_03155",
         "Position Rate": "PT-RED",
-        "Total Amount": "70,500",
-        "Amount Before VAT": "65,887.85",
+        "Total Amount": "72,300",
+        "Amount Before VAT": "67,570.09",
         "Comm Sold": "2%",
-        "Commission Price": "1,317.76"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Tiger_01923",
-        "Position Rate": "PT-RED",
-        "Total Amount": "64,500",
-        "Amount Before VAT": "60,280.37",
-        "Comm Sold": "2%",
-        "Commission Price": "1,205.61"
+        "Commission Price": "1,351.40"
       },
       {
         "Ext": "",
@@ -1745,6 +1745,34 @@
         "membership": "Corporate Promotion Stay Fit Membership",
         "client": "Jadesupa Uttamatanin",
         "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "29 August 2026",
+        "app_id": "046202601349",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Nattha Vijitlunjakorn",
+        "sold_by": "RRA_Mew_01974"
+      },
+      {
+        "sold_date": "29 August 2026",
+        "app_id": "046202601350",
+        "membership": "Flexi Direct Debit Membership 2026",
+        "client": "Chompoonut Termsrithong",
+        "sold_by": "RRA_Lekza_01909"
+      },
+      {
+        "sold_date": "29 August 2026",
+        "app_id": "046202601351",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Suratchanee Prasongsin",
+        "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "29 August 2026",
+        "app_id": "046202601352",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Pongpak Darnkleaklom",
+        "sold_by": "RRA_Mew_01974"
       }
     ],
     "summary": [
@@ -1754,6 +1782,10 @@
       },
       {
         "sold_by": "RRA_Benz_03155",
+        "count": 7
+      },
+      {
+        "sold_by": "RRA_Bos_01915",
         "count": 7
       },
       {
@@ -1785,11 +1817,11 @@
         "count": 6
       },
       {
-        "sold_by": "RRA_Bos_01915",
+        "sold_by": "RRA_Lion_02391",
         "count": 6
       },
       {
-        "sold_by": "RRA_Lion_02391",
+        "sold_by": "RRA_Mew_01974",
         "count": 6
       },
       {
@@ -1821,11 +1853,11 @@
         "count": 5
       },
       {
-        "sold_by": "RRA_Put_02910",
-        "count": 4
+        "sold_by": "RRA_Lekza_01909",
+        "count": 5
       },
       {
-        "sold_by": "RRA_Mew_01974",
+        "sold_by": "RRA_Put_02910",
         "count": 4
       },
       {
@@ -1834,10 +1866,6 @@
       },
       {
         "sold_by": "RRA_Zico_01805",
-        "count": 4
-      },
-      {
-        "sold_by": "RRA_Lekza_01909",
         "count": 4
       },
       {
