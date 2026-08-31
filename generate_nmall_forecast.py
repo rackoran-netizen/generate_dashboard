@@ -1,4 +1,6 @@
+import calendar
 import json
+from datetime import datetime
 
 with open("nmall_data.json", encoding="utf-8") as f:
     src = json.load(f)
@@ -7,9 +9,6 @@ months           = src["months"]
 monthly_total    = src["monthly_total"]
 monthly_by_type  = src["monthly_by_type"]
 pt_trainer_month = src["pt_trainer_month"]
-
-full_months = months[:-1]          # ตัดเดือนล่าสุดออกเพราะข้อมูลยังไม่ครบเดือน
-last12      = full_months[-12:]
 
 def next_month_labels(last_ym, n=3):
     y, m = (int(x) for x in last_ym.split("-"))
@@ -22,10 +21,22 @@ def next_month_labels(last_ym, n=3):
         out.append(f"{y:04d}-{m:02d}")
     return out
 
-# เดือนพยากรณ์ = 3 เดือนถัดจากเดือนปัจจุบัน (ที่ยังไม่ครบ) ไม่ใช่ถัดจากเดือนล่าสุดที่ใช้ fit เทรนด์
-# เช่นถ้าข้อมูลครบถึง ก.ค. 69 และเดือนปัจจุบัน (ยังไม่ครบ) คือ ส.ค. 69 -> พยากรณ์ ก.ย./ต.ค./พ.ย. 69
+# เดือนล่าสุดถือว่า "ครบเดือน" แล้วหรือยัง เทียบวันที่ข้อมูลล่าสุด (data_through)
+# กับจำนวนวันทั้งหมดของเดือนนั้น ถ้าครบ >=90% ของวันในเดือน ถือว่าใช้ fit เทรนด์ได้เลย
+data_through = datetime.strptime(src["data_through"], "%Y-%m-%d")
+days_in_last_month = calendar.monthrange(data_through.year, data_through.month)[1]
+last_month_is_complete = (data_through.day / days_in_last_month) >= 0.9
+
+if last_month_is_complete:
+    full_months = months
+    HORIZON_START = 1
+else:
+    full_months = months[:-1]      # ตัดเดือนล่าสุดออกเพราะข้อมูลยังไม่ครบเดือน
+    HORIZON_START = 2              # ข้ามเดือนที่ยังไม่ครบไปเริ่มพยากรณ์เดือนถัดไป
+last12 = full_months[-12:]
+
+# เดือนพยากรณ์ = 3 เดือนถัดจากเดือนล่าสุดที่มีข้อมูล (ไม่ว่าเดือนนั้นจะครบหรือยังไม่ครบ)
 fc_months = next_month_labels(months[-1], 3)
-HORIZON_START = len(months) - len(full_months) + 1   # จำนวนเดือนจาก last12[-1] ถึงเดือนพยากรณ์แรก
 
 def linreg(xs, ys):
     n = len(xs)
