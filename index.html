@@ -118,7 +118,7 @@ body{
 
 /* ════════════════════════════════════════════════════════════════
    PRINT / PDF EXPORT — แยกจากหน้าจอโดยสิ้นเชิง
-   ใช้ขนาดไดนามิกที่คำนวณจากจำนวนเทรนเนอร์ (n_trainers=23)
+   ใช้ขนาดไดนามิกที่คำนวณจากจำนวนเทรนเนอร์ (n_trainers=0)
    ให้พอดี A4 หนึ่งหน้าเสมอ ไม่ยุ่งกับ layout หน้าจอ/มือถือเลย
    .pdf-export = คลาสที่ JS ใส่ชั่วคราวตอน capture ด้วย html2canvas
    (ปุ่ม "ดาวน์โหลด PDF") ส่วน @media print ใช้ตอนกด Ctrl+P ปกติ
@@ -270,11 +270,11 @@ async function downloadPDF() {
   <div class="doc-header">
     <div>
       <div class="doc-title">Report — Jetts Robinson Ratchaphruek</div>
-      <div class="doc-sub">ช่วงเวลา 01/08/2026 – 31/08/2026</div>
+      <div class="doc-sub">ช่วงเวลา 01/09/2026 – 01/09/2026</div>
     </div>
     <div class="doc-meta">
-      อัพเดต <b>31/08/2026 13:19</b><br>
-      เทรนเนอร์ทั้งหมด <b>23</b> คน
+      อัพเดต <b>01/09/2026 00:02</b><br>
+      เทรนเนอร์ทั้งหมด <b>0</b> คน
     </div>
   </div>
 
@@ -282,15 +282,15 @@ async function downloadPDF() {
   <div class="tile-row">
     <div class="tile">
       <div class="lbl">Total Session</div>
-      <div class="val">2,751<span class="unit">ครั้ง</span></div>
+      <div class="val">—<span class="unit">ครั้ง</span></div>
     </div>
     <div class="tile">
       <div class="lbl">PT Sold</div>
-      <div class="val">2,903,180<span class="unit">฿</span></div>
+      <div class="val">0<span class="unit">฿</span></div>
     </div>
     <div class="tile">
       <div class="lbl">สมาชิกใหม่</div>
-      <div class="val">136<span class="unit">คน</span></div>
+      <div class="val">0<span class="unit">คน</span></div>
     </div>
   </div>
 
@@ -299,20 +299,20 @@ async function downloadPDF() {
     <div class="goal-tile">
       <div class="gtitle">เป้าหมาย PT Sold (2,400,000 + VAT 7%)</div>
       <div class="goal-nums">
-        <div class="goal-pct" style="color:#0ca30c;">113.1%</div>
-        <div class="goal-actual">2,903,180 / 2,568,000 ฿</div>
+        <div class="goal-pct" style="color:#d03b3b;">0.0%</div>
+        <div class="goal-actual">0 / 2,568,000 ฿</div>
       </div>
-      <div class="pbar"><div class="pbar-fill" style="width:100.0%;background:#0ca30c;"></div></div>
-      <div class="goal-note">✅ บรรลุเป้าแล้ว</div>
+      <div class="pbar"><div class="pbar-fill" style="width:0.0%;background:#d03b3b;"></div></div>
+      <div class="goal-note">คงเหลือ 2,568,000 ฿</div>
     </div>
     <div class="goal-tile">
       <div class="gtitle">เป้าหมายสมาชิกรวมคลับ (125 คน)</div>
       <div class="goal-nums">
-        <div class="goal-pct" style="color:#0ca30c;">108.8%</div>
-        <div class="goal-actual">136 / 125 คน</div>
+        <div class="goal-pct" style="color:#d03b3b;">0.0%</div>
+        <div class="goal-actual">0 / 125 คน</div>
       </div>
-      <div class="pbar"><div class="pbar-fill" style="width:100.0%;background:#0ca30c;"></div></div>
-      <div class="goal-note">✅ บรรลุเป้าแล้ว</div>
+      <div class="pbar"><div class="pbar-fill" style="width:0.0%;background:#d03b3b;"></div></div>
+      <div class="goal-note">คงเหลือ 125 คน</div>
     </div>
   </div>
 
@@ -335,536 +335,7 @@ async function downloadPDF() {
       <div class="gh-m gh-m3">Fs+Ra (ครั้ง)</div>
       <div class="gh-m gh-m4">สมาชิกใหม่ (เป้า 6)</div>
     </div>
-    <div class="grid-body"><div class="grid-row">
-          <div class="gr-rank">1</div>
-          <div class="gr-name"><span class="postag">ST</span>Lekza</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:71.6%"></div></div>
-            <span class="bar-val">141,985</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:69.2%"></div></div>
-            <span class="bar-val">139</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
-            <span class="bar-val">15</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">8/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">2</div>
-          <div class="gr-name"><span class="postag">ST</span>Paul</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:71.3%"></div></div>
-            <span class="bar-val">141,305</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:100.0%"></div></div>
-            <span class="bar-val">201</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:86.7%"></div></div>
-            <span class="bar-val">13</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">3</div>
-          <div class="gr-name"><span class="postag">ET</span>Ae</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:88.3%"></div></div>
-            <span class="bar-val">175,000</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:94.5%"></div></div>
-            <span class="bar-val">190</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:33.3%"></div></div>
-            <span class="bar-val">5</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
-            <span class="bar-val">5/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">4</div>
-          <div class="gr-name"><span class="postag">ET</span>Mew</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:78.6%"></div></div>
-            <span class="bar-val">155,875</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:64.7%"></div></div>
-            <span class="bar-val">130</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:53.3%"></div></div>
-            <span class="bar-val">8</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">5</div>
-          <div class="gr-name"><span class="postag">PT</span>Ford</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:73.6%"></div></div>
-            <span class="bar-val">145,835</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:67.7%"></div></div>
-            <span class="bar-val">136</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
-            <span class="bar-val">6</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">7/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">6</div>
-          <div class="gr-name"><span class="postag">ET</span>Deaw</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:81.0%"></div></div>
-            <span class="bar-val">160,500</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:72.1%"></div></div>
-            <span class="bar-val">145</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
-            <span class="bar-val">6</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">7</div>
-          <div class="gr-name"><span class="postag">ET</span>Bos</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:100.0%"></div></div>
-            <span class="bar-val">198,200</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:71.1%"></div></div>
-            <span class="bar-val">143</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:6.7%"></div></div>
-            <span class="bar-val">1</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">7/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">8</div>
-          <div class="gr-name"><span class="postag">ET</span>Lion</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:76.4%"></div></div>
-            <span class="bar-val">151,475</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:64.7%"></div></div>
-            <span class="bar-val">130</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:46.7%"></div></div>
-            <span class="bar-val">7</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">9</div>
-          <div class="gr-name"><span class="postag">PT</span>Tiger</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:49.1%"></div></div>
-            <span class="bar-val">97,275</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:50.2%"></div></div>
-            <span class="bar-val">101</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:86.7%"></div></div>
-            <span class="bar-val">13</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">10</div>
-          <div class="gr-name"><span class="postag">PT</span>Sataem</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:67.1%"></div></div>
-            <span class="bar-val">132,900</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:34.3%"></div></div>
-            <span class="bar-val">69</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:73.3%"></div></div>
-            <span class="bar-val">11</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">11</div>
-          <div class="gr-name"><span class="postag">PT</span>Benz</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:53.9%"></div></div>
-            <span class="bar-val">106,800</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:33.3%"></div></div>
-            <span class="bar-val">67</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:73.3%"></div></div>
-            <span class="bar-val">11</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">7/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">12</div>
-          <div class="gr-name"><span class="postag">PT</span>Yean</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:70.9%"></div></div>
-            <span class="bar-val">140,500</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:59.7%"></div></div>
-            <span class="bar-val">120</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
-            <span class="bar-val">6</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">13</div>
-          <div class="gr-name"><span class="postag">ET</span>Golf</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:77.8%"></div></div>
-            <span class="bar-val">154,200</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:79.1%"></div></div>
-            <span class="bar-val">159</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">7/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">14</div>
-          <div class="gr-name"><span class="postag">PT</span>Man</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:71.6%"></div></div>
-            <span class="bar-val">141,975</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:53.2%"></div></div>
-            <span class="bar-val">107</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:46.7%"></div></div>
-            <span class="bar-val">7</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
-            <span class="bar-val">5/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">15</div>
-          <div class="gr-name"><span class="postag">ET</span>Peet</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:68.4%"></div></div>
-            <span class="bar-val">135,550</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:48.3%"></div></div>
-            <span class="bar-val">97</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:40.0%"></div></div>
-            <span class="bar-val">6</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">16</div>
-          <div class="gr-name"><span class="postag">PT</span>Poom</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:65.7%"></div></div>
-            <span class="bar-val">130,230</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:54.2%"></div></div>
-            <span class="bar-val">109</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:33.3%"></div></div>
-            <span class="bar-val">5</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">17</div>
-          <div class="gr-name"><span class="postag">PT</span>Nine</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:66.6%"></div></div>
-            <span class="bar-val">131,975</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:40.8%"></div></div>
-            <span class="bar-val">82</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:33.3%"></div></div>
-            <span class="bar-val">5</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">7/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">18</div>
-          <div class="gr-name"><span class="postag">PT</span>Nill</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:27.3%"></div></div>
-            <span class="bar-val">54,100</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:36.3%"></div></div>
-            <span class="bar-val">73</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:86.7%"></div></div>
-            <span class="bar-val">13</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">19</div>
-          <div class="gr-name"><span class="postag">ST</span>Ice</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:26.5%"></div></div>
-            <span class="bar-val">52,600</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:40.8%"></div></div>
-            <span class="bar-val">82</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:73.3%"></div></div>
-            <span class="bar-val">11</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">20</div>
-          <div class="gr-name"><span class="postag">PT</span>Put</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:70.2%"></div></div>
-            <span class="bar-val">139,200</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:43.8%"></div></div>
-            <span class="bar-val">88</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:33.3%"></div></div>
-            <span class="bar-val">5</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
-            <span class="bar-val">5/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">21</div>
-          <div class="gr-name"><span class="postag">PT</span>Baifern</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:40.3%"></div></div>
-            <span class="bar-val">79,900</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:49.8%"></div></div>
-            <span class="bar-val">100</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:20.0%"></div></div>
-            <span class="bar-val">3</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:100.0%"></div></div>
-            <span class="bar-val">6/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">22</div>
-          <div class="gr-name"><span class="postag">PT</span>Zico</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:53.1%"></div></div>
-            <span class="bar-val">105,200</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:39.8%"></div></div>
-            <span class="bar-val">80</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"><div class="bar-fill trial" style="width:26.7%"></div></div>
-            <span class="bar-val">4</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"><div class="bar-fill mem" style="width:83.3%"></div></div>
-            <span class="bar-val">5/6</span>
-          </div>
-        </div><div class="grid-row">
-          <div class="gr-rank">23</div>
-          <div class="gr-name"><span class="postag">CM</span>Tonmai</div>
-          <div class="gr-metric m1">
-            <span class="m-label">PT Sold</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0</span>
-          </div>
-          <div class="gr-metric m2">
-            <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:20.9%"></div></div>
-            <span class="bar-val">42</span>
-          </div>
-          <div class="gr-metric m3">
-            <span class="m-label">Fs+Ra</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0</span>
-          </div>
-          <div class="gr-metric m4">
-            <span class="m-label">สมาชิกใหม่</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0/6</span>
-          </div>
-        </div></div>
+    <div class="grid-body"></div>
   </div>
 
   <div class="footnote">ความยาวแท่งของ PT Sold, PT Conducted และ Fs+Ra เทียบกับค่าสูงสุดของแต่ละตัวชี้วัดในทีม &nbsp;·&nbsp; แท่งสมาชิกใหม่เทียบกับเป้าหมายรายบุคคล 6 คน &nbsp;·&nbsp; PT Conducted ไม่รวม Fitstart/Trial (แยกเป็น Fs+Ra)</div>
