@@ -1,8 +1,8 @@
 {
-  "updated_at": "01/09/2026 00:02",
+  "updated_at": "02/09/2026 00:01",
   "period": {
     "start": "01/09/2026",
-    "end": "01/09/2026"
+    "end": "02/09/2026"
   },
   "conduct": {
     "headers": [
@@ -19,7 +19,92 @@
       "Commission",
       "Total Commission"
     ],
-    "rows": []
+    "rows": [
+      {
+        "Ext": "",
+        "Trainer": "Jetts Robinson Ratchaphruek",
+        "Position Rate": "",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "8",
+        "Total Session": "8",
+        "Per Session": "6,902.57",
+        "Comm PT": "",
+        "Flat Rate": "0.00",
+        "Commission": "2,264.68",
+        "Total Commission": "2,264.68"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ae_02227",
+        "Position Rate": "ET-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "2",
+        "Total Session": "2",
+        "Per Session": "1,775.70",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "621.50",
+        "Total Commission": "621.50"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ford_02742",
+        "Position Rate": "PT-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "2",
+        "Total Session": "2",
+        "Per Session": "1,525.41",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "457.62",
+        "Total Commission": "457.62"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Yean_03170",
+        "Position Rate": "PT-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "2",
+        "Total Session": "2",
+        "Per Session": "1,499.04",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "449.71",
+        "Total Commission": "449.71"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Bos_01915",
+        "Position Rate": "ET-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "1",
+        "Total Session": "1",
+        "Per Session": "1,207.17",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "422.51",
+        "Total Commission": "422.51"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Lion_02391",
+        "Position Rate": "ET-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "1",
+        "Total Session": "1",
+        "Per Session": "895.25",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "313.34",
+        "Total Commission": "313.34"
+      }
+    ]
   },
   "sold": {
     "headers": [
@@ -31,10 +116,129 @@
       "Comm Sold",
       "Commission Price"
     ],
-    "rows": []
+    "rows": [
+      {
+        "Ext": "",
+        "Trainer": "Jetts Robinson Ratchaphruek",
+        "Position Rate": "",
+        "Total Amount": "157,570",
+        "Amount Before VAT": "147,261.68",
+        "Comm Sold": "",
+        "Commission Price": "2,945.23"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Benz_03155",
+        "Position Rate": "PT-RED",
+        "Total Amount": "43,985",
+        "Amount Before VAT": "41,107.48",
+        "Comm Sold": "2%",
+        "Commission Price": "822.15"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RSR_Benz_03083",
+        "Position Rate": "PT-RED",
+        "Total Amount": "43,985",
+        "Amount Before VAT": "41,107.48",
+        "Comm Sold": "2%",
+        "Commission Price": "822.15"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Mew_01974",
+        "Position Rate": "ET-RED",
+        "Total Amount": "39,000",
+        "Amount Before VAT": "36,448.60",
+        "Comm Sold": "2%",
+        "Commission Price": "728.97"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Bos_01915",
+        "Position Rate": "ET-RED",
+        "Total Amount": "28,800",
+        "Amount Before VAT": "26,915.89",
+        "Comm Sold": "2%",
+        "Commission Price": "538.32"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Zico_01805",
+        "Position Rate": "PT-RED",
+        "Total Amount": "1,800",
+        "Amount Before VAT": "1,682.24",
+        "Comm Sold": "2%",
+        "Commission Price": "33.64"
+      }
+    ]
   },
   "membership": {
-    "rows": [],
-    "summary": []
+    "rows": [
+      {
+        "sold_date": "01 September 2026",
+        "app_id": "046202601377",
+        "membership": "Corporate Promotion Stay Fit Membership",
+        "client": "Boonsong Korpattanacheeravut",
+        "sold_by": "RRA_Bos_01915"
+      },
+      {
+        "sold_date": "01 September 2026",
+        "app_id": "046202601378",
+        "membership": "Freedom Direct Debit Membership 2026",
+        "client": "Phichet Ketkorn",
+        "sold_by": "RRA_Zico_01805"
+      },
+      {
+        "sold_date": "29 August 2026",
+        "app_id": "046202601379",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Wannathat Saiong",
+        "sold_by": "ecommerce_website"
+      },
+      {
+        "sold_date": "01 September 2026",
+        "app_id": "046202601380",
+        "membership": "Plus One Red Complimentary Membership",
+        "client": "Pawara Uttraporn",
+        "sold_by": "RRA_Golf_01913"
+      },
+      {
+        "sold_date": "01 September 2026",
+        "app_id": "046202601381",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Nirinya Chartjariyawat",
+        "sold_by": "RRA_Yean_03170"
+      },
+      {
+        "sold_date": "01 September 2026",
+        "app_id": "046202601382",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Phanuchat Jampadaeng",
+        "sold_by": "RRA_Yean_03170"
+      }
+    ],
+    "summary": [
+      {
+        "sold_by": "RRA_Yean_03170",
+        "count": 2
+      },
+      {
+        "sold_by": "RRA_Bos_01915",
+        "count": 1
+      },
+      {
+        "sold_by": "RRA_Zico_01805",
+        "count": 1
+      },
+      {
+        "sold_by": "ecommerce_website",
+        "count": 1
+      },
+      {
+        "sold_by": "RRA_Golf_01913",
+        "count": 1
+      }
+    ]
   }
 }
