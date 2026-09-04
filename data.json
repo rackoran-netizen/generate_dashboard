@@ -1,8 +1,8 @@
 {
-  "updated_at": "03/09/2026 05:28",
+  "updated_at": "04/09/2026 00:01",
   "period": {
     "start": "01/09/2026",
-    "end": "03/09/2026"
+    "end": "04/09/2026"
   },
   "conduct": {
     "headers": [
@@ -345,10 +345,46 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "227,395",
-        "Amount Before VAT": "212,518.69",
+        "Total Amount": "538,450",
+        "Amount Before VAT": "503,224.30",
         "Comm Sold": "",
-        "Commission Price": "4,250.37"
+        "Commission Price": "12,530.93"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ford_02742",
+        "Position Rate": "PT-RED",
+        "Total Amount": "87,970",
+        "Amount Before VAT": "82,214.95",
+        "Comm Sold": "5%",
+        "Commission Price": "4,110.75"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Put_02910",
+        "Position Rate": "PT-RED",
+        "Total Amount": "54,800",
+        "Amount Before VAT": "51,214.95",
+        "Comm Sold": "2%",
+        "Commission Price": "1,024.30"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Tiger_01923",
+        "Position Rate": "PT-RED",
+        "Total Amount": "53,075",
+        "Amount Before VAT": "49,602.80",
+        "Comm Sold": "2%",
+        "Commission Price": "992.06"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Poom_03173",
+        "Position Rate": "PT-RED",
+        "Total Amount": "43,985",
+        "Amount Before VAT": "41,107.48",
+        "Comm Sold": "2%",
+        "Commission Price": "822.15"
       },
       {
         "Ext": "",
@@ -370,6 +406,15 @@
       },
       {
         "Ext": "",
+        "Trainer": "IBA_Deaw_02058",
+        "Position Rate": "ET-RED",
+        "Total Amount": "39,000",
+        "Amount Before VAT": "36,448.60",
+        "Comm Sold": "2%",
+        "Commission Price": "728.97"
+      },
+      {
+        "Ext": "",
         "Trainer": "RRA_Mew_01974",
         "Position Rate": "ET-RED",
         "Total Amount": "39,000",
@@ -388,12 +433,12 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Tiger_01923",
-        "Position Rate": "PT-RED",
-        "Total Amount": "32,775",
-        "Amount Before VAT": "30,630.84",
+        "Trainer": "RRA_Ae_02227",
+        "Position Rate": "ET-RED",
+        "Total Amount": "30,500",
+        "Amount Before VAT": "28,504.67",
         "Comm Sold": "2%",
-        "Commission Price": "612.62"
+        "Commission Price": "570.09"
       },
       {
         "Ext": "",
@@ -403,6 +448,24 @@
         "Amount Before VAT": "26,915.89",
         "Comm Sold": "2%",
         "Commission Price": "538.32"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Baifern_01910",
+        "Position Rate": "PT-RED",
+        "Total Amount": "20,300",
+        "Amount Before VAT": "18,971.96",
+        "Comm Sold": "2%",
+        "Commission Price": "379.44"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Yean_03170",
+        "Position Rate": "PT-RED",
+        "Total Amount": "14,200",
+        "Amount Before VAT": "13,271.03",
+        "Comm Sold": "2%",
+        "Commission Price": "265.42"
       },
       {
         "Ext": "",
@@ -493,11 +556,29 @@
         "membership": "3 Month PIA - Membership 2026",
         "client": "Yanisa Jaiyen",
         "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "03 September 2026",
+        "app_id": "046202601388",
+        "membership": "Corporate Promotion 12 Months PIA Membership",
+        "client": "Supornpong Kruaaon",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "03 September 2026",
+        "app_id": "046202601389",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Aiwarin Panchaue",
+        "sold_by": "RRA_Yean_03170"
       }
     ],
     "summary": [
       {
         "sold_by": "RRA_Yean_03170",
+        "count": 3
+      },
+      {
+        "sold_by": "BGPL_Ou_00936",
         "count": 2
       },
       {
@@ -530,10 +611,6 @@
       },
       {
         "sold_by": "RRA_Lion_02391",
-        "count": 1
-      },
-      {
-        "sold_by": "BGPL_Ou_00936",
         "count": 1
       }
     ]
