@@ -9,6 +9,7 @@ months           = src["months"]
 monthly_total    = src["monthly_total"]
 monthly_by_type  = src["monthly_by_type"]
 pt_trainer_month = src["pt_trainer_month"]
+nm_month_total   = src.get("nm_month_total", {})
 
 def next_month_labels(last_ym, n=3):
     y, m = (int(x) for x in last_ym.split("-"))
@@ -83,6 +84,55 @@ for name, series in pt_trainer_month.items():
     })
 trainer_rows.sort(key=lambda r: -r["total12"])
 
+# ---------- เดือนนี้ (nowcast) ----------
+# มีเฉพาะตอนที่เดือนล่าสุดยังไม่ครบ (ถ้าครบแล้วเดือนนั้นก็คือ "เดือนล่าสุด" ในภาพรวมด้านบนอยู่แล้ว)
+current_month = None
+if not last_month_is_complete:
+    cur_ym = months[-1]
+    days_elapsed = data_through.day
+    cur_pt_by_trainer = {}
+    for name, series in pt_trainer_month.items():
+        v = series.get(cur_ym, 0.0)
+        if v > 0:
+            cur_pt_by_trainer[name] = v
+
+    # พยากรณ์แบบเทรนด์ (h=1 ต่อจาก last12 ที่จบเดือนก่อนหน้า) = ค่าคาดการณ์เต็มเดือนของเดือนนี้
+    def forecast_h1(vals_by_month, month_list):
+        ys = [vals_by_month.get(m, 0.0) for m in month_list]
+        xs = list(range(len(ys)))
+        slope, intercept = linreg(xs, ys)
+        return max(0.0, slope * len(ys) + intercept)
+
+    nm_fc = forecast_h1(nm_month_total, last12)
+    pt_total_fc = forecast_h1({m: monthly_by_type.get(m, {}).get("PT Revenue", 0.0) for m in last12}, last12)
+    total_fc = forecast_h1(monthly_total, last12)
+
+    trainer_now = []
+    for name, series in pt_trainer_month.items():
+        active_cnt = sum(1 for m in last12 if series.get(m, 0) > 0)
+        if active_cnt < 6:
+            continue
+        fc = forecast_h1(series, last12)
+        trainer_now.append({
+            "name": name,
+            "actual_mtd": cur_pt_by_trainer.get(name, 0.0),
+            "forecast": fc,
+        })
+    trainer_now.sort(key=lambda r: -r["forecast"])
+
+    current_month = {
+        "ym": cur_ym,
+        "days_elapsed": days_elapsed,
+        "days_in_month": days_in_last_month,
+        "actual_total": monthly_total.get(cur_ym, 0.0),
+        "actual_pt": monthly_by_type.get(cur_ym, {}).get("PT Revenue", 0.0),
+        "actual_nm": nm_month_total.get(cur_ym, 0),
+        "forecast_total": total_fc,
+        "forecast_pt": pt_total_fc,
+        "forecast_nm": nm_fc,
+        "trainers": trainer_now,
+    }
+
 report_data = {
     "full_months": full_months,
     "last12": last12,
@@ -94,6 +144,7 @@ report_data = {
     },
     "mix_last12": mix_last12,
     "trainers": trainer_rows,
+    "current_month": current_month,
 }
 
 DATA_JSON = json.dumps(report_data, ensure_ascii=False, separators=(",", ":"))
@@ -215,6 +266,20 @@ footer p{margin:0 0 6px;max-width:75ch;}
 
   <div class="kpi-row" id="kpiRow"></div>
 
+  <section class="card" id="nowcastSection" hidden>
+    <h2 id="nowcastTitle">เดือนนี้</h2>
+    <p class="section-note" id="nowcastNote"></p>
+    <div class="kpi-row" id="nowcastKpiRow"></div>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr>
+        <th>เทรนเนอร์</th><th class="num">ยอด PT จริง ถึงวันนี้ (฿)</th><th class="num">พยากรณ์เต็มเดือน (฿)</th>
+      </tr></thead>
+      <tbody id="nowcastTrainerBody"></tbody>
+    </table>
+    </div>
+  </section>
+
   <section class="card">
     <h2>ภาพรวมยอดขายทั้งหมด</h2>
     <p class="section-note">รวมทุกประเภทรายได้ (PT Revenue, Membership, PIA Collections, Other Income) รายเดือนตั้งแต่เปิดข้อมูล เส้นทึบคือยอดจริง เส้นประคือค่าพยากรณ์จากแนวโน้ม 12 เดือนล่าสุด</p>
@@ -286,6 +351,33 @@ function fmtM(ym){ const [y,m] = ym.split('-'); return monthTH[parseInt(m,10)-1]
       <div class="val">${k.val}</div>
       ${k.sub ? `<div class="sub">${k.sub}</div>` : `<div class="sub"><span class="chip ${k.chipClass}">${k.chip}</span></div>`}
     </div>`).join('');
+})();
+
+(function(){
+  const cm = DATA.current_month;
+  if(!cm) return;
+  document.getElementById('nowcastSection').hidden = false;
+  document.getElementById('nowcastTitle').textContent = `เดือนนี้ — ${fmtM(cm.ym)}`;
+  document.getElementById('nowcastNote').textContent =
+    `ข้อมูลจริงถึงวันที่ ${cm.days_elapsed} จาก ${cm.days_in_month} วัน (${(cm.days_elapsed/cm.days_in_month*100).toFixed(0)}% ของเดือน) ` +
+    `พยากรณ์เต็มเดือนใช้แนวโน้มถดถอยเชิงเส้นจาก 12 เดือนล่าสุด ไม่ใช่การ "เอาไปคูณ" จากยอดวันนี้ เพราะช่วงต้นเดือนมีตัวอย่างน้อยและ PT ขายเป็นแพ็กเกจก้อนใหญ่ ทำให้การประมาณจากจังหวะไม่กี่วันแรกคลาดเคลื่อนสูง`;
+  const kpis = [
+    {lbl:'สมาชิกใหม่ (NM)', val: Math.round(cm.actual_nm) + ' คน', sub: `พยากรณ์เต็มเดือน: ${cm.forecast_nm.toFixed(0)} คน`},
+    {lbl:'ยอด PT ขาย', val: THB(cm.actual_pt), sub: `พยากรณ์เต็มเดือน: ${THB(cm.forecast_pt)}`},
+    {lbl:'ยอดขายรวมทุกประเภท', val: THB(cm.actual_total), sub: `พยากรณ์เต็มเดือน: ${THB(cm.forecast_total)}`},
+  ];
+  document.getElementById('nowcastKpiRow').innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="lbl">${k.lbl}</div>
+      <div class="val">${k.val}</div>
+      <div class="sub">${k.sub}</div>
+    </div>`).join('');
+  document.getElementById('nowcastTrainerBody').innerHTML = cm.trainers.map(t => `
+    <tr>
+      <td class="name">${t.name}</td>
+      <td class="num">${THB0(t.actual_mtd)}</td>
+      <td class="num">${THB0(t.forecast)}</td>
+    </tr>`).join('');
 })();
 
 (function(){
