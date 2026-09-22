@@ -1,8 +1,8 @@
 {
-  "updated_at": "21/09/2026 00:03",
+  "updated_at": "22/09/2026 00:02",
   "period": {
     "start": "01/09/2026",
-    "end": "21/09/2026"
+    "end": "22/09/2026"
   },
   "conduct": {
     "headers": [
@@ -24,15 +24,15 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Fitstart": "90",
+        "Fitstart": "97",
         "Trial Session": "9",
-        "Total Session (Expept Fitstart and Trial)": "1,521",
-        "Total Session": "1,620",
-        "Per Session": "1,317,962.58",
+        "Total Session (Expept Fitstart and Trial)": "1,572",
+        "Total Session": "1,678",
+        "Per Session": "1,360,977.93",
         "Comm PT": "",
         "Flat Rate": "0.00",
-        "Commission": "452,972.41",
-        "Total Commission": "452,972.41"
+        "Commission": "472,081.62",
+        "Total Commission": "472,081.62"
       },
       {
         "Ext": "",
@@ -40,27 +40,27 @@
         "Position Rate": "ET-RED",
         "Fitstart": "0",
         "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "110",
-        "Total Session": "111",
-        "Per Session": "109,864.61",
+        "Total Session (Expept Fitstart and Trial)": "113",
+        "Total Session": "114",
+        "Per Session": "112,751.38",
         "Comm PT": "40%",
         "Flat Rate": "0",
-        "Commission": "43,945.84",
-        "Total Commission": "43,945.84"
+        "Commission": "45,100.55",
+        "Total Commission": "45,100.55"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Golf_01913",
         "Position Rate": "ET-RED",
-        "Fitstart": "1",
+        "Fitstart": "2",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "104",
-        "Total Session": "105",
-        "Per Session": "92,419.56",
+        "Total Session (Expept Fitstart and Trial)": "105",
+        "Total Session": "107",
+        "Per Session": "93,073.77",
         "Comm PT": "40%",
         "Flat Rate": "0",
-        "Commission": "36,967.82",
-        "Total Commission": "36,967.82"
+        "Commission": "37,229.51",
+        "Total Commission": "37,229.51"
       },
       {
         "Ext": "",
@@ -68,41 +68,41 @@
         "Position Rate": "ET-RED",
         "Fitstart": "5",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "91",
-        "Total Session": "96",
-        "Per Session": "80,998.69",
+        "Total Session (Expept Fitstart and Trial)": "97",
+        "Total Session": "102",
+        "Per Session": "86,097.17",
         "Comm PT": "40%",
         "Flat Rate": "0",
-        "Commission": "32,399.48",
-        "Total Commission": "32,399.48"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Lion_02391",
-        "Position Rate": "ET-RED",
-        "Fitstart": "5",
-        "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "79",
-        "Total Session": "85",
-        "Per Session": "73,339",
-        "Comm PT": "40%",
-        "Flat Rate": "0",
-        "Commission": "29,335.60",
-        "Total Commission": "29,335.60"
+        "Commission": "34,438.87",
+        "Total Commission": "34,438.87"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Mew_01974",
         "Position Rate": "ET-RED",
-        "Fitstart": "5",
+        "Fitstart": "6",
         "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "81",
-        "Total Session": "87",
-        "Per Session": "77,610.32",
-        "Comm PT": "35%",
+        "Total Session (Expept Fitstart and Trial)": "88",
+        "Total Session": "95",
+        "Per Session": "83,744.95",
+        "Comm PT": "40%",
         "Flat Rate": "0",
-        "Commission": "27,163.61",
-        "Total Commission": "27,163.61"
+        "Commission": "33,497.98",
+        "Total Commission": "33,497.98"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Lion_02391",
+        "Position Rate": "ET-RED",
+        "Fitstart": "6",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "82",
+        "Total Session": "89",
+        "Per Session": "76,028.93",
+        "Comm PT": "40%",
+        "Flat Rate": "0",
+        "Commission": "30,411.57",
+        "Total Commission": "30,411.57"
       },
       {
         "Ext": "",
@@ -117,6 +117,20 @@
         "Flat Rate": "0",
         "Commission": "26,975.63",
         "Total Commission": "26,975.63"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Ford_02742",
+        "Position Rate": "PT-RED",
+        "Fitstart": "4",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "95",
+        "Total Session": "99",
+        "Per Session": "74,200.18",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "25,970.06",
+        "Total Commission": "25,970.06"
       },
       {
         "Ext": "",
@@ -148,31 +162,17 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Ford_02742",
-        "Position Rate": "PT-RED",
-        "Fitstart": "4",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "89",
-        "Total Session": "93",
-        "Per Session": "69,513.97",
-        "Comm PT": "35%",
-        "Flat Rate": "0",
-        "Commission": "24,329.89",
-        "Total Commission": "24,329.89"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Paul_02228",
         "Position Rate": "ST-RED",
         "Fitstart": "5",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "96",
-        "Total Session": "101",
-        "Per Session": "77,852.33",
+        "Total Session (Expept Fitstart and Trial)": "98",
+        "Total Session": "103",
+        "Per Session": "79,611.54",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "23,355.70",
-        "Total Commission": "23,355.70"
+        "Commission": "23,883.46",
+        "Total Commission": "23,883.46"
       },
       {
         "Ext": "",
@@ -180,13 +180,13 @@
         "Position Rate": "PT-RED",
         "Fitstart": "7",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "69",
-        "Total Session": "76",
-        "Per Session": "57,483.67",
+        "Total Session (Expept Fitstart and Trial)": "70",
+        "Total Session": "77",
+        "Per Session": "58,044.42",
         "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "20,119.28",
-        "Total Commission": "20,119.28"
+        "Commission": "20,315.55",
+        "Total Commission": "20,315.55"
       },
       {
         "Ext": "",
@@ -194,13 +194,27 @@
         "Position Rate": "PT-RED",
         "Fitstart": "4",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "61",
-        "Total Session": "65",
-        "Per Session": "51,564.40",
+        "Total Session (Expept Fitstart and Trial)": "68",
+        "Total Session": "72",
+        "Per Session": "57,871.05",
         "Comm PT": "35%",
         "Flat Rate": "0",
-        "Commission": "18,047.54",
-        "Total Commission": "18,047.54"
+        "Commission": "20,254.87",
+        "Total Commission": "20,254.87"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Man_01911",
+        "Position Rate": "PT-RED",
+        "Fitstart": "2",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "71",
+        "Total Session": "73",
+        "Per Session": "56,641.94",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "16,992.58",
+        "Total Commission": "16,992.58"
       },
       {
         "Ext": "",
@@ -218,45 +232,31 @@
       },
       {
         "Ext": "",
-        "Trainer": "RRA_Man_01911",
-        "Position Rate": "PT-RED",
-        "Fitstart": "2",
-        "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "66",
-        "Total Session": "68",
-        "Per Session": "52,565.14",
-        "Comm PT": "30%",
-        "Flat Rate": "0",
-        "Commission": "15,769.54",
-        "Total Commission": "15,769.54"
-      },
-      {
-        "Ext": "",
         "Trainer": "RRA_Zico_01805",
         "Position Rate": "PT-RED",
         "Fitstart": "4",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "54",
-        "Total Session": "58",
-        "Per Session": "45,523.26",
+        "Total Session (Expept Fitstart and Trial)": "61",
+        "Total Session": "65",
+        "Per Session": "51,297.41",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "13,656.98",
-        "Total Commission": "13,656.98"
+        "Commission": "15,389.22",
+        "Total Commission": "15,389.22"
       },
       {
         "Ext": "",
         "Trainer": "RRA_Ice_01548",
         "Position Rate": "ST-RED",
-        "Fitstart": "8",
+        "Fitstart": "9",
         "Trial Session": "1",
-        "Total Session (Expept Fitstart and Trial)": "51",
-        "Total Session": "60",
-        "Per Session": "41,419.79",
+        "Total Session (Expept Fitstart and Trial)": "53",
+        "Total Session": "63",
+        "Per Session": "43,125.40",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "12,425.94",
-        "Total Commission": "12,425.94"
+        "Commission": "12,937.62",
+        "Total Commission": "12,937.62"
       },
       {
         "Ext": "",
@@ -264,13 +264,13 @@
         "Position Rate": "PT-RED",
         "Fitstart": "1",
         "Trial Session": "0",
-        "Total Session (Expept Fitstart and Trial)": "50",
-        "Total Session": "51",
-        "Per Session": "40,429.30",
+        "Total Session (Expept Fitstart and Trial)": "51",
+        "Total Session": "52",
+        "Per Session": "41,111.25",
         "Comm PT": "30%",
         "Flat Rate": "0",
-        "Commission": "12,128.79",
-        "Total Commission": "12,128.79"
+        "Commission": "12,333.38",
+        "Total Commission": "12,333.38"
       },
       {
         "Ext": "",
@@ -318,10 +318,10 @@
         "Ext": "",
         "Trainer": "RRA_Nill_03116",
         "Position Rate": "PT-RED",
-        "Fitstart": "6",
+        "Fitstart": "9",
         "Trial Session": "3",
         "Total Session (Expept Fitstart and Trial)": "36",
-        "Total Session": "45",
+        "Total Session": "48",
         "Per Session": "30,098.22",
         "Comm PT": "30%",
         "Flat Rate": "0",
@@ -373,10 +373,10 @@
         "Ext": "",
         "Trainer": "Jetts Robinson Ratchaphruek",
         "Position Rate": "",
-        "Total Amount": "2,018,055",
-        "Amount Before VAT": "1,886,032.71",
+        "Total Amount": "2,062,040",
+        "Amount Before VAT": "1,927,140.19",
         "Comm Sold": "",
-        "Commission Price": "84,737.18"
+        "Commission Price": "89,008.63"
       },
       {
         "Ext": "",
@@ -431,6 +431,15 @@
         "Amount Before VAT": "118,303.74",
         "Comm Sold": "5%",
         "Commission Price": "5,915.19"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Man_01911",
+        "Position Rate": "PT-RED",
+        "Total Amount": "123,025",
+        "Amount Before VAT": "114,976.64",
+        "Comm Sold": "5%",
+        "Commission Price": "5,748.83"
       },
       {
         "Ext": "",
@@ -494,15 +503,6 @@
         "Amount Before VAT": "83,457.94",
         "Comm Sold": "2%",
         "Commission Price": "1,669.16"
-      },
-      {
-        "Ext": "",
-        "Trainer": "RRA_Man_01911",
-        "Position Rate": "PT-RED",
-        "Total Amount": "79,040",
-        "Amount Before VAT": "73,869.16",
-        "Comm Sold": "2%",
-        "Commission Price": "1,477.38"
       },
       {
         "Ext": "",
@@ -1225,12 +1225,33 @@
         "membership": "Corporate Promotion Stay Fit Membership",
         "client": "Nontakorn Siriwattanasatorn",
         "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "21 September 2026",
+        "app_id": "046202601473",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "LEE HARKER",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "21 September 2026",
+        "app_id": "046202601474",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Ekchalit Laoporn",
+        "sold_by": "RRA_Mew_01974"
+      },
+      {
+        "sold_date": "21 September 2026",
+        "app_id": "046202601475",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Ekkanit Meekul",
+        "sold_by": "BGPL_Ou_00936"
       }
     ],
     "summary": [
       {
         "sold_by": "BGPL_Ou_00936",
-        "count": 26
+        "count": 28
       },
       {
         "sold_by": "RRA_Yean_03170",
@@ -1277,6 +1298,10 @@
         "count": 3
       },
       {
+        "sold_by": "RRA_Mew_01974",
+        "count": 3
+      },
+      {
         "sold_by": "RRA_Bos_01915",
         "count": 2
       },
@@ -1286,10 +1311,6 @@
       },
       {
         "sold_by": "RRA_Put_02910",
-        "count": 2
-      },
-      {
-        "sold_by": "RRA_Mew_01974",
         "count": 2
       },
       {
