@@ -1,8 +1,8 @@
 {
-  "updated_at": "01/10/2026 00:03",
+  "updated_at": "02/10/2026 00:01",
   "period": {
     "start": "01/10/2026",
-    "end": "01/10/2026"
+    "end": "02/10/2026"
   },
   "conduct": {
     "headers": [
@@ -19,7 +19,64 @@
       "Commission",
       "Total Commission"
     ],
-    "rows": []
+    "rows": [
+      {
+        "Ext": "",
+        "Trainer": "Jetts Robinson Ratchaphruek",
+        "Position Rate": "",
+        "Fitstart": "1",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "1",
+        "Total Session": "3",
+        "Per Session": "895.25",
+        "Comm PT": "",
+        "Flat Rate": "0.00",
+        "Commission": "313.34",
+        "Total Commission": "313.34"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Golf_01913",
+        "Position Rate": "ET-RED",
+        "Fitstart": "0",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "1",
+        "Total Session": "1",
+        "Per Session": "895.25",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "313.34",
+        "Total Commission": "313.34"
+      },
+      {
+        "Ext": "",
+        "Trainer": "IBA_Deaw_02058",
+        "Position Rate": "ET-RED",
+        "Fitstart": "0",
+        "Trial Session": "1",
+        "Total Session (Expept Fitstart and Trial)": "0",
+        "Total Session": "1",
+        "Per Session": "0",
+        "Comm PT": "35%",
+        "Flat Rate": "0",
+        "Commission": "0",
+        "Total Commission": "0"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Tiger_01923",
+        "Position Rate": "PT-RED",
+        "Fitstart": "1",
+        "Trial Session": "0",
+        "Total Session (Expept Fitstart and Trial)": "0",
+        "Total Session": "1",
+        "Per Session": "0",
+        "Comm PT": "30%",
+        "Flat Rate": "0",
+        "Commission": "0",
+        "Total Commission": "0"
+      }
+    ]
   },
   "sold": {
     "headers": [
@@ -31,10 +88,148 @@
       "Comm Sold",
       "Commission Price"
     ],
-    "rows": []
+    "rows": [
+      {
+        "Ext": "",
+        "Trainer": "Jetts Robinson Ratchaphruek",
+        "Position Rate": "",
+        "Total Amount": "199,700",
+        "Amount Before VAT": "186,635.51",
+        "Comm Sold": "",
+        "Commission Price": "3,732.72"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Baifern_01910",
+        "Position Rate": "PT-RED",
+        "Total Amount": "53,400",
+        "Amount Before VAT": "49,906.54",
+        "Comm Sold": "2%",
+        "Commission Price": "998.13"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Put_02910",
+        "Position Rate": "PT-RED",
+        "Total Amount": "34,500",
+        "Amount Before VAT": "32,242.99",
+        "Comm Sold": "2%",
+        "Commission Price": "644.86"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Bos_01915",
+        "Position Rate": "ET-RED",
+        "Total Amount": "28,800",
+        "Amount Before VAT": "26,915.89",
+        "Comm Sold": "2%",
+        "Commission Price": "538.32"
+      },
+      {
+        "Ext": "",
+        "Trainer": "IBA_Deaw_02058",
+        "Position Rate": "ET-RED",
+        "Total Amount": "28,800",
+        "Amount Before VAT": "26,915.89",
+        "Comm Sold": "2%",
+        "Commission Price": "538.32"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Mew_01974",
+        "Position Rate": "ET-RED",
+        "Total Amount": "28,800",
+        "Amount Before VAT": "26,915.89",
+        "Comm Sold": "2%",
+        "Commission Price": "538.32"
+      },
+      {
+        "Ext": "",
+        "Trainer": "RRA_Tiger_01923",
+        "Position Rate": "PT-RED",
+        "Total Amount": "25,400",
+        "Amount Before VAT": "23,738.32",
+        "Comm Sold": "2%",
+        "Commission Price": "474.77"
+      }
+    ]
   },
   "membership": {
-    "rows": [],
-    "summary": []
+    "rows": [
+      {
+        "sold_date": "30 September 2026",
+        "app_id": "046202601522",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Sudatip Srilubsei",
+        "sold_by": "ecommerce_website"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601523",
+        "membership": "Corporate Jetts Love's 12 Months PIA Membership",
+        "client": "Vachiravit Pakpitpiloool",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601524",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Chayanan Lommahadthai",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601525",
+        "membership": "Corporate Promotion Freedom Membership",
+        "client": "Apinya Charernruttanakul",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601526",
+        "membership": "Stay Fit Direct Debit Membership 2026",
+        "client": "Nutcha Pongnuch",
+        "sold_by": "IBA_Deaw_02058"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601527",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Napakcharat Kitcharoenka",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601528",
+        "membership": "Corporate Promotion Flexi Membership",
+        "client": "Arpamas Somchana",
+        "sold_by": "BGPL_Ou_00936"
+      },
+      {
+        "sold_date": "01 October 2026",
+        "app_id": "046202601529",
+        "membership": "3 Month PIA - Membership 2026",
+        "client": "Boonyarit Sripitoonpart",
+        "sold_by": "RRA_Ford_02742"
+      }
+    ],
+    "summary": [
+      {
+        "sold_by": "BGPL_Ou_00936",
+        "count": 5
+      },
+      {
+        "sold_by": "ecommerce_website",
+        "count": 1
+      },
+      {
+        "sold_by": "IBA_Deaw_02058",
+        "count": 1
+      },
+      {
+        "sold_by": "RRA_Ford_02742",
+        "count": 1
+      }
+    ]
   }
 }
