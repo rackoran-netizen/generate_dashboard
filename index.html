@@ -118,7 +118,7 @@ body{
 
 /* ════════════════════════════════════════════════════════════════
    PRINT / PDF EXPORT — แยกจากหน้าจอโดยสิ้นเชิง
-   ใช้ขนาดไดนามิกที่คำนวณจากจำนวนเทรนเนอร์ (n_trainers=3)
+   ใช้ขนาดไดนามิกที่คำนวณจากจำนวนเทรนเนอร์ (n_trainers=22)
    ให้พอดี A4 หนึ่งหน้าเสมอ ไม่ยุ่งกับ layout หน้าจอ/มือถือเลย
    .pdf-export = คลาสที่ JS ใส่ชั่วคราวตอน capture ด้วย html2canvas
    (ปุ่ม "ดาวน์โหลด PDF") ส่วน @media print ใช้ตอนกด Ctrl+P ปกติ
@@ -270,11 +270,11 @@ async function downloadPDF() {
   <div class="doc-header">
     <div>
       <div class="doc-title">Report — Jetts Robinson Ratchaphruek</div>
-      <div class="doc-sub">ช่วงเวลา 01/10/2026 – 02/10/2026</div>
+      <div class="doc-sub">ช่วงเวลา 01/10/2026 – 03/10/2026</div>
     </div>
     <div class="doc-meta">
-      อัพเดต <b>02/10/2026 00:01</b><br>
-      เทรนเนอร์ทั้งหมด <b>3</b> คน
+      อัพเดต <b>03/10/2026 00:01</b><br>
+      เทรนเนอร์ทั้งหมด <b>22</b> คน
     </div>
   </div>
 
@@ -282,15 +282,15 @@ async function downloadPDF() {
   <div class="tile-row">
     <div class="tile">
       <div class="lbl">Total Session</div>
-      <div class="val">3<span class="unit">ครั้ง</span></div>
+      <div class="val">109<span class="unit">ครั้ง</span></div>
     </div>
     <div class="tile">
       <div class="lbl">PT Sold</div>
-      <div class="val">199,700<span class="unit">฿</span></div>
+      <div class="val">236,000<span class="unit">฿</span></div>
     </div>
     <div class="tile">
       <div class="lbl">สมาชิกใหม่</div>
-      <div class="val">2<span class="unit">คน</span></div>
+      <div class="val">4<span class="unit">คน</span></div>
     </div>
   </div>
 
@@ -299,20 +299,20 @@ async function downloadPDF() {
     <div class="goal-tile">
       <div class="gtitle">เป้าหมาย PT Sold (2,400,000 + VAT 7%)</div>
       <div class="goal-nums">
-        <div class="goal-pct" style="color:#d03b3b;">7.8%</div>
-        <div class="goal-actual">199,700 / 2,568,000 ฿</div>
+        <div class="goal-pct" style="color:#d03b3b;">9.2%</div>
+        <div class="goal-actual">236,000 / 2,568,000 ฿</div>
       </div>
-      <div class="pbar"><div class="pbar-fill" style="width:7.8%;background:#d03b3b;"></div></div>
-      <div class="goal-note">คงเหลือ 2,368,300 ฿</div>
+      <div class="pbar"><div class="pbar-fill" style="width:9.2%;background:#d03b3b;"></div></div>
+      <div class="goal-note">คงเหลือ 2,332,000 ฿</div>
     </div>
     <div class="goal-tile">
       <div class="gtitle">เป้าหมายสมาชิกรวมคลับ (125 คน)</div>
       <div class="goal-nums">
-        <div class="goal-pct" style="color:#d03b3b;">1.6%</div>
-        <div class="goal-actual">2 / 125 คน</div>
+        <div class="goal-pct" style="color:#d03b3b;">3.2%</div>
+        <div class="goal-actual">4 / 125 คน</div>
       </div>
-      <div class="pbar"><div class="pbar-fill" style="width:1.6%;background:#d03b3b;"></div></div>
-      <div class="goal-note">คงเหลือ 123 คน</div>
+      <div class="pbar"><div class="pbar-fill" style="width:3.2%;background:#d03b3b;"></div></div>
+      <div class="goal-note">คงเหลือ 121 คน</div>
     </div>
   </div>
 
@@ -340,13 +340,13 @@ async function downloadPDF() {
           <div class="gr-name"><span class="postag">ET</span>Deaw</div>
           <div class="gr-metric m1">
             <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:100.0%"></div></div>
+            <div class="bar-track"><div class="bar-fill sold" style="width:39.1%"></div></div>
             <span class="bar-val">28,800</span>
           </div>
           <div class="gr-metric m2">
             <span class="m-label">PT Conducted</span>
-            <div class="bar-track"></div>
-            <span class="bar-val">0</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:45.5%"></div></div>
+            <span class="bar-val">5</span>
           </div>
           <div class="gr-metric m3">
             <span class="m-label">Fs+Ra</span>
@@ -360,11 +360,241 @@ async function downloadPDF() {
           </div>
         </div><div class="grid-row">
           <div class="gr-rank">2</div>
+          <div class="gr-name"><span class="postag">PT</span>Ford</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:18.2%"></div></div>
+            <span class="bar-val">2</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
+            <span class="bar-val">1</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">3</div>
+          <div class="gr-name"><span class="postag">PT</span>Baifern</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"><div class="bar-fill sold" style="width:100.0%"></div></div>
+            <span class="bar-val">73,700</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:9.1%"></div></div>
+            <span class="bar-val">1</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
+            <span class="bar-val">1</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">4</div>
           <div class="gr-name"><span class="postag">PT</span>Tiger</div>
           <div class="gr-metric m1">
             <span class="m-label">PT Sold</span>
-            <div class="bar-track"><div class="bar-fill sold" style="width:88.2%"></div></div>
+            <div class="bar-track"><div class="bar-fill sold" style="width:34.5%"></div></div>
             <span class="bar-val">25,400</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:27.3%"></div></div>
+            <span class="bar-val">3</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
+            <span class="bar-val">1</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">5</div>
+          <div class="gr-name"><span class="postag">ST</span>Paul</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"><div class="bar-fill sold" style="width:2.4%"></div></div>
+            <span class="bar-val">1,800</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:54.5%"></div></div>
+            <span class="bar-val">6</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">6</div>
+          <div class="gr-name"><span class="postag">PT</span>Man</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:45.5%"></div></div>
+            <span class="bar-val">5</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"><div class="bar-fill mem" style="width:16.7%"></div></div>
+            <span class="bar-val">1/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">7</div>
+          <div class="gr-name"><span class="postag">ET</span>Bos</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"><div class="bar-fill sold" style="width:39.1%"></div></div>
+            <span class="bar-val">28,800</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:100.0%"></div></div>
+            <span class="bar-val">11</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">8</div>
+          <div class="gr-name"><span class="postag">PT</span>Nill</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:27.3%"></div></div>
+            <span class="bar-val">3</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
+            <span class="bar-val">1</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">9</div>
+          <div class="gr-name"><span class="postag">ST</span>Ice</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:27.3%"></div></div>
+            <span class="bar-val">3</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"><div class="bar-fill trial" style="width:100.0%"></div></div>
+            <span class="bar-val">1</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">10</div>
+          <div class="gr-name"><span class="postag">PT</span>Put</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"><div class="bar-fill sold" style="width:66.1%"></div></div>
+            <span class="bar-val">48,700</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:36.4%"></div></div>
+            <span class="bar-val">4</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">11</div>
+          <div class="gr-name"><span class="postag">ET</span>Golf</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:100.0%"></div></div>
+            <span class="bar-val">11</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">12</div>
+          <div class="gr-name"><span class="postag">ET</span>Lion</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
           </div>
           <div class="gr-metric m2">
             <span class="m-label">PT Conducted</span>
@@ -382,8 +612,8 @@ async function downloadPDF() {
             <span class="bar-val">0/6</span>
           </div>
         </div><div class="grid-row">
-          <div class="gr-rank">3</div>
-          <div class="gr-name"><span class="postag">ET</span>Golf</div>
+          <div class="gr-rank">13</div>
+          <div class="gr-name"><span class="postag">PT</span>Yean</div>
           <div class="gr-metric m1">
             <span class="m-label">PT Sold</span>
             <div class="bar-track"></div>
@@ -391,7 +621,214 @@ async function downloadPDF() {
           </div>
           <div class="gr-metric m2">
             <span class="m-label">PT Conducted</span>
-            <div class="bar-track"><div class="bar-fill conduct" style="width:100.0%"></div></div>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:90.9%"></div></div>
+            <span class="bar-val">10</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">14</div>
+          <div class="gr-name"><span class="postag">ET</span>Mew</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"><div class="bar-fill sold" style="width:39.1%"></div></div>
+            <span class="bar-val">28,800</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:36.4%"></div></div>
+            <span class="bar-val">4</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">15</div>
+          <div class="gr-name"><span class="postag">ST</span>Lekza</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:63.6%"></div></div>
+            <span class="bar-val">7</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">16</div>
+          <div class="gr-name"><span class="postag">ET</span>Ae</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:54.5%"></div></div>
+            <span class="bar-val">6</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">17</div>
+          <div class="gr-name"><span class="postag">PT</span>Poom</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:54.5%"></div></div>
+            <span class="bar-val">6</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">18</div>
+          <div class="gr-name"><span class="postag">PT</span>Aek</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:36.4%"></div></div>
+            <span class="bar-val">4</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">19</div>
+          <div class="gr-name"><span class="postag">PT</span>Benz</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:36.4%"></div></div>
+            <span class="bar-val">4</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">20</div>
+          <div class="gr-name"><span class="postag">CM</span>Tonmai</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:27.3%"></div></div>
+            <span class="bar-val">3</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">21</div>
+          <div class="gr-name"><span class="postag">PT</span>Zico</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:27.3%"></div></div>
+            <span class="bar-val">3</span>
+          </div>
+          <div class="gr-metric m3">
+            <span class="m-label">Fs+Ra</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m4">
+            <span class="m-label">สมาชิกใหม่</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0/6</span>
+          </div>
+        </div><div class="grid-row">
+          <div class="gr-rank">22</div>
+          <div class="gr-name"><span class="postag">PT</span>Sataem</div>
+          <div class="gr-metric m1">
+            <span class="m-label">PT Sold</span>
+            <div class="bar-track"></div>
+            <span class="bar-val">0</span>
+          </div>
+          <div class="gr-metric m2">
+            <span class="m-label">PT Conducted</span>
+            <div class="bar-track"><div class="bar-fill conduct" style="width:9.1%"></div></div>
             <span class="bar-val">1</span>
           </div>
           <div class="gr-metric m3">
